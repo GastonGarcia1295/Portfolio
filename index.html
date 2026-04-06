@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gastón García | Desarrollador Web Fullstack</title>
+    <title>Gastón García | Desarrollador Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
@@ -12,8 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: #020617; }
-        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: #020617; color: #94a3b8; }
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; color: white; }
         
         .reveal { opacity: 1; position: relative; }
         
@@ -36,79 +36,86 @@
             border-color: #10b981;
         }
 
-        /* Estilo de lista de tecnologías más sobrio */
         .tech-list-item {
             font-size: 1.1rem;
-            color: #94a3b8;
-            padding: 0.5rem 0;
+            padding: 0.6rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: color 0.3s ease;
         }
         .tech-list-item:hover { color: #6ee7b7; }
 
+        .contact-link {
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .contact-link:hover { color: #6ee7b7; transform: translateX(5px); }
+
         #tsparticles { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
     </style>
 </head>
-<body class="text-slate-300 min-h-screen">
+<body class="min-h-screen">
 
     <div id="tsparticles"></div>
 
     <nav class="max-w-7xl mx-auto p-8 flex justify-end items-center reveal z-10">
-        <div class="flex gap-10 text-xs font-semibold uppercase tracking-widest text-slate-400">
+        <div class="flex gap-10 text-xs font-semibold uppercase tracking-widest text-slate-500">
             <a href="#proyectos" class="hover:text-emerald-300 transition-colors">Proyectos</a>
             <a href="#tecnologias" class="hover:text-emerald-300 transition-colors">Tecnologías</a>
+            <a href="#contacto" class="hover:text-emerald-300 transition-colors">Contacto</a>
         </div>
     </nav>
 
     <header class="max-w-7xl mx-auto px-6 pt-20 pb-32 z-10">
-        <div class="max-w-6xl">
-            <h1 class="reveal text-6xl md:text-8xl font-extrabold text-white leading-tight mb-12 tracking-tighter">
+        <div class="max-w-5xl">
+            <h1 class="reveal text-6xl md:text-8xl font-extrabold leading-tight mb-12 tracking-tighter">
                 Transformo visión en <span class="text-gradient">activos digitales.</span>
             </h1>
             
-            <div class="reveal space-y-6 text-xl md:text-2xl text-slate-400 leading-relaxed max-w-4xl mb-16">
+            <div class="reveal space-y-8 text-xl md:text-2xl leading-relaxed max-w-4xl mb-16 text-slate-400">
                 <p>
-                    Soy <strong class="text-white font-semibold">Gastón García</strong>, Desarrollador Web especializado en arquitectura <strong class="text-white">Fullstack</strong> y optimización de ecosistemas digitales rentables.
+                    Soy <strong class="text-white font-semibold">Gastón García</strong>, Desarrollador Web enfocado en crear soluciones tecnológicas que impulsan el crecimiento de negocios reales.
                 </p>
                 <p>
-                    Fusiono el desarrollo de interfaces de alto impacto con arquitecturas de servidor robustas, creando soluciones integrales diseñadas para convertir y escalar negocios.
+                    Mi trabajo consiste en eliminar la fricción técnica para que tu idea escale. Diseño y desarrollo interfaces de alto rendimiento con arquitecturas sólidas, asegurando que cada línea de código esté alineada con tus objetivos comerciales y la experiencia de tus usuarios.
                 </p>
             </div>
 
             <div class="reveal flex flex-col sm:flex-row gap-8 items-center">
-                <a href="#proyectos" class="btn-profesional px-10 py-4 rounded-xl font-bold text-lg">
-                    Explorar Proyectos
+                <a href="#contacto" class="btn-profesional px-10 py-4 rounded-xl font-bold text-lg">
+                    Hablemos de tu proyecto
                 </a>
-                <div class="flex items-center gap-3 text-slate-500 italic text-base">
+                <div class="text-slate-500 italic text-base flex items-center gap-3">
                     <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> 
-                    Disponible para nuevos desafíos
+                    Consultoría disponible
                 </div>
             </div>
         </div>
     </header>
 
     <section id="proyectos" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
-        <h2 class="reveal text-4xl md:text-5xl font-bold text-white mb-20 tracking-tight">Proyectos</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <h2 class="reveal text-4xl md:text-5xl font-bold mb-20 tracking-tight">Proyectos seleccionados</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
             <div class="reveal">
-                <h4 class="text-2xl font-bold text-white mb-4 italic">Bienestar Natural</h4>
-                <p class="text-slate-400 text-lg leading-relaxed mb-6">
-                    Arquitectura integral de landing page de alta conversión para productos digitales.
+                <h4 class="text-2xl font-bold mb-4 italic text-emerald-400">Bienestar Natural</h4>
+                <p class="text-lg leading-relaxed mb-6">
+                    Optimización y desarrollo de landing page enfocada en conversión directa.
                 </p>
-                <a href="https://bienestarnatural.lovable.app" target="_blank" class="text-emerald-400 font-bold hover:underline">Ver demo →</a>
+                <a href="https://bienestarnatural.lovable.app" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors">Ver demo →</a>
             </div>
             <div class="reveal">
-                <h4 class="text-2xl font-bold text-white mb-4 italic">Ecosistema de Entrega</h4>
-                <p class="text-slate-400 text-lg leading-relaxed mb-6">
-                    Desarrollo de flujo post-compra automatizado y gestión de activos digitales.
+                <h4 class="text-2xl font-bold mb-4 italic text-emerald-400">Sistemas Post-Venta</h4>
+                <p class="text-lg leading-relaxed mb-6">
+                    Automatización de flujos de entrega de activos digitales y confirmación de pagos.
                 </p>
-                <a href="https://github.com/GastonGarcia1295/Intestino-Descarga" target="_blank" class="text-emerald-400 font-bold hover:underline">Analizar Código →</a>
+                <a href="https://github.com/GastonGarcia1295/Intestino-Descarga" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors">Analizar código →</a>
             </div>
         </div>
     </section>
 
     <section id="tecnologias" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
-        <h2 class="reveal text-3xl font-bold text-white mb-12 tracking-tight">Tecnologías y herramientas</h2>
+        <h2 class="reveal text-3xl font-bold mb-12 tracking-tight">Tecnologías y herramientas</h2>
         <div class="reveal grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-20">
             <div class="tech-list-item">React.js / Next.js</div>
             <div class="tech-list-item">TypeScript / JavaScript</div>
@@ -122,8 +129,25 @@
         </div>
     </section>
 
-    <footer class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5 text-sm text-slate-500">
-        <p>Gastón García — Desarrollador Fullstack — Castelar, Argentina.</p>
+    <section id="contacto" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5 bg-slate-900/20 rounded-[3rem] mb-20">
+        <div class="max-w-3xl">
+            <h2 class="reveal text-5xl font-bold mb-8 tracking-tight">¿Listo para empezar?</h2>
+            <p class="reveal text-xl mb-12 text-slate-400">
+                Si buscas un socio técnico para llevar tu plataforma al siguiente nivel, contactame directamente por estos canales:
+            </p>
+            <div class="reveal space-y-6 text-2xl font-medium">
+                <a href="mailto:gastongarcia1295@gmail.com" class="contact-link text-white">
+                    <span>✉</span> gastongarcia1295@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/gastongarcia1995" target="_blank" class="contact-link text-white">
+                    <span>in</span> linkedin.com/in/gastongarcia1995
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5 text-sm">
+        <p>Gastón García — Desarrollador Web — Castelar, Argentina.</p>
     </footer>
 
     <script>
@@ -133,7 +157,7 @@
                 color: { value: "#10b981" },
                 links: { color: "#0f172a", distance: 150, enable: true, opacity: 0.1, width: 1 },
                 move: { enable: true, speed: 0.4 },
-                number: { value: 40, density: { enable: true, area: 800 } },
+                number: { value: 35, density: { enable: true, area: 800 } },
                 opacity: { value: 0.1 },
                 size: { value: { min: 1, max: 2 } },
             }, detectRetina: true,
@@ -141,10 +165,10 @@
 
         gsap.registerPlugin(ScrollTrigger);
         gsap.from(".reveal", {
-            scrollTrigger: { trigger: ".reveal", start: "top 90%" },
-            duration: 1,
+            scrollTrigger: { trigger: ".reveal", start: "top 92%" },
+            duration: 0.8,
             opacity: 0,
-            y: 20,
+            y: 15,
             stagger: 0.1,
             ease: "power2.out"
         });
