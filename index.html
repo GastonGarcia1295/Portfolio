@@ -3,47 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaston Garcia | Desarrollador Web</title>
+    <title>Gaston Garcia | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); }
+        .gradient-text { background: linear-gradient(90deg, #10b981, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
 </head>
-<body class="bg-slate-900 text-white font-sans">
+<body class="bg-[#0f172a] text-slate-200">
 
-    <header class="py-16 px-4 text-center bg-slate-800 shadow-xl border-b border-emerald-500/20">
-        <h1 class="text-5xl font-extrabold text-emerald-400">Gaston Garcia</h1>
-        <p class="text-xl mt-4 text-slate-300">Desarrollador Web Frontend</p>
+    <nav class="max-w-6xl mx-auto p-6 flex justify-between items-center">
+        <span class="text-2xl font-extrabold tracking-tighter gradient-text">GG.DEV</span>
+        <div class="space-x-6 text-sm font-medium text-slate-400">
+            <a href="#proyectos" class="hover:text-emerald-400 transition">Proyectos</a>
+            <a href="#sobre-mi" class="hover:text-emerald-400 transition">Sobre mí</a>
+        </div>
+    </nav>
+
+    <header class="max-w-4xl mx-auto px-6 py-24 text-center">
+        <h1 class="text-6xl md:text-7xl font-extrabold mb-6 tracking-tight">
+            Hola, soy <span class="gradient-text">Gaston Garcia</span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Desarrollador Web especializado en crear <span class="text-white">experiencias digitales</span> de alto impacto y embudos de venta optimizados.
+        </p>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-16">
-        <h2 class="text-3xl font-bold mb-10 border-b-2 border-emerald-500 inline-block">Mis Proyectos Realizados</h2>
+    <section id="proyectos" class="max-w-6xl mx-auto px-6 py-20">
+        <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+            <span class="text-emerald-500">01.</span> Proyectos Destacados
+        </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <div class="bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 p-6 flex flex-col justify-between transition-all hover:border-emerald-500/50">
-                <div>
-                    <h3 class="text-2xl font-bold text-emerald-400 mb-2">🌿 Bienestar Natural</h3>
-                    <p class="text-slate-400 mb-6">Landing page de alta conversión enfocada en ventas de productos de salud digital (Ebooks).</p>
+            <div class="glass border border-white/10 rounded-3xl p-8 hover:bg-white/5 transition-all duration-500 group">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="p-3 bg-emerald-500/10 rounded-2xl">
+                        <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-1.343 3-3s-1.343-3-3-3m0 12c-1.657 0-3-1.343-3-3s1.343-3 3-3m0 0V5n"></path></svg>
+                    </div>
+                    <a href="https://github.com/GastonGarcia1295/bienestarnatural" target="_blank" class="text-slate-500 hover:text-white transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
                 </div>
-                <div class="flex gap-4">
-                    <a href="https://bienestarnatural.lovable.app" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded font-bold text-sm transition-colors">Ver Web</a>
-                    <a href="https://github.com/GastonGarcia1295/bienestarnatural" target="_blank" class="border border-slate-600 hover:bg-slate-700 px-4 py-2 rounded text-sm transition-colors">Código GitHub</a>
-                </div>
+                <h3 class="text-2xl font-bold mb-4 group-hover:text-emerald-400 transition">Bienestar Natural</h3>
+                <p class="text-slate-400 leading-relaxed mb-6">
+                    Landing page profesional optimizada para la venta de productos digitales de salud. Enfoque en accesibilidad y rapidez.
+                </p>
+                <a href="https://bienestarnatural.lovable.app" target="_blank" class="inline-flex items-center text-emerald-400 font-semibold hover:gap-2 transition-all">
+                    Ver demo en vivo <span class="ml-2">→</span>
+                </a>
             </div>
 
-            <div class="bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 p-6 flex flex-col justify-between transition-all hover:border-emerald-500/50">
-                <div>
-                    <h3 class="text-2xl font-bold text-emerald-400 mb-2">🛍️ Confirmación de Compra</h3>
-                    <p class="text-slate-400 mb-6">Sistema de post-venta optimizado para guiar al usuario tras la compra de su activo digital.</p>
+            <div class="glass border border-white/10 rounded-3xl p-8 hover:bg-white/5 transition-all duration-500 group">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="p-3 bg-emerald-500/10 rounded-2xl">
+                        <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 118 0m-4 7v2a4 4 0 11-8 0v-2m0 0V7a4 4 0 10-8 0v4m0 0v2a4 4 0 108 0v-2m0 0V7a4 4 0 100-8 4 4 0 000 8z"></path></svg>
+                    </div>
+                    <a href="https://github.com/GastonGarcia1295/Intestino-Descarga" target="_blank" class="text-slate-500 hover:text-white transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
                 </div>
-                <div class="flex gap-4">
-                    <a href="https://github.com/GastonGarcia1295/Intestino-Descarga" target="_blank" class="border border-slate-600 hover:bg-slate-700 px-4 py-2 rounded text-sm transition-colors">Ver Código GitHub</a>
-                </div>
+                <h3 class="text-2xl font-bold mb-4 group-hover:text-emerald-400 transition">Confirmación de Compra</h3>
+                <p class="text-slate-400 leading-relaxed mb-6">
+                    Experiencia de usuario post-venta diseñada para entrega de activos digitales con instrucciones claras y seguras.
+                </p>
+                <span class="text-slate-500 italic text-sm italic">Foco en Conversión & UX</span>
             </div>
 
         </div>
-    </main>
+    </section>
 
-    <footer class="text-center py-10 text-slate-500 border-t border-slate-800">
-        <p>Gaston Garcia - Argentina - 2026</p>
+    <section id="sobre-mi" class="max-w-6xl mx-auto px-6 py-20 bg-emerald-500/5 rounded-[3rem]">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">Herramientas y Tecnologías</h2>
+            <p class="text-slate-400">Lo que utilizo para dar vida a los proyectos.</p>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+            <span class="px-6 py-3 bg-[#1e293b] rounded-2xl border border-white/5 font-semibold">React.js</span>
+            <span class="px-6 py-3 bg-[#1e293b] rounded-2xl border border-white/5 font-semibold text-emerald-400">Tailwind CSS</span>
+            <span class="px-6 py-3 bg-[#1e293b] rounded-2xl border border-white/5 font-semibold">TypeScript</span>
+            <span class="px-6 py-3 bg-[#1e293b] rounded-2xl border border-white/5 font-semibold">Vite</span>
+            <span class="px-6 py-3 bg-[#1e293b] rounded-2xl border border-white/5 font-semibold">Git / GitHub</span>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center text-slate-500">
+        <p class="mb-4">© 2026 Gaston Garcia - Desarrollado en Argentina</p>
+        <div class="h-1 w-12 bg-emerald-500 mx-auto rounded-full"></div>
     </footer>
 
 </body>
