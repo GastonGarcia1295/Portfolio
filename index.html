@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastón García | Desarrollador Web & Estratega</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap" rel="stylesheet">
+    <style>
+        @keyframes drift {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; overflow-x: hidden; }
+        .bg-glow {
+            position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at center, #064e3b 0%, #020617 40%);
+            animation: drift 20s linear infinite; z-index: -1; opacity: 0.5;
+        }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body class="text-slate-300">
+    <div class="bg-glow"></div>
+
+    <nav class="max-w-6xl mx-auto p-8 flex justify-end space-x-8 text-xs font-bold uppercase tracking-widest">
+        <a href="#proyectos" class="hover:text-emerald-400 transition">Proyectos</a>
+        <a href="#servicios" class="hover:text-emerald-400 transition">Servicios</a>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 py-20">
+        <header class="mb-32">
+            <h1 class="text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter">
+                Transformo ideas en <br>
+                <span class="text-emerald-500">negocios rentables.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-400 max-w-2xl leading-relaxed">
+                Soy **Gastón García**, Desarrollador Web enfocado en soluciones que **venden**. Ayudo a emprendedores a capturar clientes mediante embudos de venta y diseño de alto impacto.
+            </p>
+        </header>
+
+        <section id="proyectos" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="glass p-10 rounded-[2.5rem] hover:border-emerald-500 transition-all duration-500">
+                <span class="text-emerald-500 text-xs font-bold uppercase tracking-widest mb-4 block">Salud & Bienestar</span>
+                <h3 class="text-3xl font-bold text-white mb-4 italic">Bienestar Natural</h3>
+                <p class="text-slate-400 mb-8 leading-relaxed">Landing page de alta conversión para la venta de activos digitales de salud.</p>
+                <a href="https://bienestarnatural.lovable.app" target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3 rounded-full font-bold transition">Ver Proyecto</a>
+            </div>
+
+            <div class="glass p-10 rounded-[2.5rem] hover:border-emerald-500 transition-all duration-500">
+                <span class="text-emerald-500 text-xs font-bold uppercase tracking-widest mb-4 block">E-commerce</span>
+                <h3 class="text-3xl font-bold text-white mb-4 italic">Ecosistema de Pago</h3>
+                <p class="text-slate-400 mb-8 leading-relaxed">Flujo post-compra diseñado para garantizar la entrega segura de productos.</p>
+                <a href="https://github.com/GastonGarcia1295/Intestino-Descarga" target="_blank" class="inline-block border border-slate-700 hover:bg-white/5 text-white px-8 py-3 rounded-full font-bold transition">Ver Código</a>
+            </div>
+        </section>
+
+        <section class="mt-32 text-center">
+            <h2 class="text-2xl font-bold text-white mb-12 uppercase tracking-widest">Stack Tecnológico</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="px-6 py-3 glass rounded-2xl">React.js</span>
+                <span class="px-6 py-3 glass rounded-2xl text-emerald-400 border-emerald-500/30">Tailwind CSS</span>
+                <span class="px-6 py-3 glass rounded-2xl">TypeScript</span>
+                <span class="px-6 py-3 glass rounded-2xl">Git / GitHub</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-20 border-t border-white/5 mt-20 text-sm text-slate-500 uppercase tracking-widest">
+        Gastón García — Desarrollador Web — 2026
+    </footer>
+</body>
+</html>
