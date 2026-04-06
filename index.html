@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gastón García | Desarrollador Web</title>
+    <meta name="description" content="Portfolio profesional de Gastón García, Desarrollador Web enfocado en activos digitales.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
@@ -14,38 +14,31 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: #020617; color: #94a3b8; }
         h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; color: white; }
-        
-        /* Mantiene los elementos invisibles hasta que GSAP los revele */
         .reveal { opacity: 0; }
-        
         .text-gradient {
             background: linear-gradient(135deg, #6ee7b7 0%, #10b981 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .btn-profesional {
             border: 1px solid rgba(110, 231, 183, 0.4);
             color: white;
             transition: all 0.3s ease;
             display: inline-block;
         }
-
         .btn-profesional:hover {
             background: #10b981;
             color: #020617;
             border-color: #10b981;
         }
-
         .tech-list-item {
             font-size: 1.1rem;
             padding: 0.6rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: color 0.3s ease;
-            opacity: 0; /* Para la animación secuencial */
+            opacity: 0;
         }
         .tech-list-item:hover { color: #6ee7b7; }
-
         .contact-cta-wrapper {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: inline-flex;
@@ -54,7 +47,6 @@
         }
         .contact-cta-wrapper:hover { color: #6ee7b7; transform: scale(1.05); }
         .contact-cta-text { font-size: 1.5rem; }
-
         #tsparticles { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
     </style>
 </head>
@@ -78,10 +70,10 @@
             
             <div class="reveal space-y-8 text-xl md:text-2xl leading-relaxed max-w-4xl mb-16 text-slate-400">
                 <p>
-                    Soy <strong class="text-white font-semibold">Gastón García</strong>, Desarrollador Web enfocado en crear soluciones tecnológicas que impulsan el crecimiento de negocios reales.
+                    Soy <strong class="text-white font-semibold">Gastón García</strong>, Desarrollador Web enfocado en soluciones que impulsan el crecimiento de negocios reales.
                 </p>
                 <p>
-                    Mi trabajo consiste en eliminar la fricción técnica para que tu idea escale. Diseño y desarrollo interfaces de alto rendimiento con arquitecturas sólidas, asegurando que cada línea de código esté alineada con tus objetivos comerciales y la experiencia de tus usuarios.
+                    Diseño interfaces de alto rendimiento, asegurando que cada línea de código esté alineada con tus objetivos comerciales.
                 </p>
             </div>
 
@@ -89,10 +81,6 @@
                 <a href="#contacto" class="btn-profesional px-10 py-4 rounded-xl font-bold text-lg">
                     Hablemos de tu proyecto
                 </a>
-                <div class="text-slate-500 italic text-base flex items-center gap-3">
-                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> 
-                    Consultoría disponible
-                </div>
             </div>
         </div>
     </header>
@@ -101,16 +89,16 @@
         <h2 class="reveal text-4xl md:text-5xl font-bold mb-20 tracking-tight text-white">Proyectos seleccionados</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
             <div class="reveal">
-                <h4 class="text-2xl font-bold mb-4 italic text-emerald-400">Bienestar Natural</h4>
+                <h4 class="text-2xl font-bold mb-4 italic text-emerald-400">Intestino Sano</h4>
                 <p class="text-lg leading-relaxed mb-6">
-                    Optimización y desarrollo de landing page enfocada en conversión directa.
+                    Landing page de alta conversión integrada con pasarela de pagos. Optimizada para la venta de activos digitales de salud.
                 </p>
-                <a href="https://bienestarnatural.lovable.app" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">Ver demo →</a>
+                <a href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">Ver Proyecto →</a>
             </div>
             <div class="reveal">
-                <h4 class="text-2xl font-bold mb-4 italic text-emerald-400">Sistemas Post-Venta</h4>
+                <h4 class="text-2xl font-bold mb-4 italic text-emerald-400">Arquitectura de Ventas</h4>
                 <p class="text-lg leading-relaxed mb-6">
-                    Automatización de flujos de entrega de activos digitales y confirmación de pagos.
+                    Despliegue automatizado y limpieza de metadatos para landing pages profesionales sin dependencias externas.
                 </p>
                 <a href="https://github.com/GastonGarcia1295/Intestino-Descarga" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">Analizar código →</a>
             </div>
@@ -118,26 +106,20 @@
     </section>
 
     <section id="tecnologias" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
-        <h2 class="reveal text-3xl font-bold mb-12 tracking-tight text-white">Tecnologías y herramientas</h2>
+        <h2 class="reveal text-3xl font-bold mb-12 tracking-tight text-white">Tecnologías</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-20 text-slate-400">
-            <div class="tech-list-item">React.js / Next.js</div>
-            <div class="tech-list-item">TypeScript / JavaScript</div>
-            <div class="tech-list-item">Node.js / Express</div>
+            <div class="tech-list-item">React.js / HTML5</div>
+            <div class="tech-list-item">JavaScript (ES6+)</div>
             <div class="tech-list-item">Tailwind CSS</div>
+            <div class="tech-list-item">GSAP Animations</div>
             <div class="tech-list-item">Git / GitHub</div>
-            <div class="tech-list-item">APIs REST / GraphQL</div>
-            <div class="tech-list-item">HTML5 / CSS3</div>
-            <div class="tech-list-item">GSAP Animaciones</div>
-            <div class="tech-list-item">SQL / NoSQL</div>
+            <div class="tech-list-item">E-commerce Integration</div>
         </div>
     </section>
 
     <section id="contacto" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5 mb-20 text-center md:text-left">
         <div class="max-w-3xl">
             <h2 class="reveal text-5xl font-bold mb-8 tracking-tight text-white">¿Listo para empezar?</h2>
-            <p class="reveal text-xl mb-12 text-slate-400">
-                Si buscas un socio técnico para llevar tu plataforma al siguiente nivel, no dudes en escribirme.
-            </p>
             <div class="reveal">
                 <a href="mailto:gastongarcia1295@gmail.com" class="contact-cta-wrapper text-white font-bold">
                     <span class="contact-cta-text">Contactame a través de GMail</span> <span class="text-emerald-500 text-4xl">✉</span>
@@ -147,11 +129,10 @@
     </section>
 
     <footer class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5 text-sm text-slate-600">
-        <p>Gastón García — Desarrollador Web — Castelar, Argentina.</p>
+        <p>Gastón García — Castelar, Argentina.</p>
     </footer>
 
     <script>
-        // Configuración de fondo más vivo
         tsParticles.load("tsparticles", {
             fpsLimit: 60,
             particles: {
@@ -163,37 +144,17 @@
                 size: { value: { min: 1, max: 2 } },
             }, detectRetina: true,
         });
-
         gsap.registerPlugin(ScrollTrigger);
-
-        // Animación general para clases .reveal
         gsap.utils.toArray(".reveal").forEach(el => {
             gsap.to(el, {
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 90%",
-                },
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power2.out"
+                scrollTrigger: { trigger: el, start: "top 90%" },
+                opacity: 1, y: 0, duration: 1, ease: "power2.out"
             });
         });
-
-        // Animación específica secuencial para la lista de herramientas
         gsap.to(".tech-list-item", {
-            scrollTrigger: {
-                trigger: "#tecnologias",
-                start: "top 80%",
-            },
-            opacity: 1,
-            y: 0,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: "power2.out"
+            scrollTrigger: { trigger: "#tecnologias", start: "top 80%" },
+            opacity: 1, y: 0, stagger: 0.1, duration: 0.8, ease: "power2.out"
         });
-        
-        // Inicialización de posiciones para evitar el salto
         gsap.set(".reveal, .tech-list-item", { y: 30 });
     </script>
 </body>
