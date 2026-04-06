@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gastón García | Desarrollador Web</title>
     <meta name="description" content="Portfolio profesional de Gastón García, Desarrollador Web enfocado en activos digitales.">
+    <meta name="author" content="Gastón García">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -67,20 +68,22 @@
             <h1 class="reveal text-6xl md:text-8xl font-extrabold leading-tight mb-12 tracking-tighter">
                 Transformo visión en <span class="text-gradient">activos digitales.</span>
             </h1>
-            
             <div class="reveal space-y-8 text-xl md:text-2xl leading-relaxed max-w-4xl mb-16 text-slate-400">
                 <p>
-                    Soy <strong class="text-white font-semibold">Gastón García</strong>, Desarrollador Web enfocado en soluciones que impulsan el crecimiento de negocios reales.
+                    Soy <strong class="text-white font-semibold">Gastón García</strong>, Desarrollador Web enfocado en crear soluciones tecnológicas que impulsan el crecimiento de negocios reales.
                 </p>
                 <p>
-                    Diseño interfaces de alto rendimiento, asegurando que cada línea de código esté alineada con tus objetivos comerciales.
+                    Diseño y desarrollo interfaces de alto rendimiento con arquitecturas sólidas, asegurando que cada línea de código esté alineada con tus objetivos comerciales y la experiencia de tus usuarios.
                 </p>
             </div>
-
             <div class="reveal flex flex-col sm:flex-row gap-8 items-center">
                 <a href="#contacto" class="btn-profesional px-10 py-4 rounded-xl font-bold text-lg">
                     Hablemos de tu proyecto
                 </a>
+                <div class="text-slate-500 italic text-base flex items-center gap-3">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    Disponible para nuevos proyectos
+                </div>
             </div>
         </div>
     </header>
@@ -88,48 +91,63 @@
     <section id="proyectos" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
         <h2 class="reveal text-4xl md:text-5xl font-bold mb-20 tracking-tight text-white">Proyectos seleccionados</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+
+            <!-- Proyecto 1: Landing page -->
             <div class="reveal">
-                <h4 class="text-2xl font-bold mb-4 italic text-emerald-400">Intestino Sano</h4>
-                <p class="text-lg leading-relaxed mb-6">
-                    Landing page de alta conversión integrada con pasarela de pagos. Optimizada para la venta de activos digitales de salud.
+                <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-3 block">Landing Page · Salud & Bienestar</span>
+                <h4 class="text-2xl font-bold mb-4 italic text-white">Bienestar Natural</h4>
+                <p class="text-lg leading-relaxed mb-6 text-slate-400">
+                    Landing page de alta conversión para la venta de un producto digital de salud digestiva. Diseño persuasivo con integración directa a MercadoPago.
                 </p>
-                <a href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">Ver Proyecto →</a>
+                <a href="https://bienestarnatural.lovable.app" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">
+                    Ver proyecto →
+                </a>
             </div>
+
+            <!-- Proyecto 2: Post-venta -->
             <div class="reveal">
-                <h4 class="text-2xl font-bold mb-4 italic text-emerald-400">Arquitectura de Ventas</h4>
-                <p class="text-lg leading-relaxed mb-6">
-                    Despliegue automatizado y limpieza de metadatos para landing pages profesionales sin dependencias externas.
+                <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-3 block">Página Post-Venta · E-commerce</span>
+                <h4 class="text-2xl font-bold mb-4 italic text-white">Confirmación de Compra</h4>
+                <p class="text-lg leading-relaxed mb-6 text-slate-400">
+                    Página de entrega de activo digital post-pago. Diseñada para brindar confianza al comprador y acceso inmediato al producto adquirido.
                 </p>
-                <a href="https://github.com/GastonGarcia1295/Intestino-Descarga" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">Analizar código →</a>
+                <a href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">
+                    Ver proyecto →
+                </a>
             </div>
+
         </div>
     </section>
 
     <section id="tecnologias" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
-        <h2 class="reveal text-3xl font-bold mb-12 tracking-tight text-white">Tecnologías</h2>
+        <h2 class="reveal text-3xl font-bold mb-12 tracking-tight text-white">Tecnologías y herramientas</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-20 text-slate-400">
-            <div class="tech-list-item">React.js / HTML5</div>
-            <div class="tech-list-item">JavaScript (ES6+)</div>
+            <div class="tech-list-item">React.js / Next.js</div>
+            <div class="tech-list-item">TypeScript / JavaScript</div>
+            <div class="tech-list-item">Node.js / Express</div>
             <div class="tech-list-item">Tailwind CSS</div>
-            <div class="tech-list-item">GSAP Animations</div>
             <div class="tech-list-item">Git / GitHub</div>
-            <div class="tech-list-item">E-commerce Integration</div>
+            <div class="tech-list-item">APIs REST / GraphQL</div>
+            <div class="tech-list-item">HTML5 / CSS3</div>
+            <div class="tech-list-item">GSAP Animaciones</div>
+            <div class="tech-list-item">SQL / NoSQL</div>
         </div>
     </section>
 
     <section id="contacto" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5 mb-20 text-center md:text-left">
         <div class="max-w-3xl">
             <h2 class="reveal text-5xl font-bold mb-8 tracking-tight text-white">¿Listo para empezar?</h2>
+            <p class="reveal text-xl mb-12 text-slate-400">Si buscás un desarrollador web para tu próximo proyecto, escribime.</p>
             <div class="reveal">
                 <a href="mailto:gastongarcia1295@gmail.com" class="contact-cta-wrapper text-white font-bold">
-                    <span class="contact-cta-text">Contactame a través de GMail</span> <span class="text-emerald-500 text-4xl">✉</span>
+                    <span class="contact-cta-text">Contactame a través de Gmail</span> <span class="text-emerald-500 text-4xl">✉</span>
                 </a>
             </div>
         </div>
     </section>
 
     <footer class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5 text-sm text-slate-600">
-        <p>Gastón García — Castelar, Argentina.</p>
+        <p>Gastón García — Desarrollador Web — Castelar, Argentina.</p>
     </footer>
 
     <script>
@@ -144,17 +162,21 @@
                 size: { value: { min: 1, max: 2 } },
             }, detectRetina: true,
         });
+
         gsap.registerPlugin(ScrollTrigger);
+
         gsap.utils.toArray(".reveal").forEach(el => {
             gsap.to(el, {
                 scrollTrigger: { trigger: el, start: "top 90%" },
                 opacity: 1, y: 0, duration: 1, ease: "power2.out"
             });
         });
+
         gsap.to(".tech-list-item", {
             scrollTrigger: { trigger: "#tecnologias", start: "top 80%" },
             opacity: 1, y: 0, stagger: 0.1, duration: 0.8, ease: "power2.out"
         });
+
         gsap.set(".reveal, .tech-list-item", { y: 30 });
     </script>
 </body>
