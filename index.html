@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gastón García | Desarrollador Web & Estratega Digital</title>
+    <title>Gastón García | Desarrollador Web Senior & Estratega Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
@@ -15,25 +15,71 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: #020617; }
         h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
         
-        /* Forzamos visibilidad inicial para evitar pantalla negra */
+        /* Visibilidad inicial forzada */
         .reveal { opacity: 1; position: relative; }
         
+        /* Tarjetas con efecto Glassmorphism sutil */
         .card-blur {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(14px);
+            background: rgba(255, 255, 255, 0.015);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card-blur:hover {
-            transform: translateY(-5px);
-            border-color: rgba(5, 150, 105, 0.3);
+            transform: translateY(-8px);
+            border-color: rgba(16, 185, 129, 0.3); /* Emerald 500 */
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
         }
 
+        /* Degradado de texto Emerald */
         .text-gradient {
-            background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+            background: linear-gradient(135deg, #6ee7b7 0%, #10b981 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* Botón Profesional con efecto de llenado */
+        .btn-profesional {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(110, 231, 183, 0.5); /* Emerald 300 sutil */
+            color: white;
+            transition: color 0.3s ease;
+            z-index: 1;
+        }
+
+        .btn-profesional::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669); /* Emerald 600-700 */
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .btn-profesional:hover {
+            color: #020617; /* Slate 950 para contraste */
+            border-color: #10b981;
+        }
+
+        .btn-profesional:hover::before {
+            left: 0;
+        }
+
+        /* Etiquetas de tecnología */
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .tech-tag:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            background: rgba(16, 185, 129, 0.05);
+            color: #6ee7b7;
         }
 
         #tsparticles {
@@ -50,85 +96,158 @@
 
     <div id="tsparticles"></div>
 
-    <nav class="max-w-6xl mx-auto p-8 flex justify-end items-center reveal z-10 relative">
-        <div class="flex gap-8 text-sm font-medium uppercase tracking-widest">
-            <a href="#proyectos" class="hover:text-emerald-400 transition-colors">Portafolio</a>
-            <a href="#servicios" class="hover:text-emerald-400 transition-colors">Servicios</a>
+    <nav class="max-w-7xl mx-auto p-8 flex justify-end items-center reveal z-10 relative">
+        <div class="flex gap-10 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+            <a href="#proyectos" class="hover:text-emerald-300 transition-colors">Proyectos</a>
+            <a href="#stack" class="hover:text-emerald-300 transition-colors">Tecnologías</a>
+            <a href="#contacto" class="hover:text-emerald-300 transition-colors">Contacto</a>
         </div>
     </nav>
 
-    <header class="max-w-6xl mx-auto px-6 pt-24 pb-32 z-10 relative">
-        <div class="max-w-4xl">
-            <h1 class="reveal text-7xl md:text-9xl font-bold text-white leading-none mb-10 tracking-tighter">
-                Transformo ideas en <span class="text-gradient">negocios rentables.</span>
+    <header class="max-w-7xl mx-auto px-6 pt-24 pb-40 z-10 relative">
+        <div class="max-w-5xl">
+            <h1 class="reveal text-7xl md:text-9xl font-extrabold text-white leading-[0.9] mb-12 tracking-tighter">
+                Transformo visión en <br> <span class="text-gradient">activos digitales.</span>
             </h1>
-            <p class="reveal text-xl md:text-2xl text-slate-400 leading-relaxed mb-12 max-w-3xl">
-                Soy Gastón García, Desarrollador Web enfocado en crear soluciones que no solo se ven bien, sino que <span class="text-white border-b-2 border-emerald-500 pb-1">venden</span>.
-            </p>
-            <div class="reveal flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-                <a href="#proyectos" class="bg-emerald-600 hover:bg-emerald-500 text-white px-10 py-5 rounded-full font-bold transition-all shadow-xl shadow-emerald-900/20 text-lg">Ver mi trabajo</a>
-                <div class="flex items-center gap-2.5 text-slate-500 italic">
-                    <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span> Disponible para nuevos proyectos
+            
+            <div class="reveal space-y-6 text-xl md:text-2xl text-slate-400 leading-relaxed max-w-4xl mb-16">
+                <p>
+                    Soy <strong class="text-white font-semibold">Gastón García</strong>, Desarrollador Web especializado en arquitectura Frontend moderna y optimización de conversiones. No construyo solo sitios; diseño ecosistemas digitales que impulsan el crecimiento y maximizan el ROI.
+                </p>
+                <p>
+                    Mi enfoque fusiona código limpio y escalable con estrategias de User Experience (UX) diseñadas para convertir usuarios en clientes. Ayudo a empresas tecnológicas y emprendedores ambiciosos a dominar su mercado con interfaces de alto rendimiento.
+                </p>
+            </div>
+
+            <div class="reveal flex flex-col sm:flex-row gap-8 items-start sm:items-center">
+                <a href="#proyectos" class="btn-profesional px-12 py-5 rounded-xl font-bold transition-all shadow-2xl shadow-black/30 text-lg tracking-tight">
+                    Explorar Proyectos
+                </a>
+                <div class="flex items-center gap-3 text-slate-500 italic font-medium">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                    Disponible para consultoría y desarrollo
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="proyectos" class="max-w-6xl mx-auto px-6 py-28 z-10 relative">
-        <h2 class="reveal text-5xl font-bold text-white mb-20 tracking-tight text-center">Proyectos Destacados</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <section id="proyectos" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5 z-10 relative">
+        <h2 class="reveal text-xs font-bold text-emerald-500 uppercase tracking-[0.3em] mb-6 text-center">Portafolio Destacado</h2>
+        <h3 class="reveal text-5xl md:text-6xl font-extrabold text-white mb-24 tracking-tighter text-center max-w-3xl mx-auto">Soluciones que entregan valor real</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-14">
             
-            <div class="reveal card-blur rounded-[2.5rem] p-12">
-                <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-4 block">Nicho Salud</span>
-                <h3 class="text-3xl font-bold text-white mb-5 italic">Bienestar Natural</h3>
-                <p class="text-slate-400 mb-10 leading-relaxed">
-                    Landing page persuasiva para productos digitales. Estructura optimizada para maximizar conversiones.
-                </p>
-                <div class="flex gap-6 items-center">
-                    <a href="https://bienestarnatural.lovable.app" target="_blank" class="text-white font-bold border-b-2 border-emerald-500 pb-1.5 hover:text-emerald-400 transition-colors">Ver demo</a>
+            <div class="reveal card-blur rounded-3xl p-12 group flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-4 block">Salud & Bienestar Digital</span>
+                    <h4 class="text-4xl font-bold text-white mb-6 tracking-tight">Bienestar Natural</h4>
+                    <p class="text-slate-400 mb-12 leading-relaxed text-lg">
+                        Desarrollo integral de una Landing Page de alta conversión. Implementé arquitectura modular y optimización SEO on-page, logrando una interfaz intuitiva que maximiza la captura de leads y ventas de productos digitales.
+                    </p>
+                </div>
+                <div class="flex gap-6 items-center border-t border-white/5 pt-8">
+                    <a href="https://bienestarnatural.lovable.app" target="_blank" class="text-white font-bold border-b-2 border-emerald-500 pb-2 hover:text-emerald-300 transition-colors text-lg flex items-center gap-2">
+                        Ver Demo En Vivo <span>→</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="reveal card-blur rounded-[2.5rem] p-12">
-                <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-4 block">E-commerce</span>
-                <h3 class="text-3xl font-bold text-white mb-5 italic">Ecosistema de Pago</h3>
-                <p class="text-slate-400 mb-10 leading-relaxed">
-                    Optimización del flujo post-compra y entrega instantánea de activos digitales.
-                </p>
-                <a href="https://github.com/GastonGarcia1295/Intestino-Descarga" target="_blank" class="text-white font-bold border-b-2 border-emerald-500 pb-1.5 hover:text-emerald-400 transition-colors">Ver Código</a>
+            <div class="reveal card-blur rounded-3xl p-12 group flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-4 block">E-commerce Post-Venta</span>
+                    <h4 class="text-4xl font-bold text-white mb-6 tracking-tight">Ecosistema de Entrega</h4>
+                    <p class="text-slate-400 mb-12 leading-relaxed text-lg">
+                        Diseño y desarrollo de flujo de confirmación de pago y entrega automatizada de activos. Foco en User Experience (UX) para reducir la fricción post-compra, garantizando confianza y acceso instantáneo al producto.
+                    </p>
+                </div>
+                <div class="flex gap-6 items-center border-t border-white/5 pt-8">
+                    <a href="https://github.com/GastonGarcia1295/Intestino-Descarga" target="_blank" class="text-white font-bold border-b-2 border-emerald-500 pb-2 hover:text-emerald-300 transition-colors text-lg flex items-center gap-2">
+                        Analizar Código <span>→</span>
+                    </a>
+                </div>
             </div>
 
         </div>
     </section>
 
+    <section id="stack" class="max-w-7xl mx-auto px-6 py-32 z-10 relative bg-black/20 rounded-[3rem] border border-white/5 mb-32">
+        <h2 class="reveal text-xs font-bold text-emerald-500 uppercase tracking-[0.3em] mb-6 text-center">Tecnologías & Herramientas</h2>
+        <h3 class="reveal text-5xl md:text-6xl font-extrabold text-white mb-20 tracking-tighter text-center">Mi Arsenal Técnico</h3>
+        
+        <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-6 text-center max-w-5xl mx-auto">
+            <div class="tech-tag p-6 rounded-2xl font-semibold text-white text-lg cursor-default">React.js</div>
+            <div class="tech-tag p-6 rounded-2xl font-semibold text-white text-lg cursor-default">Next.js</div>
+            <div class="tech-tag p-6 rounded-2xl font-semibold text-emerald-400 border-emerald-500/30 text-lg cursor-default">Tailwind CSS</div>
+            <div class="tech-tag p-6 rounded-2xl font-semibold text-white text-lg cursor-default">TypeScript</div>
+            
+            <div class="tech-tag p-6 rounded-2xl font-medium text-slate-300 cursor-default">JavaScript (ES6+)</div>
+            <div class="tech-tag p-6 rounded-2xl font-medium text-slate-300 cursor-default">HTML5 / CSS3</div>
+            <div class="tech-tag p-6 rounded-2xl font-medium text-slate-300 cursor-default">Node.js (Básico)</div>
+            <div class="tech-tag p-6 rounded-2xl font-medium text-slate-300 cursor-default">Git / GitHub</div>
+
+            <div class="tech-tag p-6 rounded-2xl font-medium text-slate-400 text-sm cursor-default col-span-2 md:col-span-1">GSAP Animaciones</div>
+            <div class="tech-tag p-6 rounded-2xl font-medium text-slate-400 text-sm cursor-default col-span-2 md:col-span-1">Vite / Webpack</div>
+            <div class="tech-tag p-6 rounded-2xl font-medium text-slate-400 text-sm cursor-default col-span-2 md:col-span-1">APIs REST / GraphQL</div>
+            <div class="tech-tag p-6 rounded-2xl font-medium text-slate-400 text-sm cursor-default col-span-2 md:col-span-1">Figma a Código</div>
+        </div>
+    </section>
+
+    <footer id="contacto" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600 reveal z-10 relative">
+        <p class="font-medium text-slate-500">Gastón García — Desarrollador Web Senior — Castelar, Argentina.</p>
+        <p class="mt-4 md:mt-0 italic text-emerald-500/40">"Código limpio. Estrategia clara. Resultados medibles."</p>
+    </footer>
+
     <script>
-        // Configuración de fondo
+        // Fondo tsParticles - Sutil Emerald
         tsParticles.load("tsparticles", {
             fpsLimit: 60,
             particles: {
-                color: { value: "#34d399" },
-                links: { color: "#34d399", distance: 150, enable: true, opacity: 0.1, width: 1 },
-                move: { enable: true, speed: 0.8 },
-                number: { value: 50, density: { enable: true, area: 800 } },
-                opacity: { value: 0.2 },
-                size: { value: { min: 1, max: 2 } },
-            },
-            detectRetina: true,
+                color: { value: "#10b981" }, // Emerald 500
+                links: { color: "#0f172a", distance: 180, enable: true, opacity: 0.15, width: 0.5 },
+                move: { enable: true, speed: 0.5, outModes: { default: "bounce" } },
+                number: { value: 60, density: { enable: true, area: 900 } },
+                opacity: { value: 0.1 },
+                size: { value: { min: 1, max: 2.5 } },
+            }, detectRetina: true,
         });
 
-        // Animaciones GSAP (Usando .from para asegurar visibilidad)
+        // GSAP - Animaciones de Entrada Profesionales
         gsap.registerPlugin(ScrollTrigger);
 
-        gsap.from(".reveal", {
-            duration: 1.2,
+        // Entrada Hero
+        gsap.from("header .reveal", {
+            duration: 1.4,
             opacity: 0,
-            y: 40,
-            stagger: 0.15,
+            y: 50,
+            stagger: 0.2,
             ease: "power4.out",
-            scrollTrigger: {
-                trigger: ".reveal",
-                start: "top 90%"
-            }
+            delay: 0.1
+        });
+
+        // Entrada Nav y Footer
+        gsap.from("nav .reveal, footer .reveal", {
+            duration: 1,
+            opacity: 0,
+            ease: "power2.out",
+            delay: 0.8
+        });
+
+        // Animaciones Scroll (Proyectos y Stack)
+        gsap.utils.toArray("section .reveal").forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 88%",
+                },
+                duration: 1.2,
+                opacity: 0,
+                y: 30,
+                ease: "power3.out",
+                stagger: 0.2
+            });
         });
     </script>
 </body>
