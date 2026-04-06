@@ -15,8 +15,8 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: #020617; color: #94a3b8; }
         h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; color: white; }
         
-        /* Visibilidad inicial forzada para evitar pantalla negra */
-        .reveal { opacity: 1; position: relative; }
+        /* Mantiene los elementos invisibles hasta que GSAP los revele */
+        .reveal { opacity: 0; }
         
         .text-gradient {
             background: linear-gradient(135deg, #6ee7b7 0%, #10b981 100%);
@@ -42,10 +42,10 @@
             padding: 0.6rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: color 0.3s ease;
+            opacity: 0; /* Para la animación secuencial */
         }
         .tech-list-item:hover { color: #6ee7b7; }
 
-        /* Estilo para el CTA de contacto (más pequeño) */
         .contact-cta-wrapper {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: inline-flex;
@@ -53,8 +53,7 @@
             gap: 0.75rem;
         }
         .contact-cta-wrapper:hover { color: #6ee7b7; transform: scale(1.05); }
-
-        .contact-cta-text { font-size: 1.5rem; } /* Tamaño más pequeño */
+        .contact-cta-text { font-size: 1.5rem; }
 
         #tsparticles { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
     </style>
@@ -63,7 +62,7 @@
 
     <div id="tsparticles"></div>
 
-    <nav class="max-w-7xl mx-auto p-8 flex justify-end items-center reveal z-10">
+    <nav class="max-w-7xl mx-auto p-8 flex justify-end items-center z-10">
         <div class="flex gap-10 text-xs font-semibold uppercase tracking-widest text-slate-500">
             <a href="#proyectos" class="hover:text-emerald-300 transition-colors">Proyectos</a>
             <a href="#tecnologias" class="hover:text-emerald-300 transition-colors">Tecnologías</a>
@@ -120,7 +119,7 @@
 
     <section id="tecnologias" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
         <h2 class="reveal text-3xl font-bold mb-12 tracking-tight text-white">Tecnologías y herramientas</h2>
-        <div class="reveal grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-20 text-slate-400">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-20 text-slate-400">
             <div class="tech-list-item">React.js / Next.js</div>
             <div class="tech-list-item">TypeScript / JavaScript</div>
             <div class="tech-list-item">Node.js / Express</div>
@@ -152,50 +151,50 @@
     </footer>
 
     <script>
-        // Fondo tsParticles - Más visible y dinámico
+        // Configuración de fondo más vivo
         tsParticles.load("tsparticles", {
             fpsLimit: 60,
             particles: {
                 color: { value: "#10b981" },
-                links: { color: "#10b981", distance: 160, enable: true, opacity: 0.25, width: 1 }, // Mayor opacidad
-                move: { enable: true, speed: 0.6, outModes: { default: "bounce" } }, // Ligeramente más rápido
-                number: { value: 45, density: { enable: true, area: 900 } }, // Un poco más de partículas
-                opacity: { value: 0.3 }, // Mayor opacidad base
+                links: { color: "#10b981", distance: 150, enable: true, opacity: 0.3, width: 1 },
+                move: { enable: true, speed: 0.8 },
+                number: { value: 40, density: { enable: true, area: 800 } },
+                opacity: { value: 0.4 },
                 size: { value: { min: 1, max: 2 } },
             }, detectRetina: true,
         });
 
-        // GSAP - Animaciones de Entrada (Fade-in + Slide-up) SECUENCIAL
         gsap.registerPlugin(ScrollTrigger);
 
-        // Animaciones globales para todos los elementos con la clase .reveal
+        // Animación general para clases .reveal
         gsap.utils.toArray(".reveal").forEach(el => {
-            gsap.from(el, {
+            gsap.to(el, {
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 95%", // Empieza a animar cuando el elemento entra en pantalla
+                    start: "top 90%",
                 },
-                duration: 1, // Tiempo de duración
-                opacity: 0, // Desvanecimiento inicial
-                y: 30, // Viene desde abajo
-                ease: "power2.out", // Suave
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
             });
         });
 
-        // Animación secuencial específica para las tarjetas de proyectos y lista de tecnologías
-        gsap.utils.toArray("#proyectos .reveal, #tecnologias .reveal, #tecnologias .tech-list-item").forEach((el, index) => {
-            gsap.from(el, {
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 95%",
-                },
-                duration: 1,
-                opacity: 0,
-                y: 30,
-                ease: "power2.out",
-                delay: index * 0.1 // Añade un retraso secuencial para que aparezcan uno tras otro
-            });
+        // Animación específica secuencial para la lista de herramientas
+        gsap.to(".tech-list-item", {
+            scrollTrigger: {
+                trigger: "#tecnologias",
+                start: "top 80%",
+            },
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power2.out"
         });
+        
+        // Inicialización de posiciones para evitar el salto
+        gsap.set(".reveal, .tech-list-item", { y: 30 });
     </script>
 </body>
 </html>
