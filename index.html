@@ -4,200 +4,546 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gastón García | Desarrollador Web</title>
-    <meta name="description" content="Portfolio profesional de Gastón García, Desarrollador Web enfocado en activos digitales.">
+    <meta name="description" content="Gastón García — Desarrollador Web especializado en sitios web, landing pages, apps y soluciones digitales para negocios reales.">
     <meta name="author" content="Gastón García">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: #020617; color: #94a3b8; }
-        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; color: white; }
-        .reveal { opacity: 0; }
-        .text-gradient {
-            background: linear-gradient(135deg, #6ee7b7 0%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        :root {
+            --bg: #080c12;
+            --surface: #0e1420;
+            --border: rgba(255,255,255,0.06);
+            --accent: #00ff87;
+            --accent2: #0af;
+            --text: #c8d3e0;
+            --text-dim: #546070;
         }
-        .btn-profesional {
-            border: 1px solid rgba(110, 231, 183, 0.4);
-            color: white;
-            transition: all 0.3s ease;
-            display: inline-block;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; cursor: none; }
+
+        /* CURSOR */
+        .cursor { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: difference; transition: transform 0.1s ease; }
+        .cursor-ring { width: 36px; height: 36px; border: 1px solid rgba(0,255,135,0.4); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.18s ease; }
+        a:hover ~ .cursor, button:hover ~ .cursor { transform: scale(2.5); }
+
+        h1, h2, h3 { color: #fff; }
+
+        /* NAV */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid transparent; transition: all 0.4s ease; }
+        nav.scrolled { border-bottom-color: var(--border); backdrop-filter: blur(24px); background: rgba(8,12,18,0.9); }
+        .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--accent); letter-spacing: 0.12em; }
+        .nav-links { display: flex; align-items: center; gap: 36px; }
+        .nav-links a { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* HERO */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 48px 80px; position: relative; overflow: hidden; }
+
+        /* TEXTO ROTATIVO */
+        .rotating-words { display: inline-block; overflow: hidden; vertical-align: bottom; height: 1em; }
+        .rotating-words span { display: block; animation: rotateWords 6s infinite; color: var(--accent); font-family: 'Bebas Neue', sans-serif; }
+        @keyframes rotateWords {
+            0%, 18% { transform: translateY(0); opacity: 1; }
+            20%, 38% { transform: translateY(-100%); opacity: 0; }
+            40%, 58% { transform: translateY(-100%); opacity: 0; }
+            60%, 78% { transform: translateY(-200%); opacity: 0; }
+            80%, 100% { transform: translateY(-300%); opacity: 0; }
         }
-        .btn-profesional:hover {
-            background: #10b981;
-            color: #020617;
-            border-color: #10b981;
+        /* cada palabra tiene su propio delay */
+        .word-1 { animation-delay: 0s; }
+        .word-2 { animation-delay: 2s; }
+        .word-3 { animation-delay: 4s; }
+
+        .hero-rotating { position: relative; display: inline-block; }
+        /* TYPING EFFECT */
+        .hero-typed {
+            color: var(--accent);
+            font-family: 'Bebas Neue', sans-serif;
+            border-right: 3px solid var(--accent);
+            padding-right: 4px;
+            animation: blinkCursor 0.7s infinite;
+            white-space: nowrap;
         }
-        .tech-list-item {
-            font-size: 1.1rem;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: color 0.3s ease;
-            opacity: 0;
+        @keyframes blinkCursor {
+            0%, 100% { border-color: var(--accent); }
+            50% { border-color: transparent; }
         }
-        .tech-list-item:hover { color: #6ee7b7; }
-        .contact-cta-wrapper {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(60px, 9vw, 120px);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            margin-bottom: 40px;
         }
-        .contact-cta-wrapper:hover { color: #6ee7b7; transform: scale(1.05); }
-        .contact-cta-text { font-size: 1.5rem; }
+        .hero h1 .outline { -webkit-text-stroke: 1.5px rgba(255,255,255,0.25); color: transparent; }
+
+        .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
+        .hero-tag::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
+
+        .hero-bg-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(140px, 22vw, 280px); line-height: 0.85; color: rgba(255,255,255,0.025); position: absolute; right: -30px; top: 50%; transform: translateY(-50%); pointer-events: none; user-select: none; letter-spacing: -0.02em; }
+
+        .available-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,255,135,0.07); border: 1px solid rgba(0,255,135,0.18); border-radius: 100px; padding: 9px 18px; font-size: 0.8rem; color: var(--accent); font-weight: 500; }
+        .available-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulseDot 2s infinite; }
+        @keyframes pulseDot { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,135,0.4); } 50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,135,0); } }
+
+        .stats-row { display: flex; gap: 48px; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 48px; }
+        .stat-item .number { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: #fff; line-height: 1; }
+        .stat-item .stat-accent { color: var(--accent); }
+        .stat-item .label { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 5px; }
+
+        /* SECCIONES */
+        section { padding: 120px 48px; border-top: 1px solid var(--border); }
+        .section-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .section-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--text-dim); }
+        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 6vw, 82px); letter-spacing: 0.02em; line-height: 1; margin-bottom: 64px; }
+
+        /* PROYECTOS */
+        .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+        .project-card { background: var(--surface); padding: 44px; position: relative; overflow: hidden; transition: background 0.35s ease; display: flex; flex-direction: column; }
+        .project-card:hover { background: #0f1826; }
+        .project-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .project-card:hover::after { width: 100%; }
+        .project-card:hover .project-number { color: var(--accent); }
+
+        .project-number { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-dim); margin-bottom: 22px; transition: color 0.3s; }
+        .project-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+        .project-title { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.2; }
+        .project-desc { font-size: 0.9rem; line-height: 1.75; color: var(--text-dim); flex: 1; margin-bottom: 28px; }
+        .project-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; transition: gap 0.25s ease; }
+        .project-link:hover { gap: 16px; }
+        .project-link::after { content: '→'; font-size: 1rem; }
+
+        /* PREVIEWS */
+        .project-preview { background: #070b11; border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 26px; transition: border-color 0.3s; }
+        .project-card:hover .project-preview { border-color: rgba(0,255,135,0.2); }
+        .preview-bar { display: flex; gap: 6px; margin-bottom: 10px; }
+        .preview-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .preview-screen { border-radius: 5px; overflow: hidden; height: 130px; }
+
+        /* Preview Bienestar */
+        .preview-bienestar { background: linear-gradient(135deg, #1a3a17, #2d5a27); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; text-align: center; gap: 3px; }
+        .p-urgencia { font-size: 0.38rem; background: #e67e22; color: white; padding: 2px 8px; border-radius: 4px; font-weight: 700; }
+        .p-nav { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+        .p-logo { font-size: 0.52rem; font-weight: 800; color: #6ee7b7; }
+        .p-navbtn { font-size: 0.38rem; background: #e67e22; color: white; padding: 2px 5px; border-radius: 10px; }
+        .p-title { font-size: 0.48rem; font-weight: 800; color: white; }
+        .p-old { font-size: 0.33rem; color: rgba(255,255,255,0.45); text-decoration: line-through; }
+        .p-price { font-size: 0.9rem; font-weight: 900; color: white; line-height: 1.1; }
+        .p-cta { font-size: 0.38rem; background: #27ae60; color: white; padding: 3px 10px; border-radius: 10px; font-weight: 700; }
+
+        /* Preview Descarga */
+        .preview-descarga { background: linear-gradient(135deg, #0f2027, #203a43, #24243e); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; text-align: center; gap: 5px; }
+        .p-check { font-size: 2rem; }
+        .p-dtitle { font-size: 0.55rem; font-weight: 800; color: white; }
+        .p-dsub { font-size: 0.37rem; color: rgba(255,255,255,0.5); }
+        .p-dbtn { font-size: 0.44rem; background: #27ae60; color: white; padding: 4px 12px; border-radius: 5px; font-weight: 700; }
+
+        /* Preview Admin */
+        .preview-admin { background: #0d1117; height: 100%; padding: 8px; display: grid; grid-template-columns: 28px 1fr; gap: 5px; }
+        .p-sidebar { background: #161b22; border-radius: 4px; padding: 5px; display: flex; flex-direction: column; gap: 3px; }
+        .p-si { height: 5px; background: rgba(255,255,255,0.07); border-radius: 2px; }
+        .p-si.on { background: var(--accent); }
+        .p-content { display: flex; flex-direction: column; gap: 4px; }
+        .p-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+        .p-metric { background: #161b22; border-radius: 3px; padding: 4px; }
+        .p-mnum { font-size: 0.5rem; font-weight: 800; color: var(--accent); }
+        .p-mlabel { font-size: 0.28rem; color: rgba(255,255,255,0.3); }
+        .p-chart { background: #161b22; border-radius: 3px; height: 38px; display: flex; align-items: flex-end; padding: 3px; gap: 2px; }
+        .p-bar { flex: 1; border-radius: 1px; background: rgba(0,255,135,0.3); }
+
+        /* Preview Calculadora */
+        .preview-calc { background: #0a0e1a; height: 100%; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
+        .p-ctitle { font-size: 0.48rem; color: white; font-weight: 700; }
+        .p-crow { display: flex; justify-content: space-between; align-items: center; }
+        .p-clabel { font-size: 0.33rem; color: rgba(255,255,255,0.38); }
+        .p-cval { font-size: 0.36rem; background: #161b22; color: var(--accent2); padding: 1px 5px; border-radius: 2px; }
+        .p-ctotal { background: rgba(0,170,255,0.07); border: 1px solid rgba(0,170,255,0.22); border-radius: 3px; padding: 5px; }
+        .p-ctnum { font-size: 0.65rem; font-weight: 800; color: var(--accent2); }
+        .p-ctlabel { font-size: 0.28rem; color: rgba(255,255,255,0.3); }
+        .p-cbtn { font-size: 0.36rem; background: var(--accent2); color: #000; padding: 3px 6px; border-radius: 2px; font-weight: 700; text-align: center; }
+
+        /* Preview Genérico */
+        .preview-generic { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; text-align: center; gap: 6px; }
+        .p-icon { font-size: 2rem; }
+        .p-gtitle { font-size: 0.55rem; font-weight: 800; color: white; }
+        .p-gsub { font-size: 0.37rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+        .p-gtag { font-size: 0.35rem; background: rgba(0,255,135,0.15); color: var(--accent); padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(0,255,135,0.3); }
+
+        /* STACK */
+        .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+        .tech-item { padding: 20px 28px; border: 1px solid var(--border); display: flex; align-items: center; gap: 12px; transition: all 0.25s; font-size: 0.88rem; color: var(--text-dim); }
+        .tech-item:hover { background: var(--surface); color: #fff; border-color: rgba(0,255,135,0.15); }
+        .tech-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; transition: box-shadow 0.25s; }
+        .tech-item:hover .tech-dot { box-shadow: 0 0 8px var(--accent); }
+
+        /* CONTACTO */
+        .contact-email { font-family: 'Bebas Neue', sans-serif; font-size: clamp(26px, 3.8vw, 62px); color: #fff; letter-spacing: 0.04em; display: inline-block; border-bottom: 2px solid var(--accent); padding-bottom: 6px; transition: color 0.25s, border-color 0.25s; }
+        .contact-email:hover { color: var(--accent); border-color: var(--accent2); }
+
+        .contact-btn { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); border: 1px solid var(--border); padding: 10px 22px; border-radius: 6px; transition: all 0.25s; display: inline-block; }
+        .contact-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* PARTÍCULAS */
         #tsparticles { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(28px); }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .hero { padding: 100px 20px 60px; }
+            section { padding: 80px 20px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .stats-row { gap: 20px; flex-wrap: wrap; }
+            .tech-grid { grid-template-columns: 1fr 1fr; }
+            .hero-bg-text { display: none; }
+            body { cursor: auto; }
+            .cursor, .cursor-ring { display: none; }
+        }
     </style>
 </head>
-<body class="min-h-screen">
+<body>
 
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
     <div id="tsparticles"></div>
 
-    <nav class="max-w-7xl mx-auto p-8 flex justify-end items-center z-10">
-        <div class="flex gap-10 text-xs font-semibold uppercase tracking-widest text-slate-500">
-            <a href="#proyectos" class="hover:text-emerald-300 transition-colors">Proyectos</a>
-            <a href="#tecnologias" class="hover:text-emerald-300 transition-colors">Tecnologías</a>
-            <a href="#contacto" class="hover:text-emerald-300 transition-colors">Contacto</a>
+    <!-- NAV -->
+    <nav id="navbar">
+        <span class="nav-logo">GG.DEV</span>
+        <div class="nav-links">
+            <a href="#proyectos">Proyectos</a>
+            <a href="#tecnologias">Stack</a>
+            <a href="#contacto">Contacto</a>
         </div>
     </nav>
 
-    <header class="max-w-7xl mx-auto px-6 pt-20 pb-32 z-10">
-        <div class="max-w-5xl">
-            <h1 class="reveal text-6xl md:text-8xl font-extrabold leading-tight mb-12 tracking-tighter">
-                Transformo visión en <span class="text-gradient">activos digitales.</span>
+    <!-- HERO -->
+    <header class="hero">
+        <div class="max-w-5xl relative z-10">
+            <div class="hero-tag reveal">Desarrollador Web · Buenos Aires, Argentina</div>
+            <h1 class="reveal">
+                CONSTRUYO<br>
+                <span class="hero-typed" id="heroTyped"></span><br>
+                <span class="outline">QUE FUNCIONAN.</span>
             </h1>
-            <div class="reveal space-y-8 text-xl md:text-2xl leading-relaxed max-w-4xl mb-16 text-slate-400">
-                <p>
-                    Soy <strong class="text-white font-semibold">Gastón García</strong>, Desarrollador Web enfocado en crear soluciones tecnológicas que impulsan el crecimiento de negocios reales.
-                </p>
-                <p>
-                    Diseño y desarrollo interfaces de alto rendimiento con arquitecturas sólidas, asegurando que cada línea de código esté alineada con tus objetivos comerciales y la experiencia de tus usuarios.
-                </p>
-            </div>
-            <div class="reveal flex flex-col sm:flex-row gap-8 items-center">
-                <a href="#contacto" class="btn-profesional px-10 py-4 rounded-xl font-bold text-lg">
+            <p class="reveal" style="font-size:1.1rem;line-height:1.8;max-width:580px;color:var(--text-dim);margin-bottom:40px;">
+                Soy <strong style="color:#fff;">Gastón García</strong>. Diseño y desarrollo experiencias digitales de alto impacto — desde Landing Pages que convierten hasta Aplicaciones Web interactivas con integración de pagos real.
+            </p>
+            <div class="reveal" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+                <a href="#contacto" style="background:var(--accent);color:#000;font-weight:800;padding:15px 34px;border-radius:8px;font-size:0.88rem;letter-spacing:0.06em;text-transform:uppercase;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
                     Hablemos de tu proyecto
                 </a>
-                <div class="text-slate-500 italic text-base flex items-center gap-3">
-                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                <div class="available-badge">
+                    <span class="available-dot"></span>
                     Disponible para nuevos proyectos
                 </div>
             </div>
+            <div class="stats-row reveal">
+                <div class="stat-item">
+                    <div class="number">6<span class="stat-accent">+</span></div>
+                    <div class="label">Proyectos Reales</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number"><span class="stat-accent">💳</span></div>
+                    <div class="label">Mercado Pago · Pagos AR</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">100<span class="stat-accent">%</span></div>
+                    <div class="label">Código Propio</div>
+                </div>
+            </div>
         </div>
+        <div class="hero-bg-text">GG</div>
     </header>
 
-    <section id="proyectos" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
-        <h2 class="reveal text-4xl md:text-5xl font-bold mb-20 tracking-tight text-white">Proyectos seleccionados</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+        <div class="section-label reveal">Trabajo Seleccionado</div>
+        <h2 class="section-title reveal">PROYECTOS</h2>
+        <div class="projects-grid">
 
-            <div class="reveal">
-                <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-3 block">Landing Page · Salud & Bienestar</span>
-                <h4 class="text-2xl font-bold mb-4 italic text-white">Bienestar Interior </h4>
-                <p class="text-lg leading-relaxed mb-6 text-slate-400">
-                    Landing page de alta conversión para la venta de un producto digital de salud digestiva. Diseño persuasivo con integración directa a MercadoPago.
-                </p>
-                <a href="https://bienestarinterior.netlify.app" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">
-                    Ver proyecto →
-                </a>
+            <!-- 01 -->
+            <div class="project-card reveal">
+                <div class="project-number mono">01 / 06</div>
+                <div class="project-preview">
+                    <div class="preview-bar">
+                        <div class="preview-dot" style="background:#ff5f57"></div>
+                        <div class="preview-dot" style="background:#febc2e"></div>
+                        <div class="preview-dot" style="background:#28c840"></div>
+                    </div>
+                    <div class="preview-screen">
+                        <div class="preview-bienestar">
+                            <div class="p-urgencia">⏰ OFERTA TERMINA EN: 23:59:15 🔥</div>
+                            <div class="p-nav"><span class="p-logo">BienestarInterior</span><span class="p-navbtn">$14.900</span></div>
+                            <div class="p-title">¿Harto de sentirte inflamado?</div>
+                            <div class="p-old">$30.000 ARS</div>
+                            <div class="p-price">$14.900 ARS</div>
+                            <div class="p-cta">¡QUIERO SANAR MI INTESTINO! 🚀</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-tag">Landing Page · Salud & Bienestar</div>
+                <div class="project-title">Bienestar Interior</div>
+                <div class="project-desc">Landing Page de alta conversión para venta de E-Book de salud digestiva. Contador regresivo de urgencia real, precio visible sin scrollear, Sticky CTA para Mobile e integración directa con Mercado Pago.</div>
+                <a href="https://bienestarinterior.netlify.app" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
             </div>
 
-            <div class="reveal">
-                <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-3 block">Página Post-Venta · E-commerce</span>
-                <h4 class="text-2xl font-bold mb-4 italic text-white">Confirmación de Compra</h4>
-                <p class="text-lg leading-relaxed mb-6 text-slate-400">
-                    Página de entrega de activo digital post-pago. Diseñada para brindar confianza al comprador y acceso inmediato al producto adquirido.
-                </p>
-                <a href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">
-                    Ver proyecto →
-                </a>
+            <!-- 02 -->
+            <div class="project-card reveal">
+                <div class="project-number mono">02 / 06</div>
+                <div class="project-preview">
+                    <div class="preview-bar">
+                        <div class="preview-dot" style="background:#ff5f57"></div>
+                        <div class="preview-dot" style="background:#febc2e"></div>
+                        <div class="preview-dot" style="background:#28c840"></div>
+                    </div>
+                    <div class="preview-screen">
+                        <div class="preview-descarga">
+                            <div class="p-check">✅</div>
+                            <div class="p-dtitle">¡Pago Confirmado!</div>
+                            <div class="p-dsub">Tu E-Book está listo para descargar</div>
+                            <div class="p-dbtn">⬇ Descargar Tu Intestino Sano</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-tag">Página Post-Venta · E-Commerce</div>
+                <div class="project-title">Confirmación De Compra</div>
+                <div class="project-desc">Página de entrega automática de activo digital post-pago. Integrada como URL de retorno en Mercado Pago para entrega inmediata sin intervención manual del vendedor.</div>
+                <a href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
             </div>
 
-            <div class="reveal">
-                <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-3 block">Aplicación Web · Gestión Administrativa</span>
-                <h4 class="text-2xl font-bold mb-4 italic text-white">Sistema de Gestión Admin</h4>
-                <p class="text-lg leading-relaxed mb-6 text-slate-400">
-                    Panel administrativo interactivo para el registro de ventas y gestión de clientes. Incluye visualización de métricas en tiempo real.
-                </p>
-                <a href="https://gastongarcia1295.github.io/Gestion-Ventas/" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">
-                    Ver proyecto →
-                </a>
+            <!-- 03 -->
+            <div class="project-card reveal">
+                <div class="project-number mono">03 / 06</div>
+                <div class="project-preview">
+                    <div class="preview-bar">
+                        <div class="preview-dot" style="background:#ff5f57"></div>
+                        <div class="preview-dot" style="background:#febc2e"></div>
+                        <div class="preview-dot" style="background:#28c840"></div>
+                    </div>
+                    <div class="preview-screen">
+                        <div class="preview-admin">
+                            <div class="p-sidebar">
+                                <div class="p-si on"></div>
+                                <div class="p-si"></div>
+                                <div class="p-si"></div>
+                                <div class="p-si"></div>
+                                <div class="p-si"></div>
+                            </div>
+                            <div class="p-content">
+                                <div class="p-metrics">
+                                    <div class="p-metric"><div class="p-mnum">$48K</div><div class="p-mlabel">Ventas</div></div>
+                                    <div class="p-metric"><div class="p-mnum">124</div><div class="p-mlabel">Clientes</div></div>
+                                    <div class="p-metric"><div class="p-mnum">98%</div><div class="p-mlabel">Éxito</div></div>
+                                </div>
+                                <div class="p-chart">
+                                    <div class="p-bar" style="height:40%"></div>
+                                    <div class="p-bar" style="height:65%"></div>
+                                    <div class="p-bar" style="height:52%"></div>
+                                    <div class="p-bar" style="height:85%;background:rgba(0,255,135,0.75)"></div>
+                                    <div class="p-bar" style="height:60%"></div>
+                                    <div class="p-bar" style="height:92%;background:rgba(0,255,135,0.75)"></div>
+                                    <div class="p-bar" style="height:70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-tag">Aplicación Web · Gestión Administrativa</div>
+                <div class="project-title">Sistema De Gestión Admin</div>
+                <div class="project-desc">Panel administrativo interactivo para registro de ventas y gestión de clientes. Métricas en tiempo real con gráficos dinámicos y Dashboard completo para seguimiento del negocio.</div>
+                <a href="https://gastongarcia1295.github.io/Gestion-Ventas/" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
             </div>
 
-            <div class="reveal">
-                <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-3 block">Herramienta · Desarrollo Web</span>
-                <h4 class="text-2xl font-bold mb-4 italic text-white">Calculadora de Presupuesto</h4>
-                <p class="text-lg leading-relaxed mb-6 text-slate-400">
-                    Cotizador interactivo para proyectos web con integración de API para conversión de divisas ARS/USD en tiempo real y descarga PDF.
-                </p>
-                <a href="https://gastongarcia1295.github.io/Calculadora-Presupuesto/" target="_blank" class="font-bold border-b border-emerald-500 pb-1 hover:text-emerald-400 transition-colors text-white">
-                    Ver proyecto →
-                </a>
+            <!-- 04 -->
+            <div class="project-card reveal">
+                <div class="project-number mono">04 / 06</div>
+                <div class="project-preview">
+                    <div class="preview-bar">
+                        <div class="preview-dot" style="background:#ff5f57"></div>
+                        <div class="preview-dot" style="background:#febc2e"></div>
+                        <div class="preview-dot" style="background:#28c840"></div>
+                    </div>
+                    <div class="preview-screen">
+                        <div class="preview-calc">
+                            <div class="p-ctitle">💻 Cotizador De Proyectos Web</div>
+                            <div class="p-crow"><span class="p-clabel">Landing Page</span><span class="p-cval">$350 USD</span></div>
+                            <div class="p-crow"><span class="p-clabel">Integración De Pagos</span><span class="p-cval">$120 USD</span></div>
+                            <div class="p-crow"><span class="p-clabel">Animaciones GSAP</span><span class="p-cval">$80 USD</span></div>
+                            <div class="p-ctotal">
+                                <div class="p-ctnum">$550 USD</div>
+                                <div class="p-ctlabel">≈ $509.750 ARS (hoy)</div>
+                            </div>
+                            <div class="p-cbtn">⬇ Descargar Presupuesto PDF</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-tag">Herramienta Web · Desarrollo</div>
+                <div class="project-title">Calculadora De Presupuesto</div>
+                <div class="project-desc">Cotizador interactivo para proyectos web con conversión ARS/USD en tiempo real vía API. Genera y descarga el presupuesto completo en PDF con un solo clic.</div>
+                <a href="https://gastongarcia1295.github.io/Calculadora-Presupuesto/" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
+            </div>
+
+            <!-- 05 -->
+            <div class="project-card reveal">
+                <div class="project-number mono">05 / 06</div>
+                <div class="project-preview">
+                    <div class="preview-bar">
+                        <div class="preview-dot" style="background:#ff5f57"></div>
+                        <div class="preview-dot" style="background:#febc2e"></div>
+                        <div class="preview-dot" style="background:#28c840"></div>
+                    </div>
+                    <div class="preview-screen">
+                        <div class="preview-generic" style="background:linear-gradient(135deg,#0a0f1a,#1a1a2e);">
+                            <div class="p-icon">🛒</div>
+                            <div class="p-gtitle">Próximamente</div>
+                            <div class="p-gsub">Proyecto en desarrollo.<br>Disponible muy pronto.</div>
+                            <div class="p-gtag">E-Commerce · En Progreso</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-tag">E-Commerce · Tienda Online</div>
+                <div class="project-title">Tienda Online</div>
+                <div class="project-desc">Tienda online completa con carrito de compras, gestión de productos y checkout integrado con Mercado Pago. Diseño responsive optimizado para conversión.</div>
+                <a href="#contacto" class="project-link" style="color:var(--text-dim);">En Desarrollo</a>
+            </div>
+
+            <!-- 06 -->
+            <div class="project-card reveal">
+                <div class="project-number mono">06 / 06</div>
+                <div class="project-preview">
+                    <div class="preview-bar">
+                        <div class="preview-dot" style="background:#ff5f57"></div>
+                        <div class="preview-dot" style="background:#febc2e"></div>
+                        <div class="preview-dot" style="background:#28c840"></div>
+                    </div>
+                    <div class="preview-screen">
+                        <div class="preview-generic" style="background:linear-gradient(135deg,#0a1a0f,#0f2a1a);">
+                            <div class="p-icon">📊</div>
+                            <div class="p-gtitle">Próximamente</div>
+                            <div class="p-gsub">Proyecto en desarrollo.<br>Disponible muy pronto.</div>
+                            <div class="p-gtag">Dashboard · En Progreso</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-tag">Dashboard · Análisis De Datos</div>
+                <div class="project-title">Dashboard Analítico</div>
+                <div class="project-desc">Dashboard interactivo para visualización de métricas de negocio en tiempo real. Gráficos dinámicos, filtros avanzados y exportación de reportes en PDF.</div>
+                <a href="#contacto" class="project-link" style="color:var(--text-dim);">En Desarrollo</a>
             </div>
 
         </div>
     </section>
 
-    <section id="tecnologias" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
-        <h2 class="reveal text-3xl font-bold mb-12 tracking-tight text-white">Tecnologías y herramientas</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-20 text-slate-400">
-            <div class="tech-list-item">React.js / Next.js</div>
-            <div class="tech-list-item">TypeScript / JavaScript</div>
-            <div class="tech-list-item">Node.js / Express</div>
-            <div class="tech-list-item">Tailwind CSS</div>
-            <div class="tech-list-item">Git / GitHub</div>
-            <div class="tech-list-item">APIs REST / GraphQL</div>
-            <div class="tech-list-item">HTML5 / CSS3</div>
-            <div class="tech-list-item">GSAP Animaciones</div>
-            <div class="tech-list-item">SQL / NoSQL</div>
+    <!-- STACK -->
+    <section id="tecnologias">
+        <div class="section-label reveal">Herramientas Que Domino</div>
+        <h2 class="section-title reveal">STACK TÉCNICO</h2>
+        <div class="tech-grid reveal">
+            <div class="tech-item"><span class="tech-dot"></span>HTML5 / CSS3</div>
+            <div class="tech-item"><span class="tech-dot"></span>JavaScript ES6+</div>
+            <div class="tech-item"><span class="tech-dot"></span>React.js / Next.js</div>
+            <div class="tech-item"><span class="tech-dot"></span>Tailwind CSS</div>
+            <div class="tech-item"><span class="tech-dot"></span>GSAP Animaciones</div>
+            <div class="tech-item"><span class="tech-dot"></span>Git / GitHub</div>
+            <div class="tech-item"><span class="tech-dot"></span>APIs REST</div>
+            <div class="tech-item"><span class="tech-dot"></span>Mercado Pago</div>
+            <div class="tech-item"><span class="tech-dot"></span>Netlify / GitHub Pages</div>
+            <div class="tech-item"><span class="tech-dot"></span>Node.js / Express</div>
+            <div class="tech-item"><span class="tech-dot"></span>TypeScript</div>
+            <div class="tech-item"><span class="tech-dot"></span>Diseño UI/UX</div>
         </div>
     </section>
 
-    <section id="contacto" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5 mb-20 text-center md:text-left">
-        <div class="max-w-3xl">
-            <h2 class="reveal text-5xl font-bold mb-8 tracking-tight text-white">¿Listo para empezar?</h2>
-            <p class="reveal text-xl mb-12 text-slate-400">Si buscás un desarrollador web para tu próximo proyecto, escribime.</p>
-            <div class="reveal">
-                <a href="mailto:gastongarcia1295@gmail.com" class="contact-cta-wrapper text-white font-bold">
-                    <span class="contact-cta-text">Contactame a través de Gmail</span> <span class="text-emerald-500 text-4xl">✉</span>
-                </a>
-            </div>
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <div class="section-label reveal">¿Tenés Un Proyecto?</div>
+        <h2 class="section-title reveal">HABLEMOS</h2>
+        <p class="reveal" style="font-size:1.1rem;color:var(--text-dim);max-width:560px;line-height:1.8;margin-bottom:48px;">
+            Si necesitás un Sitio Web, una Landing Page que venda, una Aplicación Web o cualquier solución digital — escribime. Respondo en menos de 24hs.
+        </p>
+        <div class="reveal">
+            <a href="mailto:gastongarcia1295@gmail.com" class="contact-email">
+                GASTONGARCIA1295@GMAIL.COM
+            </a>
+        </div>
+        <div class="reveal" style="margin-top:40px;">
+            <a href="https://github.com/GastonGarcia1295" target="_blank" class="contact-btn">GitHub →</a>
         </div>
     </section>
 
-    <footer class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5 text-sm text-slate-600">
-        <p>Gastón García — Desarrollador Web — Castelar, Argentina.</p>
+    <footer style="padding:32px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);">Gastón García — Desarrollador Web — Castelar, Argentina</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);">© 2026</p>
     </footer>
 
     <script>
+        // CURSOR
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx - 5 + 'px'; cursor.style.top = my - 5 + 'px'; });
+        function animateRing() { rx += (mx - rx - 18) * 0.15; ry += (my - ry - 18) * 0.15; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+        animateRing();
+
+        // NAV SCROLL
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // PARTÍCULAS
         tsParticles.load("tsparticles", {
             fpsLimit: 60,
             particles: {
-                color: { value: "#10b981" },
-                links: { color: "#10b981", distance: 150, enable: true, opacity: 0.3, width: 1 },
-                move: { enable: true, speed: 0.8 },
-                number: { value: 40, density: { enable: true, area: 800 } },
-                opacity: { value: 0.4 },
-                size: { value: { min: 1, max: 2 } },
+                color: { value: "#00ff87" },
+                links: { color: "#00ff87", distance: 150, enable: true, opacity: 0.1, width: 1 },
+                move: { enable: true, speed: 0.45 },
+                number: { value: 28, density: { enable: true, area: 1000 } },
+                opacity: { value: 0.18 },
+                size: { value: { min: 1, max: 1.5 } },
             }, detectRetina: true,
         });
 
+        // GSAP REVEAL
         gsap.registerPlugin(ScrollTrigger);
-
+        gsap.set(".reveal", { y: 28, opacity: 0 });
         gsap.utils.toArray(".reveal").forEach(el => {
             gsap.to(el, {
-                scrollTrigger: { trigger: el, start: "top 90%" },
-                opacity: 1, y: 0, duration: 1, ease: "power2.out"
+                scrollTrigger: { trigger: el, start: "top 92%" },
+                opacity: 1, y: 0, duration: 0.85, ease: "power2.out"
             });
         });
 
-        gsap.to(".tech-list-item", {
-            scrollTrigger: { trigger: "#tecnologias", start: "top 80%" },
-            opacity: 1, y: 0, stagger: 0.1, duration: 0.8, ease: "power2.out"
-        });
-
-        gsap.set(".reveal, .tech-list-item", { y: 30 });
+        // TYPING EFFECT HERO
+        const words = ['SITIOS WEB.', 'LANDING PAGES.', 'APPS & MÁS.', 'HERRAMIENTAS WEB.'];
+        const el = document.getElementById('heroTyped');
+        let wi = 0, ci = 0, deleting = false;
+        function type() {
+            const word = words[wi];
+            if (!deleting) {
+                el.textContent = word.slice(0, ++ci);
+                if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+            } else {
+                el.textContent = word.slice(0, --ci);
+                if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(type, 300); return; }
+            }
+            setTimeout(type, deleting ? 45 : 80);
+        }
+        setTimeout(type, 1000);
     </script>
 </body>
 </html>
