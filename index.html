@@ -78,7 +78,7 @@
         .project-card:hover .project-preview { border-color: rgba(0,255,135,0.2); }
         .preview-bar { display: flex; gap: 6px; margin-bottom: 10px; }
         .preview-dot { width: 8px; height: 8px; border-radius: 50%; }
-        .preview-screen { border-radius: 5px; overflow: hidden; height: 130px; }
+        .preview-screen { border-radius: 5px; overflow: hidden; height: 130px; isolation: isolate; }
 
         /* Preview Bienestar */
         .preview-bienestar { background: linear-gradient(135deg, #1a3a17, #2d5a27); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; text-align: center; gap: 3px; }
@@ -367,47 +367,43 @@
                         <div class="preview-dot" style="background:#28c840"></div>
                     </div>
                     <div class="preview-screen">
-                                                <div class="preview-magnolia">
-                            <div class="pm-top"><span>3 Y 6 CUOTAS SIN INTERÉS ✦ ENVÍO GRATIS ✦ 15% OFF TRANSFERENCIA</span></div>
-                            <div class="pm-nav">
-                                <span class="pm-nav-l">Colección · Sale</span>
-                                <span class="pm-nav-logo">Magnolia</span>
-                                <span class="pm-nav-r">🛒 0</span>
+                        <!-- MAGNOLIA STORE — Preview de marca -->
+                        <div style="background:#faf9f7;height:100%;display:flex;flex-direction:column;overflow:hidden;position:relative;">
+                          <!-- Topbar dorada -->
+                          <div style="background:#b8975a;padding:3px 0;text-align:center;flex-shrink:0;">
+                            <span style="font-size:0.19rem;color:rgba(0,0,0,0.65);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">3 Y 6 CUOTAS SIN INTERÉS &nbsp;✦&nbsp; ENVÍO GRATIS &nbsp;✦&nbsp; 15% OFF TRANSFERENCIA</span>
+                          </div>
+                          <!-- Nav -->
+                          <div style="background:#fff;border-bottom:1px solid rgba(44,31,20,0.08);padding:4px 10px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+                            <span style="font-size:0.18rem;color:#9a9490;letter-spacing:0.08em;text-transform:uppercase;">Colección · Sale</span>
+                            <span style="font-family:serif;font-size:0.52rem;color:#2e2c2a;letter-spacing:0.3em;font-weight:300;">Magnolia</span>
+                            <span style="font-size:0.18rem;color:#2e2c2a;">🛒 0</span>
+                          </div>
+                          <!-- Hero centrado con logo y tagline -->
+                          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;background:linear-gradient(160deg,#f3ede3 0%,#faf9f7 60%,#eef4f0 100%);position:relative;overflow:hidden;">
+                            <!-- Circulo decorativo fondo -->
+                            <div style="position:absolute;top:-20px;right:-20px;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,rgba(184,151,90,0.1) 0%,transparent 70%);"></div>
+                            <div style="position:absolute;bottom:-15px;left:-15px;width:50px;height:50px;border-radius:50%;background:radial-gradient(circle,rgba(61,107,79,0.07) 0%,transparent 70%);"></div>
+                            <!-- Logo grande -->
+                            <div style="font-family:serif;font-size:1.4rem;font-weight:300;color:#2e2c2a;letter-spacing:0.35em;text-transform:uppercase;margin-bottom:4px;">Magnolia</div>
+                            <!-- Línea decorativa -->
+                            <div style="width:28px;height:1px;background:#b8975a;margin:0 auto 5px;"></div>
+                            <!-- Tagline -->
+                            <div style="font-size:0.22rem;color:#9a9490;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;">Moda Femenina Premium</div>
+                            <!-- Badges de categorías -->
+                            <div style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center;">
+                              <span style="font-size:0.18rem;border:1px solid rgba(44,31,20,0.15);padding:1px 5px;color:#7a6a5a;border-radius:100px;">Shorts</span>
+                              <span style="font-size:0.18rem;border:1px solid rgba(44,31,20,0.15);padding:1px 5px;color:#7a6a5a;border-radius:100px;">Blazers</span>
+                              <span style="font-size:0.18rem;border:1px solid rgba(44,31,20,0.15);padding:1px 5px;color:#7a6a5a;border-radius:100px;">Vestidos</span>
+                              <span style="font-size:0.18rem;border:1px solid rgba(44,31,20,0.15);padding:1px 5px;color:#7a6a5a;border-radius:100px;">Camperas</span>
                             </div>
-                            <div class="pm-cards">
-                                <div class="pm-c">
-                                    <div class="pm-c-wrap">
-                                        <img src="data:image/jpeg;base64,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" alt="Vestido">
-                                        <span class="pm-c-badge" style="background:#1a1816;color:#b8975a;">Nuevo</span>
-                                    </div>
-                                    <div class="pm-c-info">
-                                        <div class="pm-c-name">Vestido Negro</div>
-                                        <div class="pm-c-price">$74.900</div>
-                                    </div>
-                                </div>
-                                <div class="pm-c">
-                                    <div class="pm-c-wrap">
-                                        <img src="data:image/jpeg;base64,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" alt="Campera">
-                                        <span class="pm-c-badge" style="background:#b83030;color:#fff;">Sale</span>
-                                    </div>
-                                    <div class="pm-c-info">
-                                        <div class="pm-c-name">Campera Cuero</div>
-                                        <div class="pm-c-price">$129.900</div>
-                                    </div>
-                                </div>
-                                <div class="pm-c">
-                                    <div class="pm-c-wrap">
-                                        <img src="data:image/jpeg;base64,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" alt="Jean">
-                                        <span class="pm-c-badge" style="background:#1a1816;color:#b8975a;">Nuevo</span>
-                                    </div>
-                                    <div class="pm-c-info">
-                                        <div class="pm-c-name">Jean Oversize</div>
-                                        <div class="pm-c-price">$56.900</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>iv>
-                </div>
+                          </div>
+                          <!-- Footer con CTA -->
+                          <div style="background:#2e2c2a;padding:4px 8px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+                            <span style="font-size:0.18rem;color:rgba(255,255,255,0.5);">6 cuotas sin interés</span>
+                            <span style="font-size:0.18rem;background:#b8975a;color:#000;padding:1px 5px;border-radius:2px;font-weight:700;">Ver Colección →</span>
+                          </div>
+                        </div>                </div>
                 <div class="project-tag">E-Commerce · Moda Femenina</div>
                 <div class="project-title">Magnolia Store</div>
                 <div class="project-desc">Tienda de moda femenina premium con carrito de compras funcional, modal de producto con galería y zoom, filtros por categoría, cuotas automáticas e integración con Mercado Pago.</div>
@@ -424,18 +420,85 @@
                         <div class="preview-dot" style="background:#28c840"></div>
                     </div>
                     <div class="preview-screen">
-                        <div class="preview-generic" style="background:linear-gradient(135deg,#0a1a0f,#0f2a1a);">
-                            <div class="p-icon">📊</div>
-                            <div class="p-gtitle">Próximamente</div>
-                            <div class="p-gsub">Proyecto en desarrollo.<br>Disponible muy pronto.</div>
-                            <div class="p-gtag">Dashboard · En Progreso</div>
+                        <div style="background:#f5f6fa;height:100%;display:flex;flex-direction:column;overflow:hidden;font-family:'DM Sans',sans-serif;">
+                          <!-- Sidebar + main -->
+                          <div style="display:flex;height:100%;">
+                            <!-- Mini sidebar -->
+                            <div style="width:22px;background:#0f1623;display:flex;flex-direction:column;align-items:center;padding:5px 0;gap:4px;flex-shrink:0;">
+                              <div style="width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,#6366f1,#8b5cf6);"></div>
+                              <div style="width:8px;height:2px;border-radius:1px;background:rgba(99,102,241,0.6);margin-top:4px;"></div>
+                              <div style="width:8px;height:2px;border-radius:1px;background:rgba(255,255,255,0.15);"></div>
+                              <div style="width:8px;height:2px;border-radius:1px;background:rgba(255,255,255,0.15);"></div>
+                              <div style="width:8px;height:2px;border-radius:1px;background:rgba(255,255,255,0.15);"></div>
+                              <div style="width:8px;height:2px;border-radius:1px;background:rgba(255,255,255,0.15);"></div>
+                            </div>
+                            <!-- Main content -->
+                            <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+                              <!-- Topbar -->
+                              <div style="background:#fff;border-bottom:1px solid #e8eaf2;padding:3px 6px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+                                <div style="font-size:0.28rem;font-weight:700;color:#1a1d2e;">Pulse Analytics</div>
+                                <div style="display:flex;gap:2px;">
+                                  <div style="background:#f0f2f8;border-radius:3px;padding:1px 3px;font-size:0.2rem;color:#7c8db0;font-weight:600;">7D</div>
+                                  <div style="background:#6366f1;border-radius:3px;padding:1px 3px;font-size:0.2rem;color:#fff;font-weight:600;">30D</div>
+                                  <div style="background:#f0f2f8;border-radius:3px;padding:1px 3px;font-size:0.2rem;color:#7c8db0;font-weight:600;">1A</div>
+                                </div>
+                              </div>
+                              <!-- KPIs -->
+                              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:3px;flex-shrink:0;">
+                                <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:3px;border-top:2px solid #6366f1;">
+                                  <div style="font-size:0.22rem;color:#7c8db0;margin-bottom:1px;">Ingresos</div>
+                                  <div style="font-size:0.38rem;font-weight:800;color:#1a1d2e;">$4.8M</div>
+                                  <div style="font-size:0.18rem;color:#10b981;">▲ 18.4%</div>
+                                </div>
+                                <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:3px;border-top:2px solid #10b981;">
+                                  <div style="font-size:0.22rem;color:#7c8db0;margin-bottom:1px;">Órdenes</div>
+                                  <div style="font-size:0.38rem;font-weight:800;color:#1a1d2e;">1.847</div>
+                                  <div style="font-size:0.18rem;color:#10b981;">▲ 12.1%</div>
+                                </div>
+                                <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:3px;border-top:2px solid #f59e0b;">
+                                  <div style="font-size:0.22rem;color:#7c8db0;margin-bottom:1px;">Usuarios</div>
+                                  <div style="font-size:0.38rem;font-weight:800;color:#1a1d2e;">3.291</div>
+                                  <div style="font-size:0.18rem;color:#10b981;">▲ 8.7%</div>
+                                </div>
+                                <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:3px;border-top:2px solid #0ea5e9;">
+                                  <div style="font-size:0.22rem;color:#7c8db0;margin-bottom:1px;">Conversión</div>
+                                  <div style="font-size:0.38rem;font-weight:800;color:#1a1d2e;">3.8%</div>
+                                  <div style="font-size:0.18rem;color:#f43f5e;">▼ 2.3%</div>
+                                </div>
+                              </div>
+                              <!-- Chart area -->
+                              <div style="flex:1;padding:0 3px 3px;display:grid;grid-template-columns:1.4fr 0.6fr;gap:2px;overflow:hidden;">
+                                <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:4px;overflow:hidden;">
+                                  <div style="font-size:0.22rem;font-weight:700;color:#1a1d2e;margin-bottom:3px;">Ingresos Mensuales</div>
+                                  <!-- Mini bar chart -->
+                                  <div style="display:flex;align-items:flex-end;gap:1px;height:30px;padding-top:4px;">
+                                    <div style="flex:1;background:rgba(99,102,241,0.25);border-radius:1px;height:40%;"></div>
+                                    <div style="flex:1;background:rgba(99,102,241,0.35);border-radius:1px;height:55%;"></div>
+                                    <div style="flex:1;background:rgba(99,102,241,0.3);border-radius:1px;height:45%;"></div>
+                                    <div style="flex:1;background:rgba(99,102,241,0.5);border-radius:1px;height:68%;"></div>
+                                    <div style="flex:1;background:rgba(99,102,241,0.4);border-radius:1px;height:58%;"></div>
+                                    <div style="flex:1;background:rgba(99,102,241,0.6);border-radius:1px;height:78%;"></div>
+                                    <div style="flex:1;background:#6366f1;border-radius:1px;height:100%;"></div>
+                                  </div>
+                                </div>
+                                <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:4px;overflow:hidden;">
+                                  <div style="font-size:0.22rem;font-weight:700;color:#1a1d2e;margin-bottom:3px;">Tráfico</div>
+                                  <div style="display:flex;flex-direction:column;gap:2px;">
+                                    <div style="display:flex;align-items:center;gap:2px;"><div style="width:4px;height:4px;border-radius:50%;background:#6366f1;flex-shrink:0;"></div><div style="flex:1;height:2px;background:#e8eaf2;border-radius:1px;overflow:hidden;"><div style="width:42%;height:100%;background:#6366f1;border-radius:1px;"></div></div><span style="font-size:0.18rem;color:#7c8db0;">42%</span></div>
+                                    <div style="display:flex;align-items:center;gap:2px;"><div style="width:4px;height:4px;border-radius:50%;background:#0ea5e9;flex-shrink:0;"></div><div style="flex:1;height:2px;background:#e8eaf2;border-radius:1px;overflow:hidden;"><div style="width:28%;height:100%;background:#0ea5e9;border-radius:1px;"></div></div><span style="font-size:0.18rem;color:#7c8db0;">28%</span></div>
+                                    <div style="display:flex;align-items:center;gap:2px;"><div style="width:4px;height:4px;border-radius:50%;background:#8b5cf6;flex-shrink:0;"></div><div style="flex:1;height:2px;background:#e8eaf2;border-radius:1px;overflow:hidden;"><div style="width:18%;height:100%;background:#8b5cf6;border-radius:1px;"></div></div><span style="font-size:0.18rem;color:#7c8db0;">18%</span></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
                 <div class="project-tag">Dashboard · Análisis De Datos</div>
-                <div class="project-title">Dashboard Analítico</div>
-                <div class="project-desc">Dashboard interactivo para visualización de métricas de negocio en tiempo real. Gráficos dinámicos, filtros avanzados y exportación de reportes en PDF.</div>
-                <a href="#contacto" class="project-link" style="color:var(--text-dim);">En Desarrollo</a>
+                <div class="project-title">Pulse Analytics</div>
+                <div class="project-desc">Dashboard analítico interactivo con 11 secciones, gráficos dinámicos, filtros por período, usuarios en tiempo real y heatmap anual. Diseño SaaS profesional.</div>
+                <a href="https://gastongarcia1295.github.io/Dashboard-Analitico/" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
             </div>
 
         </div>
