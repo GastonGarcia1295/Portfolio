@@ -22,6 +22,7 @@ Desarrollador web autodidacta localizado en Castelar, Buenos Aires. Me especiali
 | 04 | Calculadora De Presupuesto | Herramienta Web | [Ver](https://gastongarcia1295.github.io/Calculadora-Presupuesto/) |
 | 05 | Magnolia Store | E-Commerce | [Ver](https://magnoliashop.netlify.app) |
 | 06 | Pulse Analytics Dashboard | Dashboard Analítico | [Ver](https://gastongarcia1295.github.io/Dashboard-Analitico/) |
+| 07 | Tech Store Shop | Landing Page · Tienda Apple | [Ver](https://gastongarcia1295.github.io/Tech-Store-Shop/) |
 
 ---
 
@@ -33,9 +34,4 @@ Desarrollador web autodidacta localizado en Castelar, Buenos Aires. Me especiali
 
 ## Contacto
 
-📧 gastongarcia1295@gmail.com
-🌐 [gastongarcia1295.github.io/Portfolio](https://gastongarcia1295.github.io/Portfolio)
-
----
-
-© 2026 Gastón García · Castelar, Buenos Aires, Argentina
+📧 [gastongarcia1295@gmail.com](mailto:gastongarcia1295@gmail.com)
