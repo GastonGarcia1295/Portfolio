@@ -1,995 +1,895 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gastón García | Desarrollador Web</title>
-    <meta name="description" content="Gastón García — Desarrollador Web especializado en sitios web, landing pages, apps y soluciones digitales para negocios reales.">
-    <meta name="author" content="Gastón García">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GASTÓN GARCÍA — DEV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d0d12;
+  --bg2:#13131a;
+  --surface:#17171f;
+  --surface2:#1e1e28;
+  --white:#e8e4dd;
+  --white2:#8a8480;
+  --white3:#5a5652;
+  --accent:#4f8cff;
+  --accent2:#ff4f1f;
+  --green:#00e5a0;
+  --yellow:#ffe156;
+  --purple:#a78bfa;
+  --border:rgba(232,228,221,0.07);
+  --border2:rgba(232,228,221,0.13);
+  --f:'Barlow',sans-serif;
+  --fc:'Barlow Condensed',sans-serif;
+  --fm:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--f);font-weight:400;overflow-x:hidden;cursor:none}
+::selection{background:var(--accent);color:#000}
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+/* ── CURSOR ── */
+#cur{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;left:0;top:0;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s}
+#cur-r{position:fixed;width:30px;height:30px;border:1px solid rgba(79,140,255,.28);border-radius:50%;pointer-events:none;z-index:9998;left:0;top:0;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s}
+.hovering #cur{width:16px;height:16px;background:var(--accent2)}
+.hovering #cur-r{width:48px;height:48px;border-color:rgba(255,79,31,.4)}
 
-    <style>
-        :root {
-            --bg: #080c12;
-            --surface: #0e1420;
-            --border: rgba(255,255,255,0.06);
-            --accent: #00ff87;
-            --accent2: #0af;
-            --text: #c8d3e0;
-            --text-dim: #546070;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; cursor: none; }
+/* ── CANVAS ── */
+#bgc{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-        .cursor { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: difference; transition: transform 0.1s ease; }
-        .cursor-ring { width: 36px; height: 36px; border: 1px solid rgba(0,255,135,0.4); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.18s ease; }
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;transition:background .3s,box-shadow .3s}
+nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 1px 0 var(--border)}
+.logo{font-family:var(--fm);font-weight:700;font-size:.85rem;letter-spacing:.06em;color:var(--white);text-decoration:none;text-transform:uppercase}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:var(--fm);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-btn{font-family:var(--fm);font-size:.57rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;background:var(--accent);border:none;padding:.48rem 1.3rem;border-radius:3px;text-decoration:none;cursor:none;transition:background .2s,transform .15s}
+.nav-btn:hover{background:#6fa3ff;transform:scale(.97)}
 
-        h1, h2, h3 { color: #fff; }
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;z-index:1;overflow:hidden}
+.hero-ey{font-family:var(--fm);font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem;opacity:0;animation:up .7s .05s ease forwards}
+.hero-ey::before{content:'//';opacity:.4;margin-right:.1rem}
+.hero-h1{font-family:var(--fc);font-weight:900;font-size:clamp(3rem,7vw,6.8rem);line-height:.88;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:2.5rem;opacity:0;animation:up .8s .2s ease forwards}
+.hero-h1 .ac{color:var(--accent)}
+.hero-h1 .out{-webkit-text-stroke:1.5px var(--white);color:transparent}
 
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid transparent; transition: all 0.4s ease; }
-        nav.scrolled { border-bottom-color: var(--border); backdrop-filter: blur(24px); background: rgba(8,12,18,0.9); }
-        .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--accent); letter-spacing: 0.12em; }
-        .nav-links { display: flex; align-items: center; gap: 36px; }
-        .nav-links a { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent); }
+/* hero body — desc + badge side by side */
+.hero-body{display:flex;align-items:flex-start;gap:2.2rem;margin-bottom:2.5rem;flex-wrap:wrap;opacity:0;animation:up .8s .35s ease forwards}
+.hero-desc{max-width:560px;font-size:.92rem;color:var(--white2);line-height:1.85;font-weight:300}
+.hero-desc strong{color:var(--white);font-weight:500}
+.hero-desc p+p{margin-top:.9rem}
 
-        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 48px 80px; position: relative; overflow: hidden; }
-        .hero-typed { color: var(--accent); font-family: 'Bebas Neue', sans-serif; border-right: 3px solid var(--accent); padding-right: 4px; animation: blinkCursor 0.7s infinite; white-space: nowrap; }
-        @keyframes blinkCursor { 0%, 100% { border-color: var(--accent); } 50% { border-color: transparent; } }
-        .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 9vw, 120px); line-height: 0.9; letter-spacing: 0.02em; margin-bottom: 40px; }
-        .hero h1 .outline { -webkit-text-stroke: 1.5px rgba(255,255,255,0.25); color: transparent; }
-        .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
-        .hero-tag::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
-        .hero-bg-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(140px, 22vw, 280px); line-height: 0.85; color: rgba(255,255,255,0.025); position: absolute; right: -30px; top: 50%; transform: translateY(-50%); pointer-events: none; user-select: none; letter-spacing: -0.02em; }
-        .available-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,255,135,0.07); border: 1px solid rgba(0,255,135,0.18); border-radius: 100px; padding: 9px 18px; font-size: 0.8rem; color: var(--accent); font-weight: 500; }
-        .available-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulseDot 2s infinite; }
-        @keyframes pulseDot { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,135,0.4); } 50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,135,0); } }
-        .stats-row { display: flex; gap: 48px; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 48px; }
-        .stat-item .number { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: #fff; line-height: 1; }
-        .stat-item .stat-accent { color: var(--accent); }
-        .stat-item .label { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 5px; }
+/* Available badge */
+.avail-badge{
+  display:flex;align-items:center;gap:.55rem;
+  border:1.5px solid rgba(0,229,160,.3);
+  border-radius:100px;
+  padding:.6rem 1.2rem;
+  background:rgba(0,229,160,.05);
+  text-decoration:none;
+  cursor:none;
+  flex-shrink:0;
+  transition:border-color .25s,background .25s,transform .2s;
+  align-self:flex-start;
+  margin-top:.15rem;
+}
+.avail-badge:hover{border-color:rgba(0,229,160,.7);background:rgba(0,229,160,.1);transform:scale(1.03)}
+.avail-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,229,160,.5)}50%{opacity:.7;box-shadow:0 0 0 5px rgba(0,229,160,0)}}
+.avail-text{font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);white-space:nowrap}
 
-        section { padding: 120px 48px; border-top: 1px solid var(--border); }
-        .section-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-        .section-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--text-dim); }
-        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 6vw, 82px); letter-spacing: 0.02em; line-height: 1; margin-bottom: 64px; }
+/* hero bottom — stats + cta */
+.hero-bot{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;opacity:0;animation:up .8s .5s ease forwards}
+.hstats{display:flex;gap:2.2rem}
+.sn{font-family:var(--fc);font-weight:900;font-size:2.1rem;line-height:1;letter-spacing:-.03em;text-transform:uppercase}
+.sl{font-family:var(--fm);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white2);margin-top:.2rem}
+.hacts{display:flex;gap:.7rem}
+.bp{font-family:var(--fm);font-size:.57rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;background:var(--accent);border:none;padding:.75rem 1.7rem;border-radius:3px;text-decoration:none;cursor:none;transition:background .2s,transform .15s}
+.bp:hover{background:#6fa3ff;transform:scale(.97)}
+.bg{font-family:var(--fm);font-size:.57rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--white2);background:transparent;border:1px solid var(--border2);padding:.75rem 1.7rem;border-radius:3px;text-decoration:none;cursor:none;transition:color .2s,border-color .2s}
+.bg:hover{color:var(--white);border-color:rgba(232,228,221,.3)}
 
-        .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-        .project-card { background: var(--surface); padding: 44px; position: relative; overflow: hidden; transition: background 0.35s ease; display: flex; flex-direction: column; }
-        .project-card:hover { background: #0f1826; }
-        .project-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .project-card:hover::after { width: 100%; }
-        .project-card:hover .project-number { color: var(--accent); }
-        .project-number { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-dim); margin-bottom: 22px; transition: color 0.3s; }
-        .project-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-        .project-title { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.2; }
-        .project-desc { font-size: 0.9rem; line-height: 1.75; color: var(--text-dim); flex: 1; margin-bottom: 28px; }
-        .project-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; transition: gap 0.25s ease; }
-        .project-link:hover { gap: 16px; }
-        .project-link::after { content: '→'; font-size: 1rem; }
+.shi{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.45rem;z-index:2;opacity:0;animation:fi 1s .9s ease forwards}
+.shi span{font-family:var(--fm);font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white3)}
+.shline{width:1px;height:40px;background:linear-gradient(to bottom,var(--white3),transparent);animation:sp 2s ease-in-out infinite}
 
-        .project-preview { background: #070b11; border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 26px; transition: border-color 0.3s; }
-        .project-card:hover .project-preview { border-color: rgba(0,255,135,0.2); }
-        .preview-bar { display: flex; gap: 6px; margin-bottom: 10px; }
-        .preview-dot { width: 8px; height: 8px; border-radius: 50%; }
-        .preview-screen { border-radius: 5px; overflow: hidden; height: 130px; isolation: isolate; }
+@keyframes blink-cur{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@keyframes sp{0%,100%{opacity:.18}50%{opacity:.65}}
 
-        /* Preview Bienestar */
-        .preview-bienestar { background: linear-gradient(135deg, #1a3a17, #2d5a27); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; text-align: center; gap: 3px; }
-        .p-urgencia { font-size: 0.38rem; background: #e67e22; color: white; padding: 2px 8px; border-radius: 4px; font-weight: 700; }
-        .p-nav { width: 100%; display: flex; justify-content: space-between; align-items: center; }
-        .p-logo { font-size: 0.52rem; font-weight: 800; color: #6ee7b7; }
-        .p-navbtn { font-size: 0.38rem; background: #e67e22; color: white; padding: 2px 5px; border-radius: 10px; }
-        .p-title { font-size: 0.48rem; font-weight: 800; color: white; }
-        .p-old { font-size: 0.33rem; color: rgba(255,255,255,0.45); text-decoration: line-through; }
-        .p-price { font-size: 0.9rem; font-weight: 900; color: white; line-height: 1.1; }
-        .p-cta { font-size: 0.38rem; background: #27ae60; color: white; padding: 3px 10px; border-radius: 10px; font-weight: 700; }
+/* ── MARQUEE ── */
+.mwrap{position:relative;z-index:2;overflow:hidden;background:var(--surface);padding:.72rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mtrack{display:flex;width:max-content;animation:mq 15s linear infinite}
+.mtrack:hover{animation-play-state:paused}
+.mitem{font-family:var(--fm);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--white2);padding:0 1.5rem;white-space:nowrap;display:flex;align-items:center;gap:1.5rem}
+.mitem.hi{color:var(--green)}
+.mitem::after{content:'✦';font-size:.4rem;opacity:.3}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-        /* Preview Descarga */
-        .preview-descarga { background: linear-gradient(135deg, #0f2027, #203a43, #24243e); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; text-align: center; gap: 5px; }
-        .p-check { font-size: 2rem; }
-        .p-dtitle { font-size: 0.55rem; font-weight: 800; color: white; }
-        .p-dsub { font-size: 0.37rem; color: rgba(255,255,255,0.5); }
-        .p-dbtn { font-size: 0.44rem; background: #27ae60; color: white; padding: 4px 12px; border-radius: 5px; font-weight: 700; }
+/* ── SECTIONS ── */
+.sec{position:relative;z-index:2;padding:6.5rem 3rem}
+.ey{font-family:var(--fm);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;opacity:.7}
+.stitle{font-family:var(--fc);font-weight:900;font-size:clamp(2.4rem,5vw,4.5rem);letter-spacing:-.01em;line-height:.88;text-transform:uppercase;color:var(--white)}
+.stitle .ac{color:var(--accent)}
+.stitle .out{-webkit-text-stroke:1.2px rgba(232,228,221,.35);color:transparent}
 
-        /* Preview Admin */
-        .preview-admin { background: #0d1117; height: 100%; padding: 8px; display: grid; grid-template-columns: 28px 1fr; gap: 5px; }
-        .p-sidebar { background: #161b22; border-radius: 4px; padding: 5px; display: flex; flex-direction: column; gap: 3px; }
-        .p-si { height: 5px; background: rgba(255,255,255,0.07); border-radius: 2px; }
-        .p-si.on { background: var(--accent); }
-        .p-content { display: flex; flex-direction: column; gap: 4px; }
-        .p-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
-        .p-metric { background: #161b22; border-radius: 3px; padding: 4px; }
-        .p-mnum { font-size: 0.5rem; font-weight: 800; color: var(--accent); }
-        .p-mlabel { font-size: 0.28rem; color: rgba(255,255,255,0.3); }
-        .p-chart { background: #161b22; border-radius: 3px; height: 38px; display: flex; align-items: flex-end; padding: 3px; gap: 2px; }
-        .p-bar { flex: 1; border-radius: 1px; background: rgba(0,255,135,0.3); }
+/* ── PROYECTOS ── */
+#proyectos{border-top:1px solid var(--border)}
+.phead{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3.5rem;flex-wrap:wrap;gap:1rem}
+.pcnt{font-family:var(--fm);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white3)}
 
-        /* Preview Calculadora */
-        .preview-calc { background: #0a0e1a; height: 100%; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
-        .p-ctitle { font-size: 0.48rem; color: white; font-weight: 700; }
-        .p-crow { display: flex; justify-content: space-between; align-items: center; }
-        .p-clabel { font-size: 0.33rem; color: rgba(255,255,255,0.38); }
-        .p-cval { font-size: 0.36rem; background: #161b22; color: var(--accent2); padding: 1px 5px; border-radius: 2px; }
-        .p-ctotal { background: rgba(0,170,255,0.07); border: 1px solid rgba(0,170,255,0.22); border-radius: 3px; padding: 5px; }
-        .p-ctnum { font-size: 0.65rem; font-weight: 800; color: var(--accent2); }
-        .p-ctlabel { font-size: 0.28rem; color: rgba(255,255,255,0.3); }
-        .p-cbtn { font-size: 0.36rem; background: var(--accent2); color: #000; padding: 3px 6px; border-radius: 2px; font-weight: 700; text-align: center; }
+/* CAROUSEL */
+.car-outer{position:relative;height:360px;display:flex;align-items:center;justify-content:center;perspective:1300px;overflow:visible;margin:0 -3rem;padding:0 3rem}
+.car-scene{position:relative;width:220px;height:300px;transform-style:preserve-3d}
+.pcard{position:absolute;inset:0;background:var(--surface);border:1px solid var(--border2);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;backface-visibility:hidden;text-decoration:none;color:inherit;cursor:none;transition:box-shadow .35s,border-color .35s}
+.pcard:hover{box-shadow:0 6px 32px rgba(79,140,255,.12);border-color:rgba(79,140,255,.28)}
 
-        /* Preview Magnolia */
-        .preview-magnolia { background: #faf9f7; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
-        .pm-top { background: #b8975a; padding: 2px 0; text-align: center; flex-shrink: 0; }
-        .pm-top span { font-size: 0.2rem; color: rgba(0,0,0,0.7); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-        .pm-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 3px 6px; border-bottom: 1px solid rgba(46,44,42,0.08); flex-shrink: 0; }
-        .pm-nav-l { font-size: 0.18rem; color: #9a9490; letter-spacing: 0.08em; text-transform: uppercase; }
-        .pm-nav-logo { font-size: 0.44rem; color: #2e2c2a; letter-spacing: 0.28em; text-align: center; font-weight: 300; }
-        .pm-nav-r { font-size: 0.18rem; color: #2e2c2a; text-align: right; }
-        .pm-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; flex: 1; overflow: hidden; }
-        .pm-c { display: flex; flex-direction: column; overflow: hidden; background: #f2ede6; }
-        .pm-c img { width: 100%; flex: 1; object-fit: cover; object-position: center top; min-height: 0; display: block; }
-        .pm-c-info { padding: 2px 3px; background: #fff; border-top: 1px solid rgba(46,44,42,0.06); flex-shrink: 0; }
-        .pm-c-name { font-size: 0.19rem; color: #2e2c2a; font-weight: 500; white-space: nowrap; overflow: hidden; }
-        .pm-c-price { font-size: 0.18rem; color: #b8975a; font-weight: 600; }
-        .pm-c-badge { position: absolute; top: 2px; left: 2px; font-size: 0.16rem; font-weight: 700; padding: 1px 3px; letter-spacing: 0.04em; text-transform: uppercase; }
-        .pm-c-wrap { position: relative; flex: 1; overflow: hidden; min-height: 0; display: flex; }
-        .pm-c-wrap img { width: 100%; object-fit: cover; object-position: center top; }
+/* ── IMAGEN DEL PROYECTO
+   Para reemplazar: cambiá el src="" de cada <img> por la ruta real.
+   Ejemplo: src="./ScreenShoots/bienestar.jpg"
+   Tamaño recomendado: 880×500px, formato JPG/WebP ── */
+.pcard-img{height:118px;flex-shrink:0;background:var(--surface2);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.pcard-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .45s ease;position:relative;z-index:2}
+.pcard:hover .pcard-img img{transform:scale(1.06)}
+.pcard-img .ph{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.32rem;background:linear-gradient(135deg,var(--surface2) 0%,var(--bg2) 100%)}
+.ph-ico{font-size:1.7rem;opacity:.2}
+.ph-lbl{font-family:var(--fm);font-size:.4rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white2);opacity:.35}
 
-        /* Preview Tech Store */
-        .preview-techstore {
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            background: #0a0a0a;
-            display: flex;
-            flex-direction: column;
-        }
 
-        /* fondo degradado naranja dramático */
-        .pts-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 75% 50%, rgba(255,153,0,0.22) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 80% at 80% 80%, rgba(255,100,0,0.12) 0%, transparent 60%),
-                linear-gradient(135deg, #0a0a0a 0%, #111008 60%, #1a0f00 100%);
-            z-index: 0;
-        }
-        /* glow spot detrás del iPhone */
-        .pts-glow {
-            position: absolute;
-            right: 18%;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, rgba(255,153,0,0.45) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(8px);
-            z-index: 1;
-        }
+.pcard-body{padding:.95rem .9rem;display:flex;flex-direction:column;gap:.42rem;flex:1}
+.pcard-num{font-family:var(--fm);font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white3)}
+.pcard-tag{font-family:var(--fm);font-size:.44rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(79,140,255,.2);border-radius:2px;padding:.1rem .48rem;width:fit-content}
+.pcard-name{font-family:var(--fc);font-weight:700;font-size:1rem;letter-spacing:-.01em;line-height:1.05;text-transform:uppercase;color:var(--white)}
+.pcard-desc{font-size:.66rem;color:var(--white2);line-height:1.6;font-weight:300;flex:1}
+.pcard-link{font-family:var(--fm);font-size:.48rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:.33rem;margin-top:auto;transition:gap .18s}
+.pcard-link:hover{gap:.58rem}
 
-        /* Nav */
-        .pts-nav {
-            position: relative;
-            z-index: 3;
-            background: rgba(0,0,0,0.55);
-            backdrop-filter: blur(6px);
-            border-bottom: 1px solid rgba(255,153,0,0.15);
-            padding: 3px 8px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-shrink: 0;
-        }
-        .pts-logo {
-            font-size: 0.38rem;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-        .pts-logo span { color: #FF9900; }
-        .pts-navbtn {
-            font-size: 0.24rem;
-            background: #FF9900;
-            color: #000;
-            padding: 1px 5px;
-            border-radius: 3px;
-            font-weight: 800;
-        }
+.cnav{position:absolute;bottom:-3rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:1rem}
+.cbtn{width:36px;height:36px;border-radius:3px;border:1px solid var(--border2);background:transparent;color:var(--white2);cursor:none;font-family:var(--fm);font-size:.82rem;display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s,background .18s}
+.cbtn:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,140,255,.06)}
+.cdots{display:flex;gap:.36rem;align-items:center}
+.cdot{width:4px;height:4px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:none;transition:background .2s,transform .2s;padding:0}
+.cdot.on{background:var(--accent);border-color:var(--accent);transform:scale(1.5)}
+.chint{text-align:center;margin-top:4.8rem;font-family:var(--fm);font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white3);opacity:.38}
 
-        /* Cuerpo hero */
-        .pts-body {
-            flex: 1;
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            padding: 6px 10px 4px;
-            overflow: hidden;
-        }
+/* ── SOBRE MÍ ── */
+#sobre-mi{border-top:1px solid var(--border)}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.acopy p{font-size:.88rem;color:var(--white2);line-height:1.88;font-weight:300;margin-bottom:1.2rem}
+.acopy p strong{color:var(--white);font-weight:500}
+.avals{display:flex;flex-direction:column;gap:.42rem}
+.aval{display:flex;align-items:flex-start;gap:.85rem;border:1px solid var(--border);border-radius:5px;padding:1rem 1.05rem;background:var(--surface);transition:border-color .18s,background .18s}
+.aval:hover{border-color:rgba(79,140,255,.26);background:var(--surface2)}
+.aval-ico{font-size:.95rem;flex-shrink:0;margin-top:.05rem}
+.avt{font-family:var(--fc);font-weight:700;font-size:.85rem;letter-spacing:.01em;text-transform:uppercase;color:var(--white);margin-bottom:.22rem}
+.avx{font-size:.7rem;color:var(--white2);line-height:1.6;font-weight:300}
 
-        /* Texto izquierda */
-        .pts-left {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            z-index: 2;
-        }
-        .pts-badge {
-            font-size: 0.2rem;
-            color: #FF9900;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-        .pts-badge::before {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 1px;
-            background: #FF9900;
-        }
-        .pts-h1 {
-            font-size: 1.15rem;
-            font-weight: 900;
-            color: #fff;
-            line-height: 0.95;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-        }
-        .pts-h1 .orange { color: #FF9900; }
-        .pts-h1 .stroke {
-            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-            color: transparent;
-        }
-        .pts-sub {
-            font-size: 0.22rem;
-            color: rgba(255,255,255,0.45);
-            font-weight: 500;
-            letter-spacing: 0.04em;
-        }
-        .pts-bullets {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5px;
-            margin-top: 1px;
-        }
-        .pts-bullet {
-            font-size: 0.19rem;
-            color: rgba(255,255,255,0.55);
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-        .pts-bullet::before {
-            content: '';
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: #FF9900;
-            flex-shrink: 0;
-        }
-        .pts-cta {
-            margin-top: 5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-            font-size: 0.24rem;
-            background: #FF9900;
-            color: #000;
-            padding: 2.5px 7px;
-            border-radius: 3px;
-            font-weight: 800;
-            width: fit-content;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
+/* ── STACK ── */
+#tecnologias{border-top:1px solid var(--border);background:transparent}
 
-        /* iPhone SVG derecha */
-        .pts-right {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            width: 52px;
-            flex-shrink: 0;
-            margin-right: 4px;
-        }
-        .pts-iphone {
-            width: 34px;
-            height: 58px;
-            background: linear-gradient(160deg, #2a2a2a 0%, #1a1a1a 40%, #0f0f0f 100%);
-            border-radius: 5px;
-            border: 1.5px solid rgba(255,153,0,0.6);
-            box-shadow:
-                0 0 12px rgba(255,153,0,0.35),
-                0 0 24px rgba(255,153,0,0.15),
-                inset 0 1px 0 rgba(255,255,255,0.08);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 4px 2px 3px;
-            z-index: 2;
-        }
-        .pts-iphone-notch {
-            width: 10px;
-            height: 3px;
-            background: #000;
-            border-radius: 0 0 3px 3px;
-            margin-bottom: 3px;
-            flex-shrink: 0;
-        }
-        .pts-iphone-screen {
-            flex: 1;
-            width: 100%;
-            border-radius: 2px;
-            background: linear-gradient(135deg, #1a0f00, #2d1800, #1a0f00);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2px;
-            overflow: hidden;
-            position: relative;
-        }
-        .pts-screen-logo {
-            font-size: 0.28rem;
-            font-weight: 900;
-            color: #FF9900;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            line-height: 1;
-        }
-        .pts-screen-model {
-            font-size: 0.38rem;
-            font-weight: 900;
-            color: #fff;
-            line-height: 1;
-        }
-        .pts-screen-btn {
-            font-size: 0.18rem;
-            background: #FF9900;
-            color: #000;
-            padding: 1px 4px;
-            border-radius: 2px;
-            font-weight: 800;
-        }
-        .pts-screen-glow {
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 10px;
-            background: rgba(255,153,0,0.4);
-            border-radius: 50%;
-            filter: blur(4px);
-        }
-        .pts-iphone-btn {
-            position: absolute;
-            right: -2.5px;
-            top: 14px;
-            width: 1.5px;
-            height: 8px;
-            background: rgba(255,153,0,0.5);
-            border-radius: 1px;
-        }
-        .pts-iphone-btn2 {
-            position: absolute;
-            left: -2.5px;
-            top: 12px;
-            width: 1.5px;
-            height: 6px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 1px;
-        }
-        .pts-iphone-btn3 {
-            position: absolute;
-            left: -2.5px;
-            top: 20px;
-            width: 1.5px;
-            height: 6px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 1px;
-        }
-        /* iPhone chico detrás */
-        .pts-iphone-sm {
-            width: 26px;
-            height: 44px;
-            background: linear-gradient(160deg, #1e1e1e, #111);
-            border-radius: 4px;
-            border: 1px solid rgba(255,153,0,0.25);
-            box-shadow: 0 0 6px rgba(255,153,0,0.1);
-            position: absolute;
-            right: -2px;
-            bottom: 0;
-            z-index: 1;
-            opacity: 0.7;
-        }
+.stack-cols{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:1px;
+  margin-top:3rem;
+  background:var(--border2);
+  border:1px solid var(--border2);
+  border-radius:6px;
+  overflow:hidden;
+}
+.scol{
+  background:var(--bg);
+  padding:1.6rem 1.2rem;
+  display:flex;flex-direction:column;gap:.5rem;
+}
+.scol-label{
+  font-family:var(--fm);font-size:.62rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--white);
+  margin-bottom:.7rem;padding-bottom:.65rem;
+  border-bottom:1px solid var(--border2);
+  white-space:nowrap;
+  text-shadow:0 0 12px rgba(79,140,255,.4);
+}
+.sitem{
+  display:flex;align-items:center;gap:.55rem;
+  padding:.5rem .75rem;
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:3px;
+  cursor:none;
+  transition:background .18s,border-color .18s;
+}
+.sitem:hover{background:var(--surface2);border-color:rgba(79,140,255,.4)}
+.sitem-dot{width:5px;height:5px;border-radius:50%;background:var(--white2);flex-shrink:0;transition:background .18s}
+.sitem:hover .sitem-dot{background:var(--accent)}
+.sitem-name{
+  font-family:var(--fm);font-size:.72rem;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;
+  color:var(--white);line-height:1;
+}
 
-        /* Marquee */
-        .pts-marquee {
-            position: relative;
-            z-index: 3;
-            background: #FF9900;
-            padding: 2px 0;
-            flex-shrink: 0;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .pts-marquee-inner {
-            display: inline-block;
-            animation: marqueeScroll 10s linear infinite;
-            font-size: 0.2rem;
-            font-weight: 800;
-            color: #000;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-        @keyframes marqueeScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+@media(max-width:860px){
+  .stack-cols{grid-template-columns:repeat(2,1fr)}
+}
 
-        /* Stats bar */
-        .pts-stats {
-            position: relative;
-            z-index: 3;
-            background: rgba(0,0,0,0.7);
-            border-top: 1px solid rgba(255,153,0,0.1);
-            display: flex;
-            justify-content: space-around;
-            padding: 3px 4px;
-            flex-shrink: 0;
-        }
-        .pts-stat { text-align: center; }
-        .pts-stat-num {
-            font-size: 0.38rem;
-            font-weight: 900;
-            color: #FF9900;
-            line-height: 1;
-        }
-        .pts-stat-label {
-            font-size: 0.17rem;
-            color: rgba(255,255,255,0.3);
-            letter-spacing: 0.04em;
-        }
+/* ── CONTACTO ── */
+#contacto{padding:7rem 3rem 5rem;border-top:1px solid var(--border);position:relative;z-index:2;overflow:hidden}
+.cta-glow{position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);width:70vw;height:50vw;background:radial-gradient(ellipse,rgba(79,140,255,.1) 0%,transparent 68%);pointer-events:none}
 
-        /* Preview Genérico */
-        .preview-generic { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; text-align: center; gap: 6px; }
-        .p-icon { font-size: 2rem; }
-        .p-gtitle { font-size: 0.55rem; font-weight: 800; color: white; }
-        .p-gsub { font-size: 0.37rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
-        .p-gtag { font-size: 0.35rem; background: rgba(0,255,135,0.15); color: var(--accent); padding: 2px 8px; border-radius: 10px; border: 1px solid rgba(0,255,135,0.3); }
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
 
-        .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
-        .tech-item { padding: 20px 28px; border: 1px solid var(--border); display: flex; align-items: center; gap: 12px; transition: all 0.25s; font-size: 0.88rem; color: var(--text-dim); }
-        .tech-item:hover { background: var(--surface); color: #fff; border-color: rgba(0,255,135,0.15); }
-        .tech-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; transition: box-shadow 0.25s; }
-        .tech-item:hover .tech-dot { box-shadow: 0 0 8px var(--accent); }
+.cta-left{}
+.cta-eyebrow{font-family:var(--fm);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);opacity:.6;margin-bottom:.8rem}
+.cta-h{font-family:var(--fc);font-weight:900;font-size:clamp(2.4rem,5vw,4.4rem);letter-spacing:-.01em;line-height:.9;text-transform:uppercase;color:var(--white);margin-bottom:1.6rem}
+.cta-h .ac{color:var(--accent)}
+.cta-body{font-size:.88rem;color:var(--white2);line-height:1.82;font-weight:300;max-width:500px}
+.cta-body strong{color:var(--white);font-weight:500}
 
-        .contact-email { font-family: 'Bebas Neue', sans-serif; font-size: clamp(26px, 3.8vw, 62px); color: #fff; letter-spacing: 0.04em; display: inline-block; border-bottom: 2px solid var(--accent); padding-bottom: 6px; transition: color 0.25s, border-color 0.25s; }
-        .contact-email:hover { color: var(--accent); border-color: var(--accent2); }
-        .contact-btn { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); border: 1px solid var(--border); padding: 10px 22px; border-radius: 6px; transition: all 0.25s; display: inline-block; }
-        .contact-btn:hover { color: var(--accent); border-color: var(--accent); }
+.cta-right{display:flex;flex-direction:column;gap:.7rem}
 
-        #tsparticles { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
-        .reveal { opacity: 0; transform: translateY(28px); }
-        ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+/* contact card — compact */
+.cta-card{
+  border:1px solid var(--border2);
+  border-radius:10px;
+  padding:1.1rem 1.2rem;
+  background:var(--surface);
+  display:flex;align-items:center;gap:1rem;
+  transition:border-color .22s,background .22s,transform .18s,box-shadow .22s;
+  text-decoration:none;color:inherit;cursor:none;
+  position:relative;overflow:hidden;
+}
+.cta-card:hover{border-color:rgba(79,140,255,.4);background:var(--surface2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(79,140,255,.1)}
 
-        @media (max-width: 768px) {
-            nav { padding: 16px 20px; }
-            .hero { padding: 100px 20px 60px; }
-            section { padding: 80px 20px; }
-            .projects-grid { grid-template-columns: 1fr; }
-            .stats-row { gap: 20px; flex-wrap: wrap; }
-            .tech-grid { grid-template-columns: 1fr 1fr; }
-            .hero-bg-text { display: none; }
-            body { cursor: auto; }
-            .cursor, .cursor-ring { display: none; }
-        }
-    </style>
+.cta-card-ico{
+  width:40px;height:40px;border-radius:8px;
+  background:rgba(79,140,255,.1);border:1px solid rgba(79,140,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background .22s,border-color .22s;
+}
+.cta-card:hover .cta-card-ico{background:rgba(79,140,255,.18);border-color:rgba(79,140,255,.4)}
+.cta-card-ico svg{width:18px;height:18px}
+
+.cta-card-body{flex:1;min-width:0}
+.cta-card-label{font-family:var(--fm);font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:var(--white3);margin-bottom:.22rem}
+.cta-card-title{font-family:var(--fc);font-weight:700;font-size:.95rem;letter-spacing:-.01em;text-transform:uppercase;color:var(--white);line-height:1}
+.cta-card-sub{font-size:.64rem;color:var(--white2);font-weight:300;margin-top:.18rem}
+
+.cta-card-arr{
+  width:28px;height:28px;border:1px solid var(--border2);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:var(--white2);flex-shrink:0;
+  transition:border-color .2s,color .2s,transform .22s;
+}
+.cta-card:hover .cta-card-arr{border-color:var(--accent);color:var(--accent);transform:rotate(45deg)}
+
+/* whatsapp card variant */
+.cta-card.wa{border-color:rgba(0,229,160,.18);background:rgba(0,229,160,.03)}
+.cta-card.wa:hover{border-color:rgba(0,229,160,.5);background:rgba(0,229,160,.08);box-shadow:0 6px 24px rgba(0,229,160,.1)}
+.cta-card.wa .cta-card-ico{background:rgba(0,229,160,.1);border-color:rgba(0,229,160,.25)}
+.cta-card.wa:hover .cta-card-ico{background:rgba(0,229,160,.18);border-color:rgba(0,229,160,.5)}
+.cta-card.wa .cta-card-arr{border-color:rgba(0,229,160,.3);color:var(--green)}
+.cta-card.wa:hover .cta-card-arr{border-color:var(--green)}
+.cta-card.wa .cta-card-title{color:var(--green)}
+.cta-card.wa .cta-card-label{color:var(--green);opacity:.6}
+
+/* wa cta button */
+.wa-cta-wrap{
+  border:1.5px solid rgba(0,229,160,.22);
+  border-radius:10px;
+  padding:1.2rem 1.3rem;
+  background:rgba(0,229,160,.04);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  text-decoration:none;color:inherit;cursor:none;
+  transition:border-color .22s,background .22s,transform .18s,box-shadow .22s;
+}
+.wa-cta-wrap:hover{border-color:rgba(0,229,160,.55);background:rgba(0,229,160,.09);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,229,160,.12)}
+.wa-cta-text{font-family:var(--fc);font-weight:700;font-size:1rem;letter-spacing:-.01em;text-transform:uppercase;color:var(--green);line-height:1.1}
+.wa-cta-btn{
+  display:inline-flex;align-items:center;gap:.4rem;flex-shrink:0;
+  background:var(--green);color:#000;
+  font-family:var(--fm);font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  border:none;padding:.55rem 1.1rem;border-radius:3px;
+  cursor:none;white-space:nowrap;
+}
+
+/* ── FOOTER ── */
+footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;position:relative;z-index:2;background:var(--bg2)}
+.fc{font-family:var(--fm);font-size:.48rem;letter-spacing:.07em;text-transform:uppercase;color:var(--white3);opacity:.45}
+.fb{display:flex;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);border:1px solid rgba(0,229,160,.18);border-radius:2px;padding:.25rem .72rem}
+.fbd{width:5px;height:5px;border-radius:50%;background:var(--green);animation:bl 2.5s ease-in-out infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.08}}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.22,.68,0,1),transform .8s cubic-bezier(.22,.68,0,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.38s}
+@keyframes fadeRow{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MOBILE ── */
+@media(max-width:860px){
+  nav{padding:1rem 1.5rem}.nav-links{display:none}
+  .hero{padding:0 1.5rem 4rem}
+  .hero-h1{font-size:clamp(2.6rem,9vw,4.8rem)}
+  .hero-body{flex-direction:column;align-items:flex-start}
+  .avail-badge{align-self:flex-start}
+  .hero-bot{flex-direction:column;align-items:flex-start}
+  .sec{padding:4.5rem 1.5rem}
+  .agrid{grid-template-columns:1fr;gap:2.5rem}
+  .stack-board{grid-template-columns:repeat(2,1fr)}
+  .sk-wide{grid-column:span 1}
+  .cta-grid{grid-template-columns:1fr;gap:2.5rem}
+  #contacto{padding:5rem 1.5rem 4rem}
+  footer{padding:1rem 1.5rem}
+  .car-outer{height:380px;margin:0 -1.5rem;padding:0 1.5rem}
+}
+</style>
 </head>
 <body>
 
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-    <div id="tsparticles"></div>
+<div id="cur"></div>
+<div id="cur-r"></div>
+<canvas id="bgc"></canvas>
 
-    <nav id="navbar">
-        <span class="nav-logo">GG.DEV</span>
-        <div class="nav-links">
-            <a href="#proyectos">Proyectos</a>
-            <a href="#tecnologias">Stack</a>
-            <a href="#contacto">Contacto</a>
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="#">GG<span>.</span>DEV</a>
+  <ul class="nav-links">
+    <li><a href="#proyectos">PROYECTOS</a></li>
+    <li><a href="#sobre-mi">SOBRE MÍ</a></li>
+    <li><a href="#tecnologias">STACK</a></li>
+    <li><a href="#contacto">CONTACTO</a></li>
+  </ul>
+  <a class="nav-btn" href="#contacto">CONTACTO →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-ey">GASTÓN GARCÍA — BUENOS AIRES, ARGENTINA</div>
+  <h1 class="hero-h1">
+    <span class="ac">DESARROLLO</span><br>
+    <span class="out">EXPERIENCIAS</span><br>
+    <span id="typeword"><span id="typecursor" style="display:inline-block;width:2px;height:.85em;background:var(--white);margin-left:1px;vertical-align:middle;animation:blink-cur .75s step-end infinite"></span></span>.
+  </h1>
+
+  <!-- DESCRIPCIÓN + BADGE -->
+  <div class="hero-body">
+    <div class="hero-desc">
+      <p>Soy <strong>Gastón García, Desarrollador Web</strong>. Diseño y desarrollo experiencias de alto impacto, desde <strong>Landing Pages que convierten</strong> y <strong>Dashboards analíticos</strong> hasta <strong>Aplicaciones Web interactivas</strong> con integración de pagos real.</p>
+      <p>Código 100% propio, sin templates ni soluciones a medias.</p>
+    </div>
+    <a class="avail-badge" href="#contacto">
+      <div class="avail-dot"></div>
+      <span class="avail-text">DISPONIBLE PARA NUEVOS PROYECTOS</span>
+    </a>
+  </div>
+
+  <div class="hero-bot">
+    <div class="hstats">
+      <div><div class="sn">7+</div><div class="sl">PROYECTOS</div></div>
+      <div><div class="sn">100%</div><div class="sl">CÓDIGO PROPIO</div></div>
+      <div><div class="sn">MP</div><div class="sl">MERCADO PAGO</div></div>
+    </div>
+    <div class="hacts">
+      <a class="bp" href="#proyectos">VER PROYECTOS →</a>
+      <a class="bg" href="#contacto">HABLEMOS</a>
+    </div>
+  </div>
+  <div class="shi"><span>SCROLL</span><div class="shline"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mwrap">
+  <div class="mtrack">
+    <span class="mitem">LANDING PAGES</span><span class="mitem hi">MERCADO PAGO</span>
+    <span class="mitem">REACT &amp; NEXT.JS</span><span class="mitem">E-COMMERCE</span>
+    <span class="mitem hi">APLICACIONES WEB</span><span class="mitem">DASHBOARDS</span>
+    <span class="mitem">UI · UX DESIGN</span><span class="mitem hi">GSAP ANIMATIONS</span>
+    <span class="mitem">TYPESCRIPT</span><span class="mitem hi">NODE.JS</span>
+    <span class="mitem">LANDING PAGES</span><span class="mitem hi">MERCADO PAGO</span>
+    <span class="mitem">REACT &amp; NEXT.JS</span><span class="mitem">E-COMMERCE</span>
+    <span class="mitem hi">APLICACIONES WEB</span><span class="mitem">DASHBOARDS</span>
+    <span class="mitem">UI · UX DESIGN</span><span class="mitem hi">GSAP ANIMATIONS</span>
+    <span class="mitem">TYPESCRIPT</span><span class="mitem hi">NODE.JS</span>
+  </div>
+</div>
+
+<!-- PROYECTOS -->
+<section class="sec" id="proyectos">
+  <div class="phead rv">
+    <div>
+      <div class="ey">// TRABAJO SELECCIONADO</div>
+      <h2 class="stitle">PRO<span class="ac">YECTOS.</span></h2>
+    </div>
+    <div></div>
+  </div>
+
+  <div class="car-outer rv d1">
+    <div class="car-scene" id="scene">
+
+      <!-- 01 — src="" → reemplazá por "./ScreenShoots/bienestar.jpg" -->
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="./ScreenShoots/bienestar.jpg" alt="Bienestar Interior"/>
+          <div class="ph"><div class="ph-ico">🌿</div><div class="ph-lbl">bienestarinterior.netlify.app</div></div>
         </div>
-    </nav>
-
-    <header class="hero">
-        <div class="max-w-5xl relative z-10">
-            <div class="hero-tag reveal">Desarrollador Web · Buenos Aires, Argentina</div>
-            <h1 class="reveal">
-                CONSTRUYO<br>
-                <span class="hero-typed" id="heroTyped"></span><br>
-                <span class="outline">QUE FUNCIONAN.</span>
-            </h1>
-            <p class="reveal" style="font-size:1.1rem;line-height:1.8;max-width:580px;color:var(--text-dim);margin-bottom:40px;">
-                Soy <strong style="color:#fff;">Gastón García</strong>. Diseño y desarrollo experiencias digitales de alto impacto — desde Landing Pages que convierten hasta Aplicaciones Web interactivas con integración de pagos real.
-            </p>
-            <div class="reveal" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
-                <a href="#contacto" style="background:var(--accent);color:#000;font-weight:800;padding:15px 34px;border-radius:8px;font-size:0.88rem;letter-spacing:0.06em;text-transform:uppercase;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                    Hablemos de tu proyecto
-                </a>
-                <div class="available-badge">
-                    <span class="available-dot"></span>
-                    Disponible para nuevos proyectos
-                </div>
-            </div>
-            <div class="stats-row reveal">
-                <div class="stat-item">
-                    <div class="number">7<span class="stat-accent">+</span></div>
-                    <div class="label">Proyectos Reales</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number"><span class="stat-accent">💳</span></div>
-                    <div class="label">Mercado Pago · Pagos AR</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">100<span class="stat-accent">%</span></div>
-                    <div class="label">Código Propio</div>
-                </div>
-            </div>
+        <div class="pcard-body">
+          <div class="pcard-num">01 — 07</div>
+          <span class="pcard-tag">SALUD &amp; BIENESTAR</span>
+          <div class="pcard-name">BIENESTAR INTERIOR</div>
+          <p class="pcard-desc">Landing de alta conversión con contador de urgencia, sticky CTA mobile e integración con Mercado Pago.</p>
+          <a class="pcard-link" href="https://bienestarinterior.netlify.app" target="_blank" rel="noopener">VER PROYECTO →</a>
         </div>
-        <div class="hero-bg-text">GG</div>
-    </header>
+      </div>
 
-    <section id="proyectos">
-        <div class="section-label reveal">Trabajo Seleccionado</div>
-        <h2 class="section-title reveal">PROYECTOS</h2>
-        <div class="projects-grid">
-
-            <!-- 01 -->
-            <div class="project-card reveal">
-                <div class="project-number mono">01 / 07</div>
-                <div class="project-preview">
-                    <div class="preview-bar">
-                        <div class="preview-dot" style="background:#ff5f57"></div>
-                        <div class="preview-dot" style="background:#febc2e"></div>
-                        <div class="preview-dot" style="background:#28c840"></div>
-                    </div>
-                    <div class="preview-screen">
-                        <div class="preview-bienestar">
-                            <div class="p-urgencia">⏰ OFERTA TERMINA EN: 23:59:15 🔥</div>
-                            <div class="p-nav"><span class="p-logo">BienestarInterior</span><span class="p-navbtn">$14.900</span></div>
-                            <div class="p-title">¿Harto de sentirte inflamado?</div>
-                            <div class="p-old">$30.000 ARS</div>
-                            <div class="p-price">$14.900 ARS</div>
-                            <div class="p-cta">¡QUIERO SANAR MI INTESTINO! 🚀</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-tag">Landing Page · Salud & Bienestar</div>
-                <div class="project-title">Bienestar Interior</div>
-                <div class="project-desc">Landing Page de alta conversión para venta de E-Book de salud digestiva. Contador regresivo de urgencia real, precio visible sin scrollear, Sticky CTA para Mobile e integración directa con Mercado Pago.</div>
-                <a href="https://bienestarinterior.netlify.app" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
-            </div>
-
-            <!-- 02 -->
-            <div class="project-card reveal">
-                <div class="project-number mono">02 / 07</div>
-                <div class="project-preview">
-                    <div class="preview-bar">
-                        <div class="preview-dot" style="background:#ff5f57"></div>
-                        <div class="preview-dot" style="background:#febc2e"></div>
-                        <div class="preview-dot" style="background:#28c840"></div>
-                    </div>
-                    <div class="preview-screen">
-                        <div class="preview-descarga">
-                            <div class="p-check">✅</div>
-                            <div class="p-dtitle">¡Pago Confirmado!</div>
-                            <div class="p-dsub">Tu E-Book está listo para descargar</div>
-                            <div class="p-dbtn">⬇ Descargar Tu Intestino Sano</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-tag">Página Post-Venta · E-Commerce</div>
-                <div class="project-title">Confirmación De Compra</div>
-                <div class="project-desc">Página de entrega automática de activo digital post-pago. Integrada como URL de retorno en Mercado Pago para entrega inmediata sin intervención manual del vendedor.</div>
-                <a href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
-            </div>
-
-            <!-- 03 -->
-            <div class="project-card reveal">
-                <div class="project-number mono">03 / 07</div>
-                <div class="project-preview">
-                    <div class="preview-bar">
-                        <div class="preview-dot" style="background:#ff5f57"></div>
-                        <div class="preview-dot" style="background:#febc2e"></div>
-                        <div class="preview-dot" style="background:#28c840"></div>
-                    </div>
-                    <div class="preview-screen">
-                        <div class="preview-admin">
-                            <div class="p-sidebar">
-                                <div class="p-si on"></div>
-                                <div class="p-si"></div>
-                                <div class="p-si"></div>
-                                <div class="p-si"></div>
-                                <div class="p-si"></div>
-                            </div>
-                            <div class="p-content">
-                                <div class="p-metrics">
-                                    <div class="p-metric"><div class="p-mnum">$48K</div><div class="p-mlabel">Ventas</div></div>
-                                    <div class="p-metric"><div class="p-mnum">124</div><div class="p-mlabel">Clientes</div></div>
-                                    <div class="p-metric"><div class="p-mnum">98%</div><div class="p-mlabel">Éxito</div></div>
-                                </div>
-                                <div class="p-chart">
-                                    <div class="p-bar" style="height:40%"></div>
-                                    <div class="p-bar" style="height:65%"></div>
-                                    <div class="p-bar" style="height:52%"></div>
-                                    <div class="p-bar" style="height:85%;background:rgba(0,255,135,0.75)"></div>
-                                    <div class="p-bar" style="height:60%"></div>
-                                    <div class="p-bar" style="height:92%;background:rgba(0,255,135,0.75)"></div>
-                                    <div class="p-bar" style="height:70%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-tag">Aplicación Web · Gestión Administrativa</div>
-                <div class="project-title">Sistema De Gestión Admin</div>
-                <div class="project-desc">Panel administrativo interactivo para registro de ventas y gestión de clientes. Métricas en tiempo real con gráficos dinámicos y Dashboard completo para seguimiento del negocio.</div>
-                <a href="https://gastongarcia1295.github.io/Gestion-Ventas/" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
-            </div>
-
-            <!-- 04 -->
-            <div class="project-card reveal">
-                <div class="project-number mono">04 / 07</div>
-                <div class="project-preview">
-                    <div class="preview-bar">
-                        <div class="preview-dot" style="background:#ff5f57"></div>
-                        <div class="preview-dot" style="background:#febc2e"></div>
-                        <div class="preview-dot" style="background:#28c840"></div>
-                    </div>
-                    <div class="preview-screen">
-                        <div class="preview-calc">
-                            <div class="p-ctitle">💻 Cotizador De Proyectos Web</div>
-                            <div class="p-crow"><span class="p-clabel">Landing Page</span><span class="p-cval">$350 USD</span></div>
-                            <div class="p-crow"><span class="p-clabel">Integración De Pagos</span><span class="p-cval">$120 USD</span></div>
-                            <div class="p-crow"><span class="p-clabel">Animaciones GSAP</span><span class="p-cval">$80 USD</span></div>
-                            <div class="p-ctotal">
-                                <div class="p-ctnum">$550 USD</div>
-                                <div class="p-ctlabel">≈ $509.750 ARS (hoy)</div>
-                            </div>
-                            <div class="p-cbtn">⬇ Descargar Presupuesto PDF</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-tag">Herramienta Web · Desarrollo</div>
-                <div class="project-title">Calculadora De Presupuesto</div>
-                <div class="project-desc">Cotizador interactivo para proyectos web con conversión ARS/USD en tiempo real vía API. Genera y descarga el presupuesto completo en PDF con un solo clic.</div>
-                <a href="https://gastongarcia1295.github.io/Calculadora-Presupuesto/" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
-            </div>
-
-            <!-- 05 — MAGNOLIA -->
-            <div class="project-card reveal">
-                <div class="project-number mono">05 / 07</div>
-                <div class="project-preview">
-                    <div class="preview-bar">
-                        <div class="preview-dot" style="background:#ff5f57"></div>
-                        <div class="preview-dot" style="background:#febc2e"></div>
-                        <div class="preview-dot" style="background:#28c840"></div>
-                    </div>
-                    <div class="preview-screen">
-                        <div style="background:#faf9f7;height:100%;display:flex;flex-direction:column;overflow:hidden;position:relative;">
-                            <div style="background:#b8975a;padding:3px 0;text-align:center;flex-shrink:0;">
-                                <span style="font-size:0.19rem;color:rgba(0,0,0,0.65);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">3 Y 6 CUOTAS SIN INTERÉS &nbsp;✦&nbsp; ENVÍO GRATIS &nbsp;✦&nbsp; 15% OFF TRANSFERENCIA</span>
-                            </div>
-                            <div style="background:#fff;border-bottom:1px solid rgba(44,31,20,0.08);padding:4px 10px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-                                <span style="font-size:0.18rem;color:#9a9490;letter-spacing:0.08em;text-transform:uppercase;">Colección · Sale</span>
-                                <span style="font-family:serif;font-size:0.52rem;color:#2e2c2a;letter-spacing:0.3em;font-weight:300;">Magnolia</span>
-                                <span style="font-size:0.18rem;color:#2e2c2a;">🛒 0</span>
-                            </div>
-                            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;background:linear-gradient(160deg,#f3ede3 0%,#faf9f7 60%,#eef4f0 100%);position:relative;overflow:hidden;">
-                                <div style="position:absolute;top:-20px;right:-20px;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,rgba(184,151,90,0.1) 0%,transparent 70%);"></div>
-                                <div style="position:absolute;bottom:-15px;left:-15px;width:50px;height:50px;border-radius:50%;background:radial-gradient(circle,rgba(61,107,79,0.07) 0%,transparent 70%);"></div>
-                                <div style="font-family:serif;font-size:1.4rem;font-weight:300;color:#2e2c2a;letter-spacing:0.35em;text-transform:uppercase;margin-bottom:4px;">Magnolia</div>
-                                <div style="width:28px;height:1px;background:#b8975a;margin:0 auto 5px;"></div>
-                                <div style="font-size:0.22rem;color:#9a9490;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;">Moda Femenina Premium</div>
-                                <div style="display:flex;gap:3px;flex-wrap:wrap;justify-content:center;">
-                                    <span style="font-size:0.18rem;border:1px solid rgba(44,31,20,0.15);padding:1px 5px;color:#7a6a5a;border-radius:100px;">Shorts</span>
-                                    <span style="font-size:0.18rem;border:1px solid rgba(44,31,20,0.15);padding:1px 5px;color:#7a6a5a;border-radius:100px;">Blazers</span>
-                                    <span style="font-size:0.18rem;border:1px solid rgba(44,31,20,0.15);padding:1px 5px;color:#7a6a5a;border-radius:100px;">Vestidos</span>
-                                    <span style="font-size:0.18rem;border:1px solid rgba(44,31,20,0.15);padding:1px 5px;color:#7a6a5a;border-radius:100px;">Camperas</span>
-                                </div>
-                            </div>
-                            <div style="background:#2e2c2a;padding:4px 8px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-                                <span style="font-size:0.18rem;color:rgba(255,255,255,0.5);">6 cuotas sin interés</span>
-                                <span style="font-size:0.18rem;background:#b8975a;color:#000;padding:1px 5px;border-radius:2px;font-weight:700;">Ver Colección →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-tag">E-Commerce · Moda Femenina</div>
-                <div class="project-title">Magnolia Store</div>
-                <div class="project-desc">Tienda de moda femenina premium con carrito de compras funcional, modal de producto con galería y zoom, filtros por categoría, cuotas automáticas e integración con Mercado Pago.</div>
-                <a href="https://magnoliashop.netlify.app" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
-            </div>
-
-            <!-- 06 — PULSE ANALYTICS -->
-            <div class="project-card reveal">
-                <div class="project-number mono">06 / 07</div>
-                <div class="project-preview">
-                    <div class="preview-bar">
-                        <div class="preview-dot" style="background:#ff5f57"></div>
-                        <div class="preview-dot" style="background:#febc2e"></div>
-                        <div class="preview-dot" style="background:#28c840"></div>
-                    </div>
-                    <div class="preview-screen">
-                        <div style="background:#f5f6fa;height:100%;display:flex;flex-direction:column;overflow:hidden;font-family:'DM Sans',sans-serif;">
-                            <div style="display:flex;height:100%;">
-                                <div style="width:22px;background:#0f1623;display:flex;flex-direction:column;align-items:center;padding:5px 0;gap:4px;flex-shrink:0;">
-                                    <div style="width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,#6366f1,#8b5cf6);"></div>
-                                    <div style="width:8px;height:2px;border-radius:1px;background:rgba(99,102,241,0.6);margin-top:4px;"></div>
-                                    <div style="width:8px;height:2px;border-radius:1px;background:rgba(255,255,255,0.15);"></div>
-                                    <div style="width:8px;height:2px;border-radius:1px;background:rgba(255,255,255,0.15);"></div>
-                                    <div style="width:8px;height:2px;border-radius:1px;background:rgba(255,255,255,0.15);"></div>
-                                    <div style="width:8px;height:2px;border-radius:1px;background:rgba(255,255,255,0.15);"></div>
-                                </div>
-                                <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-                                    <div style="background:#fff;border-bottom:1px solid #e8eaf2;padding:3px 6px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-                                        <div style="font-size:0.28rem;font-weight:700;color:#1a1d2e;">Pulse Analytics</div>
-                                        <div style="display:flex;gap:2px;">
-                                            <div style="background:#f0f2f8;border-radius:3px;padding:1px 3px;font-size:0.2rem;color:#7c8db0;font-weight:600;">7D</div>
-                                            <div style="background:#6366f1;border-radius:3px;padding:1px 3px;font-size:0.2rem;color:#fff;font-weight:600;">30D</div>
-                                            <div style="background:#f0f2f8;border-radius:3px;padding:1px 3px;font-size:0.2rem;color:#7c8db0;font-weight:600;">1A</div>
-                                        </div>
-                                    </div>
-                                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:3px;flex-shrink:0;">
-                                        <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:3px;border-top:2px solid #6366f1;">
-                                            <div style="font-size:0.22rem;color:#7c8db0;margin-bottom:1px;">Ingresos</div>
-                                            <div style="font-size:0.38rem;font-weight:800;color:#1a1d2e;">$4.8M</div>
-                                            <div style="font-size:0.18rem;color:#10b981;">▲ 18.4%</div>
-                                        </div>
-                                        <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:3px;border-top:2px solid #10b981;">
-                                            <div style="font-size:0.22rem;color:#7c8db0;margin-bottom:1px;">Órdenes</div>
-                                            <div style="font-size:0.38rem;font-weight:800;color:#1a1d2e;">1.847</div>
-                                            <div style="font-size:0.18rem;color:#10b981;">▲ 12.1%</div>
-                                        </div>
-                                        <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:3px;border-top:2px solid #f59e0b;">
-                                            <div style="font-size:0.22rem;color:#7c8db0;margin-bottom:1px;">Usuarios</div>
-                                            <div style="font-size:0.38rem;font-weight:800;color:#1a1d2e;">3.291</div>
-                                            <div style="font-size:0.18rem;color:#10b981;">▲ 8.7%</div>
-                                        </div>
-                                        <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:3px;border-top:2px solid #0ea5e9;">
-                                            <div style="font-size:0.22rem;color:#7c8db0;margin-bottom:1px;">Conversión</div>
-                                            <div style="font-size:0.38rem;font-weight:800;color:#1a1d2e;">3.8%</div>
-                                            <div style="font-size:0.18rem;color:#f43f5e;">▼ 2.3%</div>
-                                        </div>
-                                    </div>
-                                    <div style="flex:1;padding:0 3px 3px;display:grid;grid-template-columns:1.4fr 0.6fr;gap:2px;overflow:hidden;">
-                                        <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:4px;overflow:hidden;">
-                                            <div style="font-size:0.22rem;font-weight:700;color:#1a1d2e;margin-bottom:3px;">Ingresos Mensuales</div>
-                                            <div style="display:flex;align-items:flex-end;gap:1px;height:30px;padding-top:4px;">
-                                                <div style="flex:1;background:rgba(99,102,241,0.25);border-radius:1px;height:40%;"></div>
-                                                <div style="flex:1;background:rgba(99,102,241,0.35);border-radius:1px;height:55%;"></div>
-                                                <div style="flex:1;background:rgba(99,102,241,0.3);border-radius:1px;height:45%;"></div>
-                                                <div style="flex:1;background:rgba(99,102,241,0.5);border-radius:1px;height:68%;"></div>
-                                                <div style="flex:1;background:rgba(99,102,241,0.4);border-radius:1px;height:58%;"></div>
-                                                <div style="flex:1;background:rgba(99,102,241,0.6);border-radius:1px;height:78%;"></div>
-                                                <div style="flex:1;background:#6366f1;border-radius:1px;height:100%;"></div>
-                                            </div>
-                                        </div>
-                                        <div style="background:#fff;border:1px solid #e8eaf2;border-radius:3px;padding:4px;overflow:hidden;">
-                                            <div style="font-size:0.22rem;font-weight:700;color:#1a1d2e;margin-bottom:3px;">Tráfico</div>
-                                            <div style="display:flex;flex-direction:column;gap:2px;">
-                                                <div style="display:flex;align-items:center;gap:2px;"><div style="width:4px;height:4px;border-radius:50%;background:#6366f1;flex-shrink:0;"></div><div style="flex:1;height:2px;background:#e8eaf2;border-radius:1px;overflow:hidden;"><div style="width:42%;height:100%;background:#6366f1;border-radius:1px;"></div></div><span style="font-size:0.18rem;color:#7c8db0;">42%</span></div>
-                                                <div style="display:flex;align-items:center;gap:2px;"><div style="width:4px;height:4px;border-radius:50%;background:#0ea5e9;flex-shrink:0;"></div><div style="flex:1;height:2px;background:#e8eaf2;border-radius:1px;overflow:hidden;"><div style="width:28%;height:100%;background:#0ea5e9;border-radius:1px;"></div></div><span style="font-size:0.18rem;color:#7c8db0;">28%</span></div>
-                                                <div style="display:flex;align-items:center;gap:2px;"><div style="width:4px;height:4px;border-radius:50%;background:#8b5cf6;flex-shrink:0;"></div><div style="flex:1;height:2px;background:#e8eaf2;border-radius:1px;overflow:hidden;"><div style="width:18%;height:100%;background:#8b5cf6;border-radius:1px;"></div></div><span style="font-size:0.18rem;color:#7c8db0;">18%</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-tag">Dashboard · Análisis De Datos</div>
-                <div class="project-title">Pulse Analytics</div>
-                <div class="project-desc">Dashboard analítico interactivo con 11 secciones, gráficos dinámicos, filtros por período, usuarios en tiempo real y heatmap anual. Diseño SaaS profesional.</div>
-                <a href="https://gastongarcia1295.github.io/Dashboard-Analitico/" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
-            </div>
-
-            <!-- 07 — TECH STORE SHOP -->
-            <div class="project-card reveal">
-                <div class="project-number mono">07 / 07</div>
-                <div class="project-preview">
-                    <div class="preview-bar">
-                        <div class="preview-dot" style="background:#ff5f57"></div>
-                        <div class="preview-dot" style="background:#febc2e"></div>
-                        <div class="preview-dot" style="background:#28c840"></div>
-                    </div>
-                    <div class="preview-screen" style="position:relative;overflow:hidden;background:#0a0a0a;height:130px;display:flex;flex-direction:column;">
-
-                        <!-- fondo oscuro con grano sutil -->
-                        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 80% 40%,rgba(255,153,0,0.08) 0%,transparent 65%),#0a0a0a;z-index:0;"></div>
-
-                        <!-- texto BG gigante tipo hero (SHOP) -->
-                        <div style="position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:3.8rem;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.02em;z-index:1;">SHOP</div>
-
-                        <!-- NAV mini -->
-                        <div style="position:relative;z-index:3;background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(255,255,255,0.06);padding:2.5px 7px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-                            <div style="display:flex;align-items:center;gap:3px;">
-                                <div style="width:6px;height:6px;border-radius:2px;background:#FF9900;display:flex;align-items:center;justify-content:center;"></div>
-                                <span style="font-family:'Bebas Neue',sans-serif;font-size:0.38rem;color:#fff;letter-spacing:0.14em;">TECH STORE SHOP</span>
-                            </div>
-                            <div style="font-size:0.22rem;background:#FF9900;color:#000;padding:1px 4px;border-radius:2px;font-weight:800;">WhatsApp</div>
-                        </div>
-
-                        <!-- HERO BODY -->
-                        <div style="position:relative;z-index:2;flex:1;padding:5px 8px 4px;display:flex;flex-direction:column;justify-content:center;gap:2.5px;overflow:hidden;">
-
-                            <!-- badge naranja -->
-                            <div style="display:inline-flex;align-items:center;gap:4px;">
-                                <span style="font-size:0.19rem;background:rgba(255,153,0,0.12);border:1px solid rgba(255,153,0,0.35);color:#FF9900;padding:1px 5px;border-radius:100px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Tech Store Shop</span>
-                            </div>
-
-                            <!-- subtítulo naranja -->
-                            <div style="font-size:0.18rem;color:#FF9900;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">Tienda de equipos electrónicos</div>
-
-                            <!-- TECH STORE grande — stroke effect -->
-                            <div style="line-height:0.88;margin:1px 0;">
-                                <div style="font-family:'Bebas Neue',sans-serif;font-size:1.35rem;-webkit-text-stroke:1px rgba(255,255,255,0.22);color:transparent;letter-spacing:0.02em;line-height:1;">TECH STORE</div>
-                                <div style="font-family:'Bebas Neue',sans-serif;font-size:1.35rem;background:linear-gradient(90deg,#FF9900,#ffb833);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:0.02em;line-height:1;">SHOP</div>
-                            </div>
-
-                            <!-- TU PRÓXIMO iPHONE -->
-                            <div style="font-family:'Bebas Neue',sans-serif;font-size:0.38rem;color:#fff;letter-spacing:0.15em;text-transform:uppercase;">TU PRÓXIMO <span style="color:#FF9900;">iPHONE</span> ESTÁ ACÁ</div>
-
-                            <!-- bullets -->
-                            <div style="display:flex;flex-direction:column;gap:1.5px;margin-top:1px;">
-                                <div style="display:flex;align-items:center;gap:3px;font-size:0.18rem;color:rgba(255,255,255,0.55);">
-                                    <span style="width:5px;height:5px;background:#FF9900;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.14rem;color:#000;font-weight:900;">✓</span>Trabajamos todos los modelos
-                                </div>
-                                <div style="display:flex;align-items:center;gap:3px;font-size:0.18rem;color:rgba(255,255,255,0.55);">
-                                    <span style="width:5px;height:5px;background:#FF9900;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.14rem;color:#000;font-weight:900;">✓</span>Nuevos y usados, con garantía
-                                </div>
-                            </div>
-
-                            <!-- botones -->
-                            <div style="display:flex;gap:4px;margin-top:3px;">
-                                <div style="font-size:0.2rem;background:#FF9900;color:#000;padding:2px 6px;border-radius:3px;font-weight:800;letter-spacing:0.04em;">WHATSAPP</div>
-                                <div style="font-size:0.2rem;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);padding:2px 6px;border-radius:3px;">Ver catálogo</div>
-                            </div>
-                        </div>
-
-                        <!-- stats row -->
-                        <div style="position:relative;z-index:3;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-around;padding:2.5px 4px;background:rgba(0,0,0,0.5);flex-shrink:0;">
-                            <div style="text-align:center;">
-                                <div style="font-family:'Bebas Neue',sans-serif;font-size:0.52rem;color:#FF9900;line-height:1;">100%</div>
-                                <div style="font-size:0.15rem;color:rgba(255,255,255,0.3);letter-spacing:0.05em;text-transform:uppercase;">Pago al recibir</div>
-                            </div>
-                            <div style="text-align:center;">
-                                <div style="font-family:'Bebas Neue',sans-serif;font-size:0.52rem;color:#FF9900;line-height:1;">5★</div>
-                                <div style="font-size:0.15rem;color:rgba(255,255,255,0.3);letter-spacing:0.05em;text-transform:uppercase;">Atención</div>
-                            </div>
-                            <div style="text-align:center;">
-                                <div style="font-family:'Bebas Neue',sans-serif;font-size:0.52rem;color:#FF9900;line-height:1;">+5</div>
-                                <div style="font-size:0.15rem;color:rgba(255,255,255,0.3);letter-spacing:0.05em;text-transform:uppercase;">Modelos</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="project-tag">Landing Page · Tienda Apple · Castelar</div>
-                <div class="project-title">Tech Store Shop</div>
-                <div class="project-desc">Landing Page premium para tienda de iPhones y accesorios Apple. Canvas de partículas animado, cursor personalizado, marquee infinito, cards de accesorios con efecto glow 3D, plan canje y sección de reseñas. CTA directo a WhatsApp.</div>
-                <a href="https://gastongarcia1295.github.io/Landing-TechStore/" target="_blank" class="project-link">Ver Proyecto En Vivo</a>
-            </div>
-
+      <!-- 02 — src="" → reemplazá por "./ScreenShoots/descarga.jpg" -->
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="./ScreenShoots/descarga.jpg" alt="Confirmación de Compra"/>
+          <div class="ph"><div class="ph-ico">✅</div><div class="ph-lbl">github.io/Intestino-Descarga</div></div>
         </div>
-    </section>
-
-    <section id="tecnologias">
-        <div class="section-label reveal">Herramientas Que Domino</div>
-        <h2 class="section-title reveal">STACK TÉCNICO</h2>
-        <div class="tech-grid reveal">
-            <div class="tech-item"><span class="tech-dot"></span>HTML5 / CSS3</div>
-            <div class="tech-item"><span class="tech-dot"></span>JavaScript ES6+</div>
-            <div class="tech-item"><span class="tech-dot"></span>React.js / Next.js</div>
-            <div class="tech-item"><span class="tech-dot"></span>Tailwind CSS</div>
-            <div class="tech-item"><span class="tech-dot"></span>GSAP Animaciones</div>
-            <div class="tech-item"><span class="tech-dot"></span>Git / GitHub</div>
-            <div class="tech-item"><span class="tech-dot"></span>APIs REST</div>
-            <div class="tech-item"><span class="tech-dot"></span>Mercado Pago</div>
-            <div class="tech-item"><span class="tech-dot"></span>Netlify / GitHub Pages</div>
-            <div class="tech-item"><span class="tech-dot"></span>Node.js / Express</div>
-            <div class="tech-item"><span class="tech-dot"></span>TypeScript</div>
-            <div class="tech-item"><span class="tech-dot"></span>Diseño UI/UX</div>
+        <div class="pcard-body">
+          <div class="pcard-num">02 — 07</div>
+          <span class="pcard-tag">POST-VENTA</span>
+          <div class="pcard-name">CONFIRMACIÓN DE COMPRA</div>
+          <p class="pcard-desc">Entrega automática de activo digital integrada como URL de retorno en Mercado Pago. Sin intervención manual.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" rel="noopener">VER PROYECTO →</a>
         </div>
-    </section>
+      </div>
 
-    <section id="contacto">
-        <div class="section-label reveal">¿Tenés Un Proyecto?</div>
-        <h2 class="section-title reveal">HABLEMOS</h2>
-        <p class="reveal" style="font-size:1.1rem;color:var(--text-dim);max-width:560px;line-height:1.8;margin-bottom:48px;">
-            Si necesitás un Sitio Web, una Landing Page que venda, una Aplicación Web o cualquier solución digital — escribime. Respondo en menos de 24hs.
-        </p>
-        <div class="reveal">
-            <a href="mailto:gastongarcia1295@gmail.com" class="contact-email">GASTONGARCIA1295@GMAIL.COM</a>
+      <!-- 03 — src="" → reemplazá por "./ScreenShoots/gestion.jpg" -->
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="./ScreenShoots/gestion.jpg" alt="Sistema de Gestión"/>
+          <div class="ph"><div class="ph-ico">📊</div><div class="ph-lbl">github.io/Gestion-Ventas</div></div>
         </div>
-        <div class="reveal" style="margin-top:40px;">
-            <a href="https://github.com/GastonGarcia1295" target="_blank" class="contact-btn">GitHub →</a>
+        <div class="pcard-body">
+          <div class="pcard-num">03 — 07</div>
+          <span class="pcard-tag">ADMIN PANEL</span>
+          <div class="pcard-name">SISTEMA DE GESTIÓN</div>
+          <p class="pcard-desc">Panel administrativo con métricas en tiempo real, gráficos dinámicos y dashboard completo de seguimiento.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Gestion-Ventas/" target="_blank" rel="noopener">VER PROYECTO →</a>
         </div>
-    </section>
+      </div>
 
-    <footer style="padding:32px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-        <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);">Gastón García — Desarrollador Web — Castelar, Argentina</p>
-        <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);">© 2026</p>
-    </footer>
+      <!-- 04 — src="" → reemplazá por "./ScreenShoots/calculadora.jpg" -->
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="./ScreenShoots/calculadora.jpg" alt="Calculadora"/>
+          <div class="ph"><div class="ph-ico">🧮</div><div class="ph-lbl">github.io/Calculadora-Presupuesto</div></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">04 — 07</div>
+          <span class="pcard-tag">HERRAMIENTA WEB</span>
+          <div class="pcard-name">CALCULADORA DE PRESUPUESTO</div>
+          <p class="pcard-desc">Cotizador interactivo con conversión ARS/USD en tiempo real y exportación a PDF con un clic.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Calculadora-Presupuesto/" target="_blank" rel="noopener">VER PROYECTO →</a>
+        </div>
+      </div>
 
-    <script>
-        const cursor = document.getElementById('cursor');
-        const ring = document.getElementById('cursorRing');
-        let mx = 0, my = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx - 5 + 'px'; cursor.style.top = my - 5 + 'px'; });
-        function animateRing() { rx += (mx - rx - 18) * 0.15; ry += (my - ry - 18) * 0.15; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
-        animateRing();
+      <!-- 05 — src="" → reemplazá por "./ScreenShoots/magnolia.jpg" -->
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="./ScreenShoots/magnolia.jpg" alt="Magnolia Store"/>
+          <div class="ph"><div class="ph-ico">👗</div><div class="ph-lbl">magnoliashop.netlify.app</div></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">05 — 07</div>
+          <span class="pcard-tag">E-COMMERCE</span>
+          <div class="pcard-name">MAGNOLIA STORE</div>
+          <p class="pcard-desc">Tienda premium con carrito funcional, galería con zoom, filtros por categoría y cuotas con Mercado Pago.</p>
+          <a class="pcard-link" href="https://magnoliashop.netlify.app" target="_blank" rel="noopener">VER PROYECTO →</a>
+        </div>
+      </div>
 
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
+      <!-- 06 — src="" → reemplazá por "./ScreenShoots/pulse.jpg" -->
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="./ScreenShoots/pulse.jpg" alt="Pulse Analytics"/>
+          <div class="ph"><div class="ph-ico">📈</div><div class="ph-lbl">github.io/Dashboard-Analitico</div></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">06 — 07</div>
+          <span class="pcard-tag">ANALYTICS · SAAS</span>
+          <div class="pcard-name">PULSE ANALYTICS</div>
+          <p class="pcard-desc">Dashboard con 11 secciones, gráficos dinámicos, filtros por período y heatmap anual. Diseño SaaS profesional.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Dashboard-Analitico/" target="_blank" rel="noopener">VER PROYECTO →</a>
+        </div>
+      </div>
 
-        tsParticles.load("tsparticles", {
-            fpsLimit: 60,
-            particles: {
-                color: { value: "#00ff87" },
-                links: { color: "#00ff87", distance: 150, enable: true, opacity: 0.1, width: 1 },
-                move: { enable: true, speed: 0.45 },
-                number: { value: 28, density: { enable: true, area: 1000 } },
-                opacity: { value: 0.18 },
-                size: { value: { min: 1, max: 1.5 } },
-            }, detectRetina: true,
-        });
+      <!-- 07 — src="" → reemplazá por "./ScreenShoots/techstore.jpg" -->
+      <div class="pcard">
+        <div class="pcard-img">
+          <img src="./ScreenShoots/techstore.jpg" alt="Tech Store"/>
+          <div class="ph"><div class="ph-ico">📱</div><div class="ph-lbl">github.io/Landing-TechStore</div></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">07 — 07</div>
+          <span class="pcard-tag">LANDING · APPLE</span>
+          <div class="pcard-name">TECH STORE SHOP</div>
+          <p class="pcard-desc">Landing premium para tienda de iPhones con partículas animadas, cursor personalizado y marquee infinito.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Landing-TechStore/" target="_blank" rel="noopener">VER PROYECTO →</a>
+        </div>
+      </div>
 
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.set(".reveal", { y: 28, opacity: 0 });
-        gsap.utils.toArray(".reveal").forEach(el => {
-            gsap.to(el, {
-                scrollTrigger: { trigger: el, start: "top 92%" },
-                opacity: 1, y: 0, duration: 0.85, ease: "power2.out"
-            });
-        });
+    </div>
+    <div class="cnav">
+      <button class="cbtn" id="prev">←</button>
+      <div class="cdots" id="dots"></div>
+      <button class="cbtn" id="next">→</button>
+    </div>
+  </div>
 
-        const words = ['SITIOS WEB.', 'LANDING PAGES.', 'APPS & MÁS.', 'HERRAMIENTAS WEB.'];
-        const el = document.getElementById('heroTyped');
-        let wi = 0, ci = 0, deleting = false;
-        function type() {
-            const word = words[wi];
-            if (!deleting) {
-                el.textContent = word.slice(0, ++ci);
-                if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
-            } else {
-                el.textContent = word.slice(0, --ci);
-                if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(type, 300); return; }
-            }
-            setTimeout(type, deleting ? 45 : 80);
+</section>
+
+<!-- SOBRE MÍ -->
+<section class="sec" id="sobre-mi">
+  <div class="agrid">
+    <div class="rv">
+      <div style="margin-bottom:2rem">
+        <div class="ey">// SOBRE MÍ</div>
+        <h2 class="stitle">CÓ<span class="ac">DIGO.</span></h2>
+      </div>
+      <div class="acopy">
+        <p>Construyo productos web con precisión técnica y criterio de diseño. Cada línea de código tiene un propósito — <strong>ningún elemento es decorativo si no suma al resultado final</strong>.</p>
+        <p>Trabajo de manera <strong>independiente y transparente</strong>: sin intermediarios, sin sorpresas. El cliente ve el avance en tiempo real y participa del proceso desde el primer commit.</p>
+        <p>Cada proyecto es una oportunidad de construir algo que <strong>dure, escale y funcione</strong> en el mundo real.</p>
+      </div>
+    </div>
+    <div class="avals rv d1">
+      <div class="aval"><div class="aval-ico">⚡</div><div><div class="avt">IMPACTO DESDE EL PRIMER SEGUNDO</div><p class="avx">Interfaces pensadas para capturar atención y sostenerla.</p></div></div>
+      <div class="aval"><div class="aval-ico">💳</div><div><div class="avt">PAGOS INTEGRADOS</div><p class="avx">Mercado Pago nativo para el mercado argentino. Sin rodeos.</p></div></div>
+      <div class="aval"><div class="aval-ico">🔬</div><div><div class="avt">DETALLE TÉCNICO</div><p class="avx">Código limpio, optimizado y mantenible. Nada a medias.</p></div></div>
+      <div class="aval"><div class="aval-ico">🚀</div><div><div class="avt">ENTREGA REAL</div><p class="avx">Proyectos en producción, funcionando, con usuarios reales.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="sec" id="tecnologias">
+  <div class="rv">
+    <div class="ey">// HERRAMIENTAS</div>
+    <h2 class="stitle">STACK <span class="ac">TÉCNICO</span></h2>
+  </div>
+
+  <div class="stack-cols rv d1">
+
+    <div class="scol">
+      <div class="scol-label">FUNDAMENTOS</div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">HTML5</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">CSS3</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">JAVASCRIPT</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">TYPESCRIPT</div></div>
+    </div>
+
+    <div class="scol">
+      <div class="scol-label">FRAMEWORKS</div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">REACT.JS</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NEXT.JS</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NODE.JS</div></div>
+    </div>
+
+    <div class="scol">
+      <div class="scol-label">ESTILOS</div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">TAILWIND CSS</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">UI / UX DESIGN</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">CANVAS API</div></div>
+    </div>
+
+    <div class="scol">
+      <div class="scol-label">ANIMACIONES</div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">GSAP</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">CSS ANIMATIONS</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">THREE.JS</div></div>
+    </div>
+
+    <div class="scol">
+      <div class="scol-label">PAGOS & APIs</div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">MERCADO PAGO</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">APIs REST</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">FETCH / AXIOS</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">JSON</div></div>
+    </div>
+
+    <div class="scol">
+      <div class="scol-label">HERRAMIENTAS</div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">GIT / GITHUB</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NETLIFY</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">GH PAGES</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">VS CODE</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="sec">
+  <div class="cta-glow"></div>
+  <div class="cta-grid rv">
+
+    <div class="cta-left">
+      <div class="cta-eyebrow">// NUEVA OPORTUNIDAD</div>
+      <h2 class="cta-h">ESCRIBIME<br>PARA<br><span class="ac">COMENZAR.</span></h2>
+      <p class="cta-body">Si necesitás un <strong>Sitio Web</strong>, una <strong>Landing Page</strong>, una <strong>Aplicación Web</strong> o cualquier solución digital — escribime. <strong>Respondo en menos de 24hs.</strong></p>
+    </div>
+
+    <div class="cta-right rv d1">
+
+      <!-- GMAIL -->
+      <a class="cta-card" href="mailto:gastongarcia1295@gmail.com">
+        <div class="cta-card-ico">
+          <!-- Gmail SVG -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" stroke="rgba(79,140,255,.5)" stroke-width="1.5"/>
+            <path d="M2 6l10 7 10-7" stroke="#4f8cff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="cta-card-body">
+          <div class="cta-card-label">EMAIL</div>
+          <div class="cta-card-title">GMAIL</div>
+          <div class="cta-card-sub">gastongarcia1295@gmail.com</div>
+        </div>
+        <div class="cta-card-arr">↗</div>
+      </a>
+
+      <!-- WHATSAPP compact row -->
+      <a class="cta-card wa" href="https://wa.me/5491100000000?text=Hola%20Gast%C3%B3n%2C%20quisiera%20conversar%20para%20iniciar%20un%20proyecto" target="_blank" rel="noopener">
+        <div class="cta-card-ico">
+          <!-- WhatsApp SVG official shape -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 1.89.527 3.66 1.445 5.168L2 22l4.978-1.418A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="rgba(0,229,160,.15)" stroke="#00e5a0" stroke-width="1.2"/>
+            <path d="M8.5 8.5c.2-.5.7-.8 1.1-.7l.8.1c.3.1.5.3.6.6l.5 1.3c.1.3 0 .6-.2.8l-.4.5c.5 1 1.4 1.9 2.4 2.4l.5-.4c.2-.2.5-.3.8-.2l1.3.5c.3.1.5.3.6.6l.1.8c.1.4-.2.9-.7 1.1C13 16.8 8 13.5 8.5 8.5z" fill="#00e5a0"/>
+          </svg>
+        </div>
+        <div class="cta-card-body">
+          <div class="cta-card-label">WHATSAPP</div>
+          <div class="cta-card-title">SI TENÉS ALGO EN MENTE, ESCRIBIME</div>
+        </div>
+        <div class="cta-card-arr">↗</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="fc">GASTÓN GARCÍA — DESARROLLADOR WEB — CASTELAR, BUENOS AIRES © 2026</span>
+  <span class="fb"><span class="fbd"></span>DISPONIBLE PARA PROYECTOS</span>
+</footer>
+
+<script>
+// ── CURSOR
+const curEl=document.getElementById('cur'),ringEl=document.getElementById('cur-r');
+let rx=0,ry=0,cx=window.innerWidth/2,cy=window.innerHeight/2;
+document.addEventListener('mousemove',e=>{
+  cx=e.clientX;cy=e.clientY;
+  curEl.style.left=cx+'px';curEl.style.top=cy+'px';
+  document.body.classList.toggle('hovering',!!e.target.closest('a,button'));
+},{passive:true});
+(function loop(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;ringEl.style.left=rx+'px';ringEl.style.top=ry+'px';requestAnimationFrame(loop)})();
+
+// ── NAV
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>50),{passive:true});
+
+// ── CANVAS — dark bg + IT objects
+(function(){
+  const c=document.getElementById('bgc'),ctx=c.getContext('2d');
+  let W,H;
+  const SYM=[
+    '</>','{ }','[ ]','()=>','//',
+    '&&','||','===','!==','??','++','--',
+    'npm','git','API','SSH','CLI','ENV',
+    'fn()','var','const','let','return','void',
+    'async','await','import','export','class','extends',
+    '.map()','filter()','reduce()','fetch()','JSON',
+    '#!','<div>','<html>','</head>','<br/>','<span>',
+    '01','10','11','00','101','110','0xff',
+    'px','rem','vw','vh','%','em',
+    '*.js','*.ts','*.jsx','*.css','*.html','*.json',
+    'push()','pop()','shift()','sort()','find()','slice()',
+    'true','false','null','undefined','NaN','Infinity',
+    'HTTP','GET','POST','PUT','DELETE','PATCH',
+    '200','404','500','301','401','403','429',
+    'JWT','OAuth','API','REST','JSON','XML','SQL',
+    '{}','[]','()','<>','=>','::',':',';',
+    'DB','ORM','.env','CI/CD','Docker','Linux',
+    'v1.0','main','HEAD','MERGE','PULL','COMMIT','PUSH',
+    'React','Next','Node','TS','JS','CSS','HTML',
+    'if()','else','for','while','try','catch','throw',
+  ];
+  const COLS=[
+    [79,140,255],[0,229,160],[255,225,86],
+    [255,79,31],[167,139,250],[232,228,221],
+    [56,189,248],[244,167,0],
+  ];
+
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  resize();
+  window.addEventListener('resize',resize,{passive:true});
+
+  function mkSym(){
+    const col=COLS[Math.floor(Math.random()*COLS.length)];
+    return{
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.22,
+      sym:SYM[Math.floor(Math.random()*SYM.length)],
+      size:Math.random()*5+7,
+      op:Math.random()*.09+.03,
+      rot:Math.random()*Math.PI*2,
+      rv:(Math.random()-.5)*.002,
+      col, isDot:false
+    };
+  }
+  function mkDot(){
+    const col=COLS[Math.floor(Math.random()*COLS.length)];
+    return{
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*.12, vy:(Math.random()-.5)*.1,
+      size:Math.random()*1.4+.4,
+      op:Math.random()*.07+.025,
+      col, isDot:true,
+      rot:0,rv:0,sym:''
+    };
+  }
+
+  const pts=[];
+  for(let i=0;i<110;i++)pts.push(mkSym()); // more symbols
+  for(let i=0;i<80;i++)pts.push(mkDot());  // more dots
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(o=>{
+      const[r,g,b]=o.col;
+      ctx.save();
+      if(o.isDot){
+        ctx.globalAlpha=o.op;
+        ctx.fillStyle=`rgba(${r},${g},${b},1)`;
+        ctx.beginPath();ctx.arc(o.x,o.y,o.size,0,Math.PI*2);ctx.fill();
+      } else {
+        ctx.translate(o.x,o.y);ctx.rotate(o.rot);
+        ctx.globalAlpha=o.op;
+        ctx.font=`700 ${o.size}px "Space Mono",monospace`;
+        ctx.fillStyle=`rgba(${r},${g},${b},1)`;
+        ctx.fillText(o.sym,0,0);
+        o.rot+=o.rv;
+      }
+      ctx.restore();
+      o.x+=o.vx; o.y+=o.vy;
+      if(o.x<-120)o.x=W+60; if(o.x>W+120)o.x=-60;
+      if(o.y<-50)o.y=H+25;  if(o.y>H+50)o.y=-25;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── REVEAL
+const rvEls=document.querySelectorAll('.rv');
+const rvo=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvo.unobserve(e.target)}});
+},{threshold:0.06,rootMargin:'0px 0px -60px 0px'});
+rvEls.forEach(el=>rvo.observe(el));
+
+// ── 3D CAROUSEL — snappy
+(function(){
+  const scene=document.getElementById('scene');
+  const faces=[...scene.querySelectorAll('.pcard')];
+  const N=faces.length;
+  const dotsEl=document.getElementById('dots');
+  let cur=0;
+  const R=305;
+
+  faces.forEach((_,i)=>{
+    const d=document.createElement('button');
+    d.className='cdot'+(i===0?' on':'');
+    d.setAttribute('aria-label','Proyecto '+(i+1));
+    d.addEventListener('click',()=>go(i));
+    dotsEl.appendChild(d);
+  });
+  const dots=[...dotsEl.querySelectorAll('.cdot')];
+
+  function go(idx){
+    cur=((idx%N)+N)%N;
+    const step=360/N;
+    faces.forEach((f,i)=>{
+      const off=i-cur;
+      const ang=off*step*(Math.PI/180);
+      const x=Math.sin(ang)*R;
+      const z=Math.cos(ang)*R;
+      const norm=(z+R)/(2*R);
+      const sc=0.68+norm*.32;
+      f.style.transition='transform .4s cubic-bezier(.22,.68,0,1.15),opacity .4s,filter .4s';
+      f.style.transform=`translateX(${x}px) translateZ(${z}px) scale(${sc})`;
+      f.style.opacity=0.1+norm*.9;
+      f.style.filter=norm>.62?'none':`blur(${(1-norm)*2}px)`;
+      f.style.pointerEvents=norm>.76?'auto':'none';
+      f.style.zIndex=Math.round(norm*100);
+    });
+    dots.forEach((d,i)=>d.classList.toggle('on',i===cur));
+  }
+  go(0);
+
+  document.getElementById('next').addEventListener('click',()=>go(cur+1));
+  document.getElementById('prev').addEventListener('click',()=>go(cur-1));
+
+  let wlock=false;
+  const cw=document.querySelector('.car-outer');
+  cw.addEventListener('wheel',e=>{
+    e.preventDefault();
+    if(wlock)return;
+    wlock=true;
+    e.deltaY>0?go(cur+1):go(cur-1);
+    setTimeout(()=>wlock=false,460);
+  },{passive:false});
+
+  window.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown'].includes(e.key))go(cur+1);
+    if(['ArrowLeft','ArrowUp'].includes(e.key))go(cur-1);
+  });
+
+  let tx=0;
+  cw.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+  cw.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>30)dx<0?go(cur+1):go(cur-1);
+  },{passive:true});
+})();
+
+// ── TYPEWRITER — DIGITALES (loop infinito)
+(function(){
+  const el   = document.getElementById('typeword');
+  const cur  = document.getElementById('typecursor');
+  const word = 'DIGITALES';
+
+  // Siempre render: texto + cursor parpadeante al final
+  function render(text){
+    el.textContent = text;
+    el.appendChild(cur);
+  }
+
+  function loop(){
+    let i = 0;
+    // ESCRIBIR
+    (function type(){
+      render(word.slice(0, i));
+      if(i < word.length){
+        i++;
+        setTimeout(type, i === 1 ? 300 : 72);
+      } else {
+        // pausa con texto completo, luego borrar
+        setTimeout(erase, 2600);
+      }
+    })();
+
+    // BORRAR
+    function erase(){
+      (function del(){
+        render(word.slice(0, i));
+        if(i > 0){
+          i--;
+          setTimeout(del, 42);
+        } else {
+          // pausa vacío, luego volver a escribir
+          setTimeout(loop, 500);
         }
-        setTimeout(type, 1000);
-    </script>
+      })();
+    }
+  }
+
+  // Arrancar después de que termina la animación del hero
+  setTimeout(loop, 950);
+})();
+
+// Formato: 54 (Argentina) + código de área sin 0 + número sin 15
+// Ejemplo Castelar: 54 11 XXXX-XXXX → 5411XXXXXXXX
+</script>
 </body>
 </html>
