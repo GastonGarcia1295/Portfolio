@@ -5,7 +5,8 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 
 **[🌐 Ver Portfolio en vivo](https://gastongarcia1295.github.io/Portfolio/)**
 
@@ -15,7 +16,7 @@
 
 ## 👋 Sobre mí
 
-Soy **Gastón García**, Desarrollador Web de Buenos Aires, Argentina. Diseño y desarrollo experiencias digitales de alto impacto — desde Landing Pages que convierten hasta Aplicaciones Web interactivas con integración de pagos real.
+Soy **Gastón García**, Desarrollador Web de Buenos Aires, Argentina. Diseño y desarrollo experiencias digitales de alto impacto — desde Landing Pages que convierten hasta Aplicaciones Web completas con backend, base de datos e integración de pagos real.
 
 Código 100% propio. Sin templates ni soluciones a medias.
 
@@ -84,11 +85,8 @@ Tienda de moda femenina premium con experiencia de compra completa.
 Dashboard analítico SaaS con datos 100% reales e ingresables.
 
 - KPIs dinámicos con comparación por período (7D / 30D / 90D / 1A)
-- Registro de ventas, clientes, productos y sesiones web
 - Gráficos interactivos: líneas, barras, donut, heatmap
-- Cálculo automático de LTV, ticket promedio y tasas de conversión
 - Exportación de reportes en `.txt`
-- Persistencia de datos vía `localStorage`
 
 🔗 [Ver proyecto](https://gastongarcia1295.github.io/Dashboard-Analitico/)
 
@@ -101,9 +99,37 @@ Landing page premium para tienda de iPhones y accesorios Apple.
 - Cursor personalizado con efectos
 - Marquee infinito de productos
 - Cards de accesorios con efecto glow 3D
-- CTA directo a WhatsApp
 
 🔗 [Ver proyecto](https://gastongarcia1295.github.io/Landing-TechStore/)
+
+---
+
+### ⭐ MiTurno — Sistema de Turnos Online
+Sistema completo de reserva de turnos para cualquier tipo de negocio o rubro.
+
+El proyecto más completo del portfolio — una aplicación web full stack, lista para vender como servicio a clínicas, barberías, consultorios, canchas deportivas, centros de estética y cualquier negocio que necesite gestionar turnos online.
+
+**¿Qué puede hacer un cliente con MiTurno?**
+- Reservar un turno en cualquier momento, desde cualquier dispositivo
+- Abonar la seña online con **Mercado Pago** (50% del servicio)
+- Recibir un **email de confirmación** automático con todos los detalles
+- El negocio recibe una notificación por email con los datos del cliente
+
+**¿Qué puede hacer el dueño del negocio?**
+- Acceder a un **panel de administración** con login protegido
+- Ver todos los turnos reservados con nombre, servicio, fecha y hora
+- Confirmar, cancelar o eliminar turnos con un clic
+- Ver estadísticas: total de turnos, confirmados, pendientes y seña cobrada
+
+**Stack técnico completo:**
+- **Frontend:** HTML, CSS, JavaScript puro — Tipografía DM Serif Display + Cabinet Grotesk
+- **Backend:** Node.js + Express — API REST completa
+- **Base de datos:** MongoDB Atlas — almacenamiento en la nube
+- **Emails:** Nodemailer + Gmail — confirmaciones automáticas
+- **Pagos:** Mercado Pago Checkout Pro — seña del 50%
+- **Deploy:** Frontend en GitHub Pages — Backend en Render
+
+🔗 [Ver demo](https://gastongarcia1295.github.io/MiTurno-Frontend/)
 
 ---
 
@@ -112,11 +138,12 @@ Landing page premium para tienda de iPhones y accesorios Apple.
 | Categoría | Tecnologías |
 |---|---|
 | **Fundamentos** | HTML5, CSS3, JavaScript ES6+, TypeScript |
-| **Frameworks** | React.js, Next.js, Node.js |
+| **Frameworks** | React.js, Next.js, Node.js, Express |
 | **Estilos** | Tailwind CSS, UI/UX Design, Canvas API |
 | **Animaciones** | GSAP, CSS Animations, Three.js |
-| **Pagos & APIs** | Mercado Pago, APIs REST, Fetch/Axios |
-| **Herramientas** | Git, GitHub, Netlify, GitHub Pages, VS Code |
+| **Bases de datos** | MongoDB Atlas |
+| **Pagos & APIs** | Mercado Pago, APIs REST, Fetch/Axios, Nodemailer |
+| **Herramientas** | Git, GitHub, Netlify, Render, GitHub Pages, VS Code |
 
 ---
 
@@ -127,6 +154,7 @@ Landing page premium para tienda de iPhones y accesorios Apple.
 - ⌨️ **Efecto máquina de escribir** en el título — loop infinito
 - 🌊 **Scroll reveal** — secciones con fade-in al entrar en viewport
 - 🖱️ **Cursor personalizado** con efecto de seguimiento suave
+- ⭐ **Card destacada** para MiTurno con efecto dorado pulsante
 - 📱 **Totalmente responsive** — mobile, tablet y desktop
 
 ---
@@ -135,7 +163,7 @@ Landing page premium para tienda de iPhones y accesorios Apple.
 
 ```
 Portfolio/
-├── index.html              ← Portfolio principal
+├── index.html
 ├── README.md
 └── ScreenShoots/
     ├── bienestar.jpg
@@ -143,6 +171,7 @@ Portfolio/
     ├── descarga.jpg
     ├── gestion.jpg
     ├── magnolia.jpg
+    ├── miturno.jpg
     ├── pulse.jpg
     └── techstore.jpg
 ```
