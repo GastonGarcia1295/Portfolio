@@ -165,15 +165,14 @@ El proyecto más completo del portfolio — una aplicación web full stack, list
 Portfolio/
 ├── index.html
 ├── README.md
-└── ScreenShoots/
-    ├── bienestar.jpg
-    ├── calculadora.jpg
-    ├── descarga.jpg
-    ├── gestion.jpg
-    ├── magnolia.jpg
-    ├── miturno.jpg
-    ├── pulse.jpg
-    └── techstore.jpg
+├── bienestar.jpg
+├── calculadora.jpg
+├── descarga.jpg
+├── gestion.jpg
+├── magnolia.jpg
+├── miturno.jpg
+├── pulse.jpg
+└── techstore.jpg
 ```
 
 ---
