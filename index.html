@@ -22,6 +22,9 @@
   --green:#00e5a0;
   --yellow:#ffe156;
   --purple:#a78bfa;
+  --gold:#f5c842;
+  --gold2:#ffd700;
+  --gold3:#b8860b;
   --border:rgba(232,228,221,0.07);
   --border2:rgba(232,228,221,0.13);
   --f:'Barlow',sans-serif;
@@ -32,16 +35,13 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--white);font-family:var(--f);font-weight:400;overflow-x:hidden;cursor:none}
 ::selection{background:var(--accent);color:#000}
 
-/* ── CURSOR ── */
 #cur{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;left:0;top:0;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s}
 #cur-r{position:fixed;width:30px;height:30px;border:1px solid rgba(79,140,255,.28);border-radius:50%;pointer-events:none;z-index:9998;left:0;top:0;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s}
 .hovering #cur{width:16px;height:16px;background:var(--accent2)}
 .hovering #cur-r{width:48px;height:48px;border-color:rgba(255,79,31,.4)}
 
-/* ── CANVAS ── */
 #bgc{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;transition:background .3s,box-shadow .3s}
 nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 1px 0 var(--border)}
 .logo{font-family:var(--fm);font-weight:700;font-size:.85rem;letter-spacing:.06em;color:var(--white);text-decoration:none;text-transform:uppercase}
@@ -52,40 +52,21 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .nav-btn{font-family:var(--fm);font-size:.57rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;background:var(--accent);border:none;padding:.48rem 1.3rem;border-radius:3px;text-decoration:none;cursor:none;transition:background .2s,transform .15s}
 .nav-btn:hover{background:#6fa3ff;transform:scale(.97)}
 
-/* ── HERO ── */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;z-index:1;overflow:hidden}
 .hero-ey{font-family:var(--fm);font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem;opacity:0;animation:up .7s .05s ease forwards}
 .hero-ey::before{content:'//';opacity:.4;margin-right:.1rem}
 .hero-h1{font-family:var(--fc);font-weight:900;font-size:clamp(3rem,7vw,6.8rem);line-height:.88;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:2.5rem;opacity:0;animation:up .8s .2s ease forwards}
 .hero-h1 .ac{color:var(--accent)}
 .hero-h1 .out{-webkit-text-stroke:1.5px var(--white);color:transparent}
-
-/* hero body — desc + badge side by side */
 .hero-body{display:flex;align-items:flex-start;gap:2.2rem;margin-bottom:2.5rem;flex-wrap:wrap;opacity:0;animation:up .8s .35s ease forwards}
 .hero-desc{max-width:560px;font-size:.92rem;color:var(--white2);line-height:1.85;font-weight:300}
 .hero-desc strong{color:var(--white);font-weight:500}
 .hero-desc p+p{margin-top:.9rem}
-
-/* Available badge */
-.avail-badge{
-  display:flex;align-items:center;gap:.55rem;
-  border:1.5px solid rgba(0,229,160,.3);
-  border-radius:100px;
-  padding:.6rem 1.2rem;
-  background:rgba(0,229,160,.05);
-  text-decoration:none;
-  cursor:none;
-  flex-shrink:0;
-  transition:border-color .25s,background .25s,transform .2s;
-  align-self:flex-start;
-  margin-top:.15rem;
-}
+.avail-badge{display:flex;align-items:center;gap:.55rem;border:1.5px solid rgba(0,229,160,.3);border-radius:100px;padding:.6rem 1.2rem;background:rgba(0,229,160,.05);text-decoration:none;cursor:none;flex-shrink:0;transition:border-color .25s,background .25s,transform .2s;align-self:flex-start;margin-top:.15rem}
 .avail-badge:hover{border-color:rgba(0,229,160,.7);background:rgba(0,229,160,.1);transform:scale(1.03)}
 .avail-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s ease-in-out infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,229,160,.5)}50%{opacity:.7;box-shadow:0 0 0 5px rgba(0,229,160,0)}}
 .avail-text{font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);white-space:nowrap}
-
-/* hero bottom — stats + cta */
 .hero-bot{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;opacity:0;animation:up .8s .5s ease forwards}
 .hstats{display:flex;gap:2.2rem}
 .sn{font-family:var(--fc);font-weight:900;font-size:2.1rem;line-height:1;letter-spacing:-.03em;text-transform:uppercase}
@@ -95,7 +76,6 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .bp:hover{background:#6fa3ff;transform:scale(.97)}
 .bg{font-family:var(--fm);font-size:.57rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--white2);background:transparent;border:1px solid var(--border2);padding:.75rem 1.7rem;border-radius:3px;text-decoration:none;cursor:none;transition:color .2s,border-color .2s}
 .bg:hover{color:var(--white);border-color:rgba(232,228,221,.3)}
-
 .shi{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.45rem;z-index:2;opacity:0;animation:fi 1s .9s ease forwards}
 .shi span{font-family:var(--fm);font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white3)}
 .shline{width:1px;height:40px;background:linear-gradient(to bottom,var(--white3),transparent);animation:sp 2s ease-in-out infinite}
@@ -105,7 +85,6 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 @keyframes fi{from{opacity:0}to{opacity:1}}
 @keyframes sp{0%,100%{opacity:.18}50%{opacity:.65}}
 
-/* ── MARQUEE ── */
 .mwrap{position:relative;z-index:2;overflow:hidden;background:var(--surface);padding:.72rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .mtrack{display:flex;width:max-content;animation:mq 15s linear infinite}
 .mtrack:hover{animation-play-state:paused}
@@ -114,17 +93,14 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .mitem::after{content:'✦';font-size:.4rem;opacity:.3}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ── SECTIONS ── */
 .sec{position:relative;z-index:2;padding:6.5rem 3rem}
 .ey{font-family:var(--fm);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;opacity:.7}
 .stitle{font-family:var(--fc);font-weight:900;font-size:clamp(2.4rem,5vw,4.5rem);letter-spacing:-.01em;line-height:.88;text-transform:uppercase;color:var(--white)}
 .stitle .ac{color:var(--accent)}
 .stitle .out{-webkit-text-stroke:1.2px rgba(232,228,221,.35);color:transparent}
 
-/* ── PROYECTOS ── */
 #proyectos{border-top:1px solid var(--border)}
 .phead{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3.5rem;flex-wrap:wrap;gap:1rem}
-.pcnt{font-family:var(--fm);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white3)}
 
 /* CAROUSEL */
 .car-outer{position:relative;height:360px;display:flex;align-items:center;justify-content:center;perspective:1300px;overflow:visible;margin:0 -3rem;padding:0 3rem}
@@ -132,10 +108,33 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .pcard{position:absolute;inset:0;background:var(--surface);border:1px solid var(--border2);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;backface-visibility:hidden;text-decoration:none;color:inherit;cursor:none;transition:box-shadow .35s,border-color .35s}
 .pcard:hover{box-shadow:0 6px 32px rgba(79,140,255,.12);border-color:rgba(79,140,255,.28)}
 
-/* ── IMAGEN DEL PROYECTO
-   Para reemplazar: cambiá el src="" de cada <img> por la ruta real.
-   Ejemplo: src="bienestar.jpg"
-   Tamaño recomendado: 880×500px, formato JPG/WebP ── */
+/* MITURNO — card especial dorada */
+.pcard.miturno{border-color:rgba(245,200,66,.25)}
+.pcard.miturno:hover{
+  border-color:var(--gold);
+  box-shadow:0 0 0 1px var(--gold),0 0 24px rgba(245,200,66,.35),0 0 60px rgba(245,200,66,.15);
+}
+
+/* efecto shimmer dorado al hacer hover */
+.pcard.miturno::before{
+  content:'';
+  position:absolute;inset:0;z-index:10;pointer-events:none;
+  background:linear-gradient(105deg,transparent 40%,rgba(245,200,66,.12) 50%,transparent 60%);
+  background-size:200% 100%;
+  background-position:200% 0;
+  transition:background-position .6s ease;
+  border-radius:8px;
+}
+.pcard.miturno:hover::before{background-position:-200% 0}
+
+/* pulso dorado en reposo */
+@keyframes goldPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(245,200,66,0),0 0 0 1px rgba(245,200,66,.18)}
+  50%{box-shadow:0 0 16px 4px rgba(245,200,66,.18),0 0 0 1px rgba(245,200,66,.35)}
+}
+.pcard.miturno{animation:goldPulse 3s ease-in-out infinite}
+.pcard.miturno:hover{animation:none}
+
 .pcard-img{height:118px;flex-shrink:0;background:var(--surface2);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
 .pcard-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .45s ease;position:relative;z-index:2}
 .pcard:hover .pcard-img img{transform:scale(1.06)}
@@ -143,13 +142,26 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .ph-ico{font-size:1.7rem;opacity:.2}
 .ph-lbl{font-family:var(--fm);font-size:.4rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white2);opacity:.35}
 
+/* badge NUEVO en card MiTurno */
+.pcard-new{
+  position:absolute;top:8px;right:8px;z-index:20;
+  background:var(--gold);color:#000;
+  font-family:var(--fm);font-size:.38rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:.18rem .6rem;border-radius:2px;
+  animation:badgeBlink 2s ease-in-out infinite;
+}
+@keyframes badgeBlink{0%,100%{opacity:1}50%{opacity:.65}}
 
 .pcard-body{padding:.95rem .9rem;display:flex;flex-direction:column;gap:.42rem;flex:1}
 .pcard-num{font-family:var(--fm);font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white3)}
 .pcard-tag{font-family:var(--fm);font-size:.44rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(79,140,255,.2);border-radius:2px;padding:.1rem .48rem;width:fit-content}
+.pcard-tag.gold{color:var(--gold);border-color:rgba(245,200,66,.35)}
 .pcard-name{font-family:var(--fc);font-weight:700;font-size:1rem;letter-spacing:-.01em;line-height:1.05;text-transform:uppercase;color:var(--white)}
+.pcard-name.gold{color:var(--gold)}
 .pcard-desc{font-size:.66rem;color:var(--white2);line-height:1.6;font-weight:300;flex:1}
 .pcard-link{font-family:var(--fm);font-size:.48rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:.33rem;margin-top:auto;transition:gap .18s}
+.pcard-link.gold{color:var(--gold)}
 .pcard-link:hover{gap:.58rem}
 
 .cnav{position:absolute;bottom:-3rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:1rem}
@@ -158,9 +170,8 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .cdots{display:flex;gap:.36rem;align-items:center}
 .cdot{width:4px;height:4px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);cursor:none;transition:background .2s,transform .2s;padding:0}
 .cdot.on{background:var(--accent);border-color:var(--accent);transform:scale(1.5)}
-.chint{text-align:center;margin-top:4.8rem;font-family:var(--fm);font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white3);opacity:.38}
+.cdot.gold{background:var(--gold)!important;border-color:var(--gold)!important}
 
-/* ── SOBRE MÍ ── */
 #sobre-mi{border-top:1px solid var(--border)}
 .agrid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
 .acopy p{font-size:.88rem;color:var(--white2);line-height:1.88;font-weight:300;margin-bottom:1.2rem}
@@ -172,105 +183,36 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .avt{font-family:var(--fc);font-weight:700;font-size:.85rem;letter-spacing:.01em;text-transform:uppercase;color:var(--white);margin-bottom:.22rem}
 .avx{font-size:.7rem;color:var(--white2);line-height:1.6;font-weight:300}
 
-/* ── STACK ── */
 #tecnologias{border-top:1px solid var(--border);background:transparent}
-
-.stack-cols{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:1px;
-  margin-top:3rem;
-  background:var(--border2);
-  border:1px solid var(--border2);
-  border-radius:6px;
-  overflow:hidden;
-}
-.scol{
-  background:var(--bg);
-  padding:1.6rem 1.2rem;
-  display:flex;flex-direction:column;gap:.5rem;
-}
-.scol-label{
-  font-family:var(--fm);font-size:.62rem;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--white);
-  margin-bottom:.7rem;padding-bottom:.65rem;
-  border-bottom:1px solid var(--border2);
-  white-space:nowrap;
-  text-shadow:0 0 12px rgba(79,140,255,.4);
-}
-.sitem{
-  display:flex;align-items:center;gap:.55rem;
-  padding:.5rem .75rem;
-  background:var(--surface);
-  border:1px solid var(--border2);
-  border-radius:3px;
-  cursor:none;
-  transition:background .18s,border-color .18s;
-}
+.stack-cols{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;margin-top:3rem;background:var(--border2);border:1px solid var(--border2);border-radius:6px;overflow:hidden}
+.scol{background:var(--bg);padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.5rem}
+.scol-label{font-family:var(--fm);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--white);margin-bottom:.7rem;padding-bottom:.65rem;border-bottom:1px solid var(--border2);white-space:nowrap;text-shadow:0 0 12px rgba(79,140,255,.4)}
+.sitem{display:flex;align-items:center;gap:.55rem;padding:.5rem .75rem;background:var(--surface);border:1px solid var(--border2);border-radius:3px;cursor:none;transition:background .18s,border-color .18s}
 .sitem:hover{background:var(--surface2);border-color:rgba(79,140,255,.4)}
 .sitem-dot{width:5px;height:5px;border-radius:50%;background:var(--white2);flex-shrink:0;transition:background .18s}
 .sitem:hover .sitem-dot{background:var(--accent)}
-.sitem-name{
-  font-family:var(--fm);font-size:.72rem;font-weight:700;
-  letter-spacing:.04em;text-transform:uppercase;
-  color:var(--white);line-height:1;
-}
+.sitem-name{font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:1}
 
-@media(max-width:860px){
-  .stack-cols{grid-template-columns:repeat(2,1fr)}
-}
-
-/* ── CONTACTO ── */
 #contacto{padding:7rem 3rem 5rem;border-top:1px solid var(--border);position:relative;z-index:2;overflow:hidden}
 .cta-glow{position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);width:70vw;height:50vw;background:radial-gradient(ellipse,rgba(79,140,255,.1) 0%,transparent 68%);pointer-events:none}
-
 .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-
-.cta-left{}
 .cta-eyebrow{font-family:var(--fm);font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);opacity:.6;margin-bottom:.8rem}
 .cta-h{font-family:var(--fc);font-weight:900;font-size:clamp(2.4rem,5vw,4.4rem);letter-spacing:-.01em;line-height:.9;text-transform:uppercase;color:var(--white);margin-bottom:1.6rem}
 .cta-h .ac{color:var(--accent)}
 .cta-body{font-size:.88rem;color:var(--white2);line-height:1.82;font-weight:300;max-width:500px}
 .cta-body strong{color:var(--white);font-weight:500}
-
 .cta-right{display:flex;flex-direction:column;gap:.7rem}
-
-/* contact card — compact */
-.cta-card{
-  border:1px solid var(--border2);
-  border-radius:10px;
-  padding:1.1rem 1.2rem;
-  background:var(--surface);
-  display:flex;align-items:center;gap:1rem;
-  transition:border-color .22s,background .22s,transform .18s,box-shadow .22s;
-  text-decoration:none;color:inherit;cursor:none;
-  position:relative;overflow:hidden;
-}
+.cta-card{border:1px solid var(--border2);border-radius:10px;padding:1.1rem 1.2rem;background:var(--surface);display:flex;align-items:center;gap:1rem;transition:border-color .22s,background .22s,transform .18s,box-shadow .22s;text-decoration:none;color:inherit;cursor:none;position:relative;overflow:hidden}
 .cta-card:hover{border-color:rgba(79,140,255,.4);background:var(--surface2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(79,140,255,.1)}
-
-.cta-card-ico{
-  width:40px;height:40px;border-radius:8px;
-  background:rgba(79,140,255,.1);border:1px solid rgba(79,140,255,.2);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;transition:background .22s,border-color .22s;
-}
+.cta-card-ico{width:40px;height:40px;border-radius:8px;background:rgba(79,140,255,.1);border:1px solid rgba(79,140,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .22s,border-color .22s}
 .cta-card:hover .cta-card-ico{background:rgba(79,140,255,.18);border-color:rgba(79,140,255,.4)}
 .cta-card-ico svg{width:18px;height:18px}
-
 .cta-card-body{flex:1;min-width:0}
 .cta-card-label{font-family:var(--fm);font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:var(--white3);margin-bottom:.22rem}
 .cta-card-title{font-family:var(--fc);font-weight:700;font-size:.95rem;letter-spacing:-.01em;text-transform:uppercase;color:var(--white);line-height:1}
 .cta-card-sub{font-size:.64rem;color:var(--white2);font-weight:300;margin-top:.18rem}
-
-.cta-card-arr{
-  width:28px;height:28px;border:1px solid var(--border2);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;color:var(--white2);flex-shrink:0;
-  transition:border-color .2s,color .2s,transform .22s;
-}
+.cta-card-arr{width:28px;height:28px;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--white2);flex-shrink:0;transition:border-color .2s,color .2s,transform .22s}
 .cta-card:hover .cta-card-arr{border-color:var(--accent);color:var(--accent);transform:rotate(45deg)}
-
-/* whatsapp card variant */
 .cta-card.wa{border-color:rgba(0,229,160,.18);background:rgba(0,229,160,.03)}
 .cta-card.wa:hover{border-color:rgba(0,229,160,.5);background:rgba(0,229,160,.08);box-shadow:0 6px 24px rgba(0,229,160,.1)}
 .cta-card.wa .cta-card-ico{background:rgba(0,229,160,.1);border-color:rgba(0,229,160,.25)}
@@ -280,40 +222,16 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .cta-card.wa .cta-card-title{color:var(--green)}
 .cta-card.wa .cta-card-label{color:var(--green);opacity:.6}
 
-/* wa cta button */
-.wa-cta-wrap{
-  border:1.5px solid rgba(0,229,160,.22);
-  border-radius:10px;
-  padding:1.2rem 1.3rem;
-  background:rgba(0,229,160,.04);
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;
-  text-decoration:none;color:inherit;cursor:none;
-  transition:border-color .22s,background .22s,transform .18s,box-shadow .22s;
-}
-.wa-cta-wrap:hover{border-color:rgba(0,229,160,.55);background:rgba(0,229,160,.09);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,229,160,.12)}
-.wa-cta-text{font-family:var(--fc);font-weight:700;font-size:1rem;letter-spacing:-.01em;text-transform:uppercase;color:var(--green);line-height:1.1}
-.wa-cta-btn{
-  display:inline-flex;align-items:center;gap:.4rem;flex-shrink:0;
-  background:var(--green);color:#000;
-  font-family:var(--fm);font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  border:none;padding:.55rem 1.1rem;border-radius:3px;
-  cursor:none;white-space:nowrap;
-}
-
-/* ── FOOTER ── */
 footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;position:relative;z-index:2;background:var(--bg2)}
 .fc{font-family:var(--fm);font-size:.48rem;letter-spacing:.07em;text-transform:uppercase;color:var(--white3);opacity:.45}
 .fb{display:flex;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);border:1px solid rgba(0,229,160,.18);border-radius:2px;padding:.25rem .72rem}
 .fbd{width:5px;height:5px;border-radius:50%;background:var(--green);animation:bl 2.5s ease-in-out infinite}
 @keyframes bl{0%,100%{opacity:1}50%{opacity:.08}}
 
-/* ── REVEAL ── */
 .rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.22,.68,0,1),transform .8s cubic-bezier(.22,.68,0,1)}
 .rv.in{opacity:1;transform:translateY(0)}
 .rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.38s}
-@keyframes fadeRow{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── MOBILE ── */
 @media(max-width:860px){
   nav{padding:1rem 1.5rem}.nav-links{display:none}
   .hero{padding:0 1.5rem 4rem}
@@ -323,8 +241,7 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
   .hero-bot{flex-direction:column;align-items:flex-start}
   .sec{padding:4.5rem 1.5rem}
   .agrid{grid-template-columns:1fr;gap:2.5rem}
-  .stack-board{grid-template-columns:repeat(2,1fr)}
-  .sk-wide{grid-column:span 1}
+  .stack-cols{grid-template-columns:repeat(2,1fr)}
   .cta-grid{grid-template-columns:1fr;gap:2.5rem}
   #contacto{padding:5rem 1.5rem 4rem}
   footer{padding:1rem 1.5rem}
@@ -338,7 +255,6 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
 <div id="cur-r"></div>
 <canvas id="bgc"></canvas>
 
-<!-- NAV -->
 <nav id="nav">
   <a class="logo" href="#">GG<span>.</span>DEV</a>
   <ul class="nav-links">
@@ -350,7 +266,6 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
   <a class="nav-btn" href="#contacto">CONTACTO →</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-ey">GASTÓN GARCÍA — BUENOS AIRES, ARGENTINA</div>
   <h1 class="hero-h1">
@@ -358,8 +273,6 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
     <span class="out">EXPERIENCIAS</span><br>
     <span id="typeword"><span id="typecursor" style="display:inline-block;width:2px;height:.85em;background:var(--white);margin-left:1px;vertical-align:middle;animation:blink-cur .75s step-end infinite"></span></span>.
   </h1>
-
-  <!-- DESCRIPCIÓN + BADGE -->
   <div class="hero-body">
     <div class="hero-desc">
       <p>Soy <strong>Gastón García, Desarrollador Web</strong>. Diseño y desarrollo experiencias de alto impacto, desde <strong>Landing Pages que convierten</strong> y <strong>Dashboards analíticos</strong> hasta <strong>Aplicaciones Web interactivas</strong> con integración de pagos real.</p>
@@ -370,10 +283,9 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
       <span class="avail-text">DISPONIBLE PARA NUEVOS PROYECTOS</span>
     </a>
   </div>
-
   <div class="hero-bot">
     <div class="hstats">
-      <div><div class="sn">7+</div><div class="sl">PROYECTOS</div></div>
+      <div><div class="sn">8+</div><div class="sl">PROYECTOS</div></div>
       <div><div class="sn">100%</div><div class="sl">CÓDIGO PROPIO</div></div>
       <div><div class="sn">MP</div><div class="sl">MERCADO PAGO</div></div>
     </div>
@@ -385,7 +297,6 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
   <div class="shi"><span>SCROLL</span><div class="shline"></div></div>
 </section>
 
-<!-- MARQUEE -->
 <div class="mwrap">
   <div class="mtrack">
     <span class="mitem">LANDING PAGES</span><span class="mitem hi">MERCADO PAGO</span>
@@ -401,27 +312,25 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
   </div>
 </div>
 
-<!-- PROYECTOS -->
 <section class="sec" id="proyectos">
   <div class="phead rv">
     <div>
       <div class="ey">// TRABAJO SELECCIONADO</div>
       <h2 class="stitle">PRO<span class="ac">YECTOS.</span></h2>
     </div>
-    <div></div>
   </div>
 
   <div class="car-outer rv d1">
     <div class="car-scene" id="scene">
 
-      <!-- 01 — src="" → reemplazá por "bienestar.jpg" -->
+      <!-- 01 -->
       <div class="pcard">
         <div class="pcard-img">
           <img src="bienestar.jpg" alt="Bienestar Interior"/>
           <div class="ph"><div class="ph-ico">🌿</div><div class="ph-lbl">bienestarinterior.netlify.app</div></div>
         </div>
         <div class="pcard-body">
-          <div class="pcard-num">01 — 07</div>
+          <div class="pcard-num">01 — 08</div>
           <span class="pcard-tag">SALUD &amp; BIENESTAR</span>
           <div class="pcard-name">BIENESTAR INTERIOR</div>
           <p class="pcard-desc">Landing de alta conversión con contador de urgencia, sticky CTA mobile e integración con Mercado Pago.</p>
@@ -429,29 +338,29 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
       </div>
 
-      <!-- 02 — src="" → reemplazá por "descarga.jpg" -->
+      <!-- 02 -->
       <div class="pcard">
         <div class="pcard-img">
           <img src="descarga.jpg" alt="Confirmación de Compra"/>
           <div class="ph"><div class="ph-ico">✅</div><div class="ph-lbl">github.io/Intestino-Descarga</div></div>
         </div>
         <div class="pcard-body">
-          <div class="pcard-num">02 — 07</div>
+          <div class="pcard-num">02 — 08</div>
           <span class="pcard-tag">POST-VENTA</span>
           <div class="pcard-name">CONFIRMACIÓN DE COMPRA</div>
           <p class="pcard-desc">Entrega automática de activo digital integrada como URL de retorno en Mercado Pago. Sin intervención manual.</p>
-          <a class="pcard-link" href="https://gastongarcia1295.github.io/ConfirmacionCompra-ExpCliente/" target="_blank" rel="noopener">VER PROYECTO →</a>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" rel="noopener">VER PROYECTO →</a>
         </div>
       </div>
 
-      <!-- 03 — src="" → reemplazá por "gestion.jpg" -->
+      <!-- 03 -->
       <div class="pcard">
         <div class="pcard-img">
           <img src="gestion.jpg" alt="Sistema de Gestión"/>
           <div class="ph"><div class="ph-ico">📊</div><div class="ph-lbl">github.io/Gestion-Ventas</div></div>
         </div>
         <div class="pcard-body">
-          <div class="pcard-num">03 — 07</div>
+          <div class="pcard-num">03 — 08</div>
           <span class="pcard-tag">ADMIN PANEL</span>
           <div class="pcard-name">SISTEMA DE GESTIÓN</div>
           <p class="pcard-desc">Panel administrativo con métricas en tiempo real, gráficos dinámicos y dashboard completo de seguimiento.</p>
@@ -459,14 +368,14 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
       </div>
 
-      <!-- 04 — src="" → reemplazá por "calculadora.jpg" -->
+      <!-- 04 -->
       <div class="pcard">
         <div class="pcard-img">
           <img src="calculadora.jpg" alt="Calculadora"/>
           <div class="ph"><div class="ph-ico">🧮</div><div class="ph-lbl">github.io/Calculadora-Presupuesto</div></div>
         </div>
         <div class="pcard-body">
-          <div class="pcard-num">04 — 07</div>
+          <div class="pcard-num">04 — 08</div>
           <span class="pcard-tag">HERRAMIENTA WEB</span>
           <div class="pcard-name">CALCULADORA DE PRESUPUESTO</div>
           <p class="pcard-desc">Cotizador interactivo con conversión ARS/USD en tiempo real y exportación a PDF con un clic.</p>
@@ -474,14 +383,14 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
       </div>
 
-      <!-- 05 — src="" → reemplazá por "magnolia.jpg" -->
+      <!-- 05 -->
       <div class="pcard">
         <div class="pcard-img">
           <img src="magnolia.jpg" alt="Magnolia Store"/>
           <div class="ph"><div class="ph-ico">👗</div><div class="ph-lbl">magnoliashop.netlify.app</div></div>
         </div>
         <div class="pcard-body">
-          <div class="pcard-num">05 — 07</div>
+          <div class="pcard-num">05 — 08</div>
           <span class="pcard-tag">E-COMMERCE</span>
           <div class="pcard-name">MAGNOLIA STORE</div>
           <p class="pcard-desc">Tienda premium con carrito funcional, galería con zoom, filtros por categoría y cuotas con Mercado Pago.</p>
@@ -489,14 +398,14 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
       </div>
 
-      <!-- 06 — src="" → reemplazá por "pulse.jpg" -->
+      <!-- 06 -->
       <div class="pcard">
         <div class="pcard-img">
           <img src="pulse.jpg" alt="Pulse Analytics"/>
           <div class="ph"><div class="ph-ico">📈</div><div class="ph-lbl">github.io/Dashboard-Analitico</div></div>
         </div>
         <div class="pcard-body">
-          <div class="pcard-num">06 — 07</div>
+          <div class="pcard-num">06 — 08</div>
           <span class="pcard-tag">ANALYTICS · SAAS</span>
           <div class="pcard-name">PULSE ANALYTICS</div>
           <p class="pcard-desc">Dashboard con 11 secciones, gráficos dinámicos, filtros por período y heatmap anual. Diseño SaaS profesional.</p>
@@ -504,18 +413,34 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
       </div>
 
-      <!-- 07 — src="" → reemplazá por "techstore.jpg" -->
+      <!-- 07 -->
       <div class="pcard">
         <div class="pcard-img">
           <img src="techstore.jpg" alt="Tech Store"/>
           <div class="ph"><div class="ph-ico">📱</div><div class="ph-lbl">github.io/Landing-TechStore</div></div>
         </div>
         <div class="pcard-body">
-          <div class="pcard-num">07 — 07</div>
+          <div class="pcard-num">07 — 08</div>
           <span class="pcard-tag">LANDING · APPLE</span>
           <div class="pcard-name">TECH STORE SHOP</div>
           <p class="pcard-desc">Landing premium para tienda de iPhones con partículas animadas, cursor personalizado y marquee infinito.</p>
           <a class="pcard-link" href="https://gastongarcia1295.github.io/Landing-TechStore/" target="_blank" rel="noopener">VER PROYECTO →</a>
+        </div>
+      </div>
+
+      <!-- 08 — MITURNO ⭐ -->
+      <div class="pcard miturno">
+        <div class="pcard-img">
+          <img src="miturno.jpg" alt="MiTurno"/>
+          <div class="ph"><div class="ph-ico">📅</div><div class="ph-lbl">miturno · sistema de turnos online</div></div>
+        </div>
+        <span class="pcard-new">★ NUEVO</span>
+        <div class="pcard-body">
+          <div class="pcard-num" style="color:var(--gold);opacity:.7;">08 — 08</div>
+          <span class="pcard-tag gold">SAAS · FULL STACK</span>
+          <div class="pcard-name gold">MITURNO</div>
+          <p class="pcard-desc">Sistema de reserva de turnos online con backend real. Calendario interactivo, pago de seña con Mercado Pago, emails automáticos y panel de administración. Node.js + MongoDB + Express.</p>
+          <a class="pcard-link gold" href="https://gastongarcia1295.github.io/MiTurno-Frontend/" target="_blank" rel="noopener">VER DEMO →</a>
         </div>
       </div>
 
@@ -526,10 +451,9 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
       <button class="cbtn" id="next">→</button>
     </div>
   </div>
-
+  <div class="chint" style="text-align:center;margin-top:4.8rem;font-family:var(--fm);font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white3);opacity:.38">RUEDA DEL MOUSE · FLECHAS DEL TECLADO · SWIPE</div>
 </section>
 
-<!-- SOBRE MÍ -->
 <section class="sec" id="sobre-mi">
   <div class="agrid">
     <div class="rv">
@@ -552,15 +476,12 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
   </div>
 </section>
 
-<!-- STACK -->
 <section class="sec" id="tecnologias">
   <div class="rv">
     <div class="ey">// HERRAMIENTAS</div>
     <h2 class="stitle">STACK <span class="ac">TÉCNICO</span></h2>
   </div>
-
   <div class="stack-cols rv d1">
-
     <div class="scol">
       <div class="scol-label">FUNDAMENTOS</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">HTML5</div></div>
@@ -568,64 +489,53 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">JAVASCRIPT</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">TYPESCRIPT</div></div>
     </div>
-
     <div class="scol">
       <div class="scol-label">FRAMEWORKS</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">REACT.JS</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NEXT.JS</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NODE.JS</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">EXPRESS</div></div>
     </div>
-
     <div class="scol">
       <div class="scol-label">ESTILOS</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">TAILWIND CSS</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">UI / UX DESIGN</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">CANVAS API</div></div>
     </div>
-
     <div class="scol">
       <div class="scol-label">ANIMACIONES</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">GSAP</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">CSS ANIMATIONS</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">THREE.JS</div></div>
     </div>
-
     <div class="scol">
       <div class="scol-label">PAGOS & APIs</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">MERCADO PAGO</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">APIs REST</div></div>
-      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">FETCH / AXIOS</div></div>
-      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">JSON</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">MONGODB</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NODEMAILER</div></div>
     </div>
-
     <div class="scol">
       <div class="scol-label">HERRAMIENTAS</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">GIT / GITHUB</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NETLIFY</div></div>
-      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">GH PAGES</div></div>
+      <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">RENDER</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">VS CODE</div></div>
     </div>
-
   </div>
 </section>
 
-<!-- CONTACTO -->
 <section id="contacto" class="sec">
   <div class="cta-glow"></div>
   <div class="cta-grid rv">
-
     <div class="cta-left">
       <div class="cta-eyebrow">// NUEVA OPORTUNIDAD</div>
       <h2 class="cta-h">ESCRIBIME<br>PARA<br><span class="ac">COMENZAR.</span></h2>
       <p class="cta-body">Si necesitás un <strong>Sitio Web</strong>, una <strong>Landing Page</strong>, una <strong>Aplicación Web</strong> o cualquier solución digital — escribime. <strong>Respondo en menos de 24hs.</strong></p>
     </div>
-
     <div class="cta-right rv d1">
-
-      <!-- GMAIL -->
       <a class="cta-card" href="mailto:gastongarcia1295@gmail.com">
         <div class="cta-card-ico">
-          <!-- Gmail SVG -->
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" stroke="rgba(79,140,255,.5)" stroke-width="1.5"/>
             <path d="M2 6l10 7 10-7" stroke="#4f8cff" stroke-width="1.5" stroke-linecap="round"/>
@@ -638,11 +548,8 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="cta-card-arr">↗</div>
       </a>
-
-      <!-- WHATSAPP compact row -->
-      <a class="cta-card wa" href="https://wa.me/5491100000000?text=Hola%20Gast%C3%B3n%2C%20quisiera%20conversar%20para%20iniciar%20un%20proyecto" target="_blank" rel="noopener">
+      <a class="cta-card wa" href="https://wa.me/5491168087692?text=Hola%20Gast%C3%B3n%2C%20quisiera%20conversar%20para%20iniciar%20un%20proyecto" target="_blank" rel="noopener">
         <div class="cta-card-ico">
-          <!-- WhatsApp SVG official shape -->
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 1.89.527 3.66 1.445 5.168L2 22l4.978-1.418A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="rgba(0,229,160,.15)" stroke="#00e5a0" stroke-width="1.2"/>
             <path d="M8.5 8.5c.2-.5.7-.8 1.1-.7l.8.1c.3.1.5.3.6.6l.5 1.3c.1.3 0 .6-.2.8l-.4.5c.5 1 1.4 1.9 2.4 2.4l.5-.4c.2-.2.5-.3.8-.2l1.3.5c.3.1.5.3.6.6l.1.8c.1.4-.2.9-.7 1.1C13 16.8 8 13.5 8.5 8.5z" fill="#00e5a0"/>
@@ -654,7 +561,6 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="cta-card-arr">↗</div>
       </a>
-
     </div>
   </div>
 </section>
@@ -665,7 +571,6 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
 </footer>
 
 <script>
-// ── CURSOR
 const curEl=document.getElementById('cur'),ringEl=document.getElementById('cur-r');
 let rx=0,ry=0,cx=window.innerWidth/2,cy=window.innerHeight/2;
 document.addEventListener('mousemove',e=>{
@@ -675,110 +580,42 @@ document.addEventListener('mousemove',e=>{
 },{passive:true});
 (function loop(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;ringEl.style.left=rx+'px';ringEl.style.top=ry+'px';requestAnimationFrame(loop)})();
 
-// ── NAV
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>50),{passive:true});
 
-// ── CANVAS — dark bg + IT objects
 (function(){
   const c=document.getElementById('bgc'),ctx=c.getContext('2d');
   let W,H;
-  const SYM=[
-    '</>','{ }','[ ]','()=>','//',
-    '&&','||','===','!==','??','++','--',
-    'npm','git','API','SSH','CLI','ENV',
-    'fn()','var','const','let','return','void',
-    'async','await','import','export','class','extends',
-    '.map()','filter()','reduce()','fetch()','JSON',
-    '#!','<div>','<html>','</head>','<br/>','<span>',
-    '01','10','11','00','101','110','0xff',
-    'px','rem','vw','vh','%','em',
-    '*.js','*.ts','*.jsx','*.css','*.html','*.json',
-    'push()','pop()','shift()','sort()','find()','slice()',
-    'true','false','null','undefined','NaN','Infinity',
-    'HTTP','GET','POST','PUT','DELETE','PATCH',
-    '200','404','500','301','401','403','429',
-    'JWT','OAuth','API','REST','JSON','XML','SQL',
-    '{}','[]','()','<>','=>','::',':',';',
-    'DB','ORM','.env','CI/CD','Docker','Linux',
-    'v1.0','main','HEAD','MERGE','PULL','COMMIT','PUSH',
-    'React','Next','Node','TS','JS','CSS','HTML',
-    'if()','else','for','while','try','catch','throw',
-  ];
-  const COLS=[
-    [79,140,255],[0,229,160],[255,225,86],
-    [255,79,31],[167,139,250],[232,228,221],
-    [56,189,248],[244,167,0],
-  ];
-
+  const SYM=['</>','{ }','[ ]','()=>','//','&&','||','===','!==','??','++','--','npm','git','API','SSH','CLI','ENV','fn()','var','const','let','return','void','async','await','import','export','class','extends','.map()','filter()','reduce()','fetch()','JSON','#!','<div>','<html>','</head>','<br/>','<span>','01','10','11','00','101','110','0xff','px','rem','vw','vh','%','em','*.js','*.ts','*.jsx','*.css','*.html','*.json','push()','pop()','shift()','sort()','find()','slice()','true','false','null','undefined','NaN','Infinity','HTTP','GET','POST','PUT','DELETE','PATCH','200','404','500','301','401','403','429','JWT','OAuth','API','REST','JSON','XML','SQL','{}','[]','()','<>','=>','::',':',';','DB','ORM','.env','CI/CD','Docker','Linux','v1.0','main','HEAD','MERGE','PULL','COMMIT','PUSH','React','Next','Node','TS','JS','CSS','HTML','if()','else','for','while','try','catch','throw'];
+  const COLS=[[79,140,255],[0,229,160],[255,225,86],[255,79,31],[167,139,250],[232,228,221],[56,189,248],[244,167,0]];
   function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
   resize();
   window.addEventListener('resize',resize,{passive:true});
-
-  function mkSym(){
-    const col=COLS[Math.floor(Math.random()*COLS.length)];
-    return{
-      x:Math.random()*W, y:Math.random()*H,
-      vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.22,
-      sym:SYM[Math.floor(Math.random()*SYM.length)],
-      size:Math.random()*5+7,
-      op:Math.random()*.09+.03,
-      rot:Math.random()*Math.PI*2,
-      rv:(Math.random()-.5)*.002,
-      col, isDot:false
-    };
-  }
-  function mkDot(){
-    const col=COLS[Math.floor(Math.random()*COLS.length)];
-    return{
-      x:Math.random()*W, y:Math.random()*H,
-      vx:(Math.random()-.5)*.12, vy:(Math.random()-.5)*.1,
-      size:Math.random()*1.4+.4,
-      op:Math.random()*.07+.025,
-      col, isDot:true,
-      rot:0,rv:0,sym:''
-    };
-  }
-
+  function mkSym(){const col=COLS[Math.floor(Math.random()*COLS.length)];return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.22,sym:SYM[Math.floor(Math.random()*SYM.length)],size:Math.random()*5+7,op:Math.random()*.09+.03,rot:Math.random()*Math.PI*2,rv:(Math.random()-.5)*.002,col,isDot:false}}
+  function mkDot(){const col=COLS[Math.floor(Math.random()*COLS.length)];return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.1,size:Math.random()*1.4+.4,op:Math.random()*.07+.025,col,isDot:true,rot:0,rv:0,sym:''}}
   const pts=[];
-  for(let i=0;i<110;i++)pts.push(mkSym()); // more symbols
-  for(let i=0;i<80;i++)pts.push(mkDot());  // more dots
-
+  for(let i=0;i<110;i++)pts.push(mkSym());
+  for(let i=0;i<80;i++)pts.push(mkDot());
   function draw(){
     ctx.clearRect(0,0,W,H);
     pts.forEach(o=>{
-      const[r,g,b]=o.col;
-      ctx.save();
-      if(o.isDot){
-        ctx.globalAlpha=o.op;
-        ctx.fillStyle=`rgba(${r},${g},${b},1)`;
-        ctx.beginPath();ctx.arc(o.x,o.y,o.size,0,Math.PI*2);ctx.fill();
-      } else {
-        ctx.translate(o.x,o.y);ctx.rotate(o.rot);
-        ctx.globalAlpha=o.op;
-        ctx.font=`700 ${o.size}px "Space Mono",monospace`;
-        ctx.fillStyle=`rgba(${r},${g},${b},1)`;
-        ctx.fillText(o.sym,0,0);
-        o.rot+=o.rv;
-      }
+      const[r,g,b]=o.col;ctx.save();
+      if(o.isDot){ctx.globalAlpha=o.op;ctx.fillStyle=`rgba(${r},${g},${b},1)`;ctx.beginPath();ctx.arc(o.x,o.y,o.size,0,Math.PI*2);ctx.fill();}
+      else{ctx.translate(o.x,o.y);ctx.rotate(o.rot);ctx.globalAlpha=o.op;ctx.font=`700 ${o.size}px "Space Mono",monospace`;ctx.fillStyle=`rgba(${r},${g},${b},1)`;ctx.fillText(o.sym,0,0);o.rot+=o.rv;}
       ctx.restore();
-      o.x+=o.vx; o.y+=o.vy;
-      if(o.x<-120)o.x=W+60; if(o.x>W+120)o.x=-60;
-      if(o.y<-50)o.y=H+25;  if(o.y>H+50)o.y=-25;
+      o.x+=o.vx;o.y+=o.vy;
+      if(o.x<-120)o.x=W+60;if(o.x>W+120)o.x=-60;
+      if(o.y<-50)o.y=H+25;if(o.y>H+50)o.y=-25;
     });
     requestAnimationFrame(draw);
   }
   draw();
 })();
 
-// ── REVEAL
 const rvEls=document.querySelectorAll('.rv');
-const rvo=new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvo.unobserve(e.target)}});
-},{threshold:0.06,rootMargin:'0px 0px -60px 0px'});
+const rvo=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvo.unobserve(e.target)}});},{threshold:0.06,rootMargin:'0px 0px -60px 0px'});
 rvEls.forEach(el=>rvo.observe(el));
 
-// ── 3D CAROUSEL — snappy
 (function(){
   const scene=document.getElementById('scene');
   const faces=[...scene.querySelectorAll('.pcard')];
@@ -786,16 +623,15 @@ rvEls.forEach(el=>rvo.observe(el));
   const dotsEl=document.getElementById('dots');
   let cur=0;
   const R=305;
-
   faces.forEach((_,i)=>{
     const d=document.createElement('button');
     d.className='cdot'+(i===0?' on':'');
+    if(i===N-1)d.classList.add('gold-dot-target');
     d.setAttribute('aria-label','Proyecto '+(i+1));
     d.addEventListener('click',()=>go(i));
     dotsEl.appendChild(d);
   });
   const dots=[...dotsEl.querySelectorAll('.cdot')];
-
   function go(idx){
     cur=((idx%N)+N)%N;
     const step=360/N;
@@ -813,13 +649,14 @@ rvEls.forEach(el=>rvo.observe(el));
       f.style.pointerEvents=norm>.76?'auto':'none';
       f.style.zIndex=Math.round(norm*100);
     });
-    dots.forEach((d,i)=>d.classList.toggle('on',i===cur));
+    dots.forEach((d,i)=>{
+      d.classList.toggle('on',i===cur);
+      if(i===N-1)d.classList.toggle('gold',i===cur);
+    });
   }
   go(0);
-
   document.getElementById('next').addEventListener('click',()=>go(cur+1));
   document.getElementById('prev').addEventListener('click',()=>go(cur-1));
-
   let wlock=false;
   const cw=document.querySelector('.car-outer');
   cw.addEventListener('wheel',e=>{
@@ -829,67 +666,37 @@ rvEls.forEach(el=>rvo.observe(el));
     e.deltaY>0?go(cur+1):go(cur-1);
     setTimeout(()=>wlock=false,460);
   },{passive:false});
-
   window.addEventListener('keydown',e=>{
     if(['ArrowRight','ArrowDown'].includes(e.key))go(cur+1);
     if(['ArrowLeft','ArrowUp'].includes(e.key))go(cur-1);
   });
-
   let tx=0;
   cw.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
-  cw.addEventListener('touchend',e=>{
-    const dx=e.changedTouches[0].clientX-tx;
-    if(Math.abs(dx)>30)dx<0?go(cur+1):go(cur-1);
-  },{passive:true});
+  cw.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>30)dx<0?go(cur+1):go(cur-1);},{passive:true});
 })();
 
-// ── TYPEWRITER — DIGITALES (loop infinito)
 (function(){
-  const el   = document.getElementById('typeword');
-  const cur  = document.getElementById('typecursor');
-  const word = 'DIGITALES';
-
-  // Siempre render: texto + cursor parpadeante al final
-  function render(text){
-    el.textContent = text;
-    el.appendChild(cur);
-  }
-
+  const el=document.getElementById('typeword');
+  const cur=document.getElementById('typecursor');
+  const word='DIGITALES';
+  function render(text){el.textContent=text;el.appendChild(cur);}
   function loop(){
-    let i = 0;
-    // ESCRIBIR
+    let i=0;
     (function type(){
-      render(word.slice(0, i));
-      if(i < word.length){
-        i++;
-        setTimeout(type, i === 1 ? 300 : 72);
-      } else {
-        // pausa con texto completo, luego borrar
-        setTimeout(erase, 2600);
-      }
+      render(word.slice(0,i));
+      if(i<word.length){i++;setTimeout(type,i===1?300:72);}
+      else{setTimeout(erase,2600);}
     })();
-
-    // BORRAR
     function erase(){
       (function del(){
-        render(word.slice(0, i));
-        if(i > 0){
-          i--;
-          setTimeout(del, 42);
-        } else {
-          // pausa vacío, luego volver a escribir
-          setTimeout(loop, 500);
-        }
+        render(word.slice(0,i));
+        if(i>0){i--;setTimeout(del,42);}
+        else{setTimeout(loop,500);}
       })();
     }
   }
-
-  // Arrancar después de que termina la animación del hero
-  setTimeout(loop, 950);
+  setTimeout(loop,950);
 })();
-
-// Formato: 54 (Argentina) + código de área sin 0 + número sin 15
-// Ejemplo Castelar: 54 11 XXXX-XXXX → 5411XXXXXXXX
 </script>
 </body>
 </html>
