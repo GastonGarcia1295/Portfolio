@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -42,6 +43,7 @@ body{background:var(--bg);color:var(--white);font-family:var(--f);font-weight:40
 
 #bgc{position:fixed;inset:0;z-index:0;pointer-events:none}
 
+/* ── NAV ─────────────────────────────────────── */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;transition:background .3s,box-shadow .3s}
 nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 1px 0 var(--border)}
 .logo{font-family:var(--fm);font-weight:700;font-size:.85rem;letter-spacing:.06em;color:var(--white);text-decoration:none;text-transform:uppercase}
@@ -49,9 +51,32 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{font-family:var(--fm);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white2);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--white)}
+
+/* nav actions wrapper */
+.nav-actions{display:flex;align-items:center;gap:.65rem}
+
+/* ── LANG SWITCHER ───────────────────────────── */
+.lang-sw{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:3px}
+.lang-btn{font-family:var(--fm);font-size:.52rem;font-weight:700;letter-spacing:.09em;padding:5px 9px;border-radius:3px;border:none;cursor:none;transition:background .18s,color .18s;color:rgba(232,228,221,.3);background:transparent;line-height:1}
+.lang-btn.on{background:rgba(255,255,255,.1);color:var(--white)}
+.lang-btn:hover:not(.on){color:rgba(232,228,221,.7)}
+
+/* ── PDF BUTTON ──────────────────────────────── */
+.btn-pdf{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;border-radius:4px;border:1px solid rgba(232,228,221,.16);background:transparent;color:var(--white);cursor:none;transition:border-color .2s,background .2s,transform .15s;white-space:nowrap;line-height:1}
+.btn-pdf svg{width:12px;height:12px;flex-shrink:0;transition:transform .2s}
+.btn-pdf:hover{border-color:rgba(232,228,221,.35);background:rgba(232,228,221,.05);transform:translateY(-1px)}
+.btn-pdf:hover svg{transform:translateY(1px)}
+.btn-pdf:active{transform:translateY(0)}
+.btn-pdf.loading{opacity:.5;pointer-events:none}
+.btn-pdf .spin{display:none;width:11px;height:11px;border:1.5px solid rgba(255,255,255,.18);border-top-color:#fff;border-radius:50%;animation:pdf-spin .65s linear infinite;flex-shrink:0}
+.btn-pdf.loading .spin{display:block}
+.btn-pdf.loading svg{display:none}
+@keyframes pdf-spin{to{transform:rotate(360deg)}}
+
 .nav-btn{font-family:var(--fm);font-size:.57rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;background:var(--accent);border:none;padding:.48rem 1.3rem;border-radius:3px;text-decoration:none;cursor:none;transition:background .2s,transform .15s}
 .nav-btn:hover{background:#6fa3ff;transform:scale(.97)}
 
+/* ── HERO ────────────────────────────────────── */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;z-index:1;overflow:hidden}
 .hero-ey{font-family:var(--fm);font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem;opacity:0;animation:up .7s .05s ease forwards}
 .hero-ey::before{content:'//';opacity:.4;margin-right:.1rem}
@@ -85,6 +110,7 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 @keyframes fi{from{opacity:0}to{opacity:1}}
 @keyframes sp{0%,100%{opacity:.18}50%{opacity:.65}}
 
+/* ── MARQUEE ─────────────────────────────────── */
 .mwrap{position:relative;z-index:2;overflow:hidden;background:var(--surface);padding:.72rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .mtrack{display:flex;width:max-content;animation:mq 15s linear infinite}
 .mtrack:hover{animation-play-state:paused}
@@ -93,66 +119,35 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .mitem::after{content:'✦';font-size:.4rem;opacity:.3}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
+/* ── SECTIONS ────────────────────────────────── */
 .sec{position:relative;z-index:2;padding:6.5rem 3rem}
 .ey{font-family:var(--fm);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;opacity:.7}
 .stitle{font-family:var(--fc);font-weight:900;font-size:clamp(2.4rem,5vw,4.5rem);letter-spacing:-.01em;line-height:.88;text-transform:uppercase;color:var(--white)}
 .stitle .ac{color:var(--accent)}
 .stitle .out{-webkit-text-stroke:1.2px rgba(232,228,221,.35);color:transparent}
 
+/* ── PROYECTOS ───────────────────────────────── */
 #proyectos{border-top:1px solid var(--border)}
 .phead{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3.5rem;flex-wrap:wrap;gap:1rem}
-
-/* CAROUSEL */
 .car-outer{position:relative;height:360px;display:flex;align-items:center;justify-content:center;perspective:1300px;overflow:visible;margin:0 -3rem;padding:0 3rem}
 .car-scene{position:relative;width:220px;height:300px;transform-style:preserve-3d}
 .pcard{position:absolute;inset:0;background:var(--surface);border:1px solid var(--border2);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;backface-visibility:hidden;text-decoration:none;color:inherit;cursor:none;transition:box-shadow .35s,border-color .35s}
 .pcard:hover{box-shadow:0 6px 32px rgba(79,140,255,.12);border-color:rgba(79,140,255,.28)}
-
-/* MITURNO — card especial dorada */
 .pcard.miturno{border-color:rgba(245,200,66,.25)}
-.pcard.miturno:hover{
-  border-color:var(--gold);
-  box-shadow:0 0 0 1px var(--gold),0 0 24px rgba(245,200,66,.35),0 0 60px rgba(245,200,66,.15);
-}
-
-/* efecto shimmer dorado al hacer hover */
-.pcard.miturno::before{
-  content:'';
-  position:absolute;inset:0;z-index:10;pointer-events:none;
-  background:linear-gradient(105deg,transparent 40%,rgba(245,200,66,.12) 50%,transparent 60%);
-  background-size:200% 100%;
-  background-position:200% 0;
-  transition:background-position .6s ease;
-  border-radius:8px;
-}
+.pcard.miturno:hover{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 0 24px rgba(245,200,66,.35),0 0 60px rgba(245,200,66,.15)}
+.pcard.miturno::before{content:'';position:absolute;inset:0;z-index:10;pointer-events:none;background:linear-gradient(105deg,transparent 40%,rgba(245,200,66,.12) 50%,transparent 60%);background-size:200% 100%;background-position:200% 0;transition:background-position .6s ease;border-radius:8px}
 .pcard.miturno:hover::before{background-position:-200% 0}
-
-/* pulso dorado en reposo */
-@keyframes goldPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(245,200,66,0),0 0 0 1px rgba(245,200,66,.18)}
-  50%{box-shadow:0 0 16px 4px rgba(245,200,66,.18),0 0 0 1px rgba(245,200,66,.35)}
-}
+@keyframes goldPulse{0%,100%{box-shadow:0 0 0 0 rgba(245,200,66,0),0 0 0 1px rgba(245,200,66,.18)}50%{box-shadow:0 0 16px 4px rgba(245,200,66,.18),0 0 0 1px rgba(245,200,66,.35)}}
 .pcard.miturno{animation:goldPulse 3s ease-in-out infinite}
 .pcard.miturno:hover{animation:none}
-
 .pcard-img{height:118px;flex-shrink:0;background:var(--surface2);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
 .pcard-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .45s ease;position:relative;z-index:2}
 .pcard:hover .pcard-img img{transform:scale(1.06)}
 .pcard-img .ph{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.32rem;background:linear-gradient(135deg,var(--surface2) 0%,var(--bg2) 100%)}
 .ph-ico{font-size:1.7rem;opacity:.2}
 .ph-lbl{font-family:var(--fm);font-size:.4rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white2);opacity:.35}
-
-/* badge NUEVO en card MiTurno */
-.pcard-new{
-  position:absolute;top:8px;right:8px;z-index:20;
-  background:var(--gold);color:#000;
-  font-family:var(--fm);font-size:.38rem;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;
-  padding:.18rem .6rem;border-radius:2px;
-  animation:badgeBlink 2s ease-in-out infinite;
-}
+.pcard-new{position:absolute;top:8px;right:8px;z-index:20;background:var(--gold);color:#000;font-family:var(--fm);font-size:.38rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.18rem .6rem;border-radius:2px;animation:badgeBlink 2s ease-in-out infinite}
 @keyframes badgeBlink{0%,100%{opacity:1}50%{opacity:.65}}
-
 .pcard-body{padding:.95rem .9rem;display:flex;flex-direction:column;gap:.42rem;flex:1}
 .pcard-num{font-family:var(--fm);font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white3)}
 .pcard-tag{font-family:var(--fm);font-size:.44rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(79,140,255,.2);border-radius:2px;padding:.1rem .48rem;width:fit-content}
@@ -163,7 +158,6 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .pcard-link{font-family:var(--fm);font-size:.48rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:.33rem;margin-top:auto;transition:gap .18s}
 .pcard-link.gold{color:var(--gold)}
 .pcard-link:hover{gap:.58rem}
-
 .cnav{position:absolute;bottom:-3rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:1rem}
 .cbtn{width:36px;height:36px;border-radius:3px;border:1px solid var(--border2);background:transparent;color:var(--white2);cursor:none;font-family:var(--fm);font-size:.82rem;display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s,background .18s}
 .cbtn:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,140,255,.06)}
@@ -172,6 +166,7 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .cdot.on{background:var(--accent);border-color:var(--accent);transform:scale(1.5)}
 .cdot.gold{background:var(--gold)!important;border-color:var(--gold)!important}
 
+/* ── SOBRE MÍ ────────────────────────────────── */
 #sobre-mi{border-top:1px solid var(--border)}
 .agrid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
 .acopy p{font-size:.88rem;color:var(--white2);line-height:1.88;font-weight:300;margin-bottom:1.2rem}
@@ -183,6 +178,7 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .avt{font-family:var(--fc);font-weight:700;font-size:.85rem;letter-spacing:.01em;text-transform:uppercase;color:var(--white);margin-bottom:.22rem}
 .avx{font-size:.7rem;color:var(--white2);line-height:1.6;font-weight:300}
 
+/* ── TECNOLOGÍAS ─────────────────────────────── */
 #tecnologias{border-top:1px solid var(--border);background:transparent}
 .stack-cols{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;margin-top:3rem;background:var(--border2);border:1px solid var(--border2);border-radius:6px;overflow:hidden}
 .scol{background:var(--bg);padding:1.6rem 1.2rem;display:flex;flex-direction:column;gap:.5rem}
@@ -193,6 +189,7 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .sitem:hover .sitem-dot{background:var(--accent)}
 .sitem-name{font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:1}
 
+/* ── CONTACTO ────────────────────────────────── */
 #contacto{padding:7rem 3rem 5rem;border-top:1px solid var(--border);position:relative;z-index:2;overflow:hidden}
 .cta-glow{position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);width:70vw;height:50vw;background:radial-gradient(ellipse,rgba(79,140,255,.1) 0%,transparent 68%);pointer-events:none}
 .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
@@ -222,18 +219,24 @@ nav.solid{background:rgba(13,13,18,.93);backdrop-filter:blur(22px);box-shadow:0 
 .cta-card.wa .cta-card-title{color:var(--green)}
 .cta-card.wa .cta-card-label{color:var(--green);opacity:.6}
 
+/* ── FOOTER ──────────────────────────────────── */
 footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;position:relative;z-index:2;background:var(--bg2)}
 .fc{font-family:var(--fm);font-size:.48rem;letter-spacing:.07em;text-transform:uppercase;color:var(--white3);opacity:.45}
 .fb{display:flex;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);border:1px solid rgba(0,229,160,.18);border-radius:2px;padding:.25rem .72rem}
 .fbd{width:5px;height:5px;border-radius:50%;background:var(--green);animation:bl 2.5s ease-in-out infinite}
 @keyframes bl{0%,100%{opacity:1}50%{opacity:.08}}
 
+/* ── REVEAL ──────────────────────────────────── */
 .rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.22,.68,0,1),transform .8s cubic-bezier(.22,.68,0,1)}
 .rv.in{opacity:1;transform:translateY(0)}
 .rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.38s}
 
+/* ── RESPONSIVE ──────────────────────────────── */
 @media(max-width:860px){
   nav{padding:1rem 1.5rem}.nav-links{display:none}
+  .nav-actions{gap:.4rem}
+  .btn-pdf span{display:none}
+  .btn-pdf{padding:7px 9px}
   .hero{padding:0 1.5rem 4rem}
   .hero-h1{font-size:clamp(2.6rem,9vw,4.8rem)}
   .hero-body{flex-direction:column;align-items:flex-start}
@@ -255,68 +258,98 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
 <div id="cur-r"></div>
 <canvas id="bgc"></canvas>
 
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
 <nav id="nav">
   <a class="logo" href="#">GG<span>.</span>DEV</a>
   <ul class="nav-links">
-    <li><a href="#proyectos">PROYECTOS</a></li>
-    <li><a href="#sobre-mi">SOBRE MÍ</a></li>
-    <li><a href="#tecnologias">STACK</a></li>
-    <li><a href="#contacto">CONTACTO</a></li>
+    <li><a href="#proyectos" data-i="nav-proj">PROYECTOS</a></li>
+    <li><a href="#sobre-mi"  data-i="nav-about">SOBRE MÍ</a></li>
+    <li><a href="#tecnologias" data-i="nav-stack">STACK</a></li>
+    <li><a href="#contacto"  data-i="nav-contact">CONTACTO</a></li>
   </ul>
-  <a class="nav-btn" href="#contacto">CONTACTO →</a>
+  <div class="nav-actions">
+
+    <!-- LANG SWITCHER -->
+    <div class="lang-sw" role="group" aria-label="Idioma / Language">
+      <button class="lang-btn on" data-lang="es" onclick="setLang('es')" aria-pressed="true">ES</button>
+      <button class="lang-btn"    data-lang="en" onclick="setLang('en')" aria-pressed="false">EN</button>
+    </div>
+
+    <!-- PDF DOWNLOAD -->
+    <button class="btn-pdf" id="btn-pdf" onclick="downloadPDF()" aria-label="Descargar CV en PDF">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      <div class="spin"></div>
+      <span data-i="pdf-btn">DESCARGAR CV</span>
+    </button>
+
+    <a class="nav-btn" href="#contacto" data-i="nav-cta">CONTACTO →</a>
+  </div>
 </nav>
 
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
 <section class="hero" id="home">
-  <div class="hero-ey">GASTÓN GARCÍA — BUENOS AIRES, ARGENTINA</div>
+  <div class="hero-ey" data-i="hero-tag">GASTÓN GARCÍA — BUENOS AIRES, ARGENTINA</div>
   <h1 class="hero-h1">
-    <span class="ac">DESARROLLO</span><br>
-    <span class="out">EXPERIENCIAS</span><br>
+    <span class="ac" data-i="hero-l1">DESARROLLO</span><br>
+    <span class="out" data-i="hero-l2">EXPERIENCIAS</span><br>
     <span id="typeword"><span id="typecursor" style="display:inline-block;width:2px;height:.85em;background:var(--white);margin-left:1px;vertical-align:middle;animation:blink-cur .75s step-end infinite"></span></span>.
   </h1>
   <div class="hero-body">
     <div class="hero-desc">
-      <p>Soy <strong>Gastón García, Desarrollador Web</strong>. Diseño y desarrollo experiencias de alto impacto, desde <strong>Landing Pages que convierten</strong> y <strong>Dashboards analíticos</strong> hasta <strong>Aplicaciones Web interactivas</strong> con integración de pagos real.</p>
-      <p>Código 100% propio, sin templates ni soluciones a medias.</p>
+      <p data-i="hero-p1">Soy <strong>Gastón García, Desarrollador Web</strong>. Diseño y desarrollo experiencias de alto impacto, desde <strong>Landing Pages que convierten</strong> y <strong>Dashboards analíticos</strong> hasta <strong>Aplicaciones Web interactivas</strong> con integración de pagos real.</p>
+      <p data-i="hero-p2">Código 100% propio, sin templates ni soluciones a medias.</p>
     </div>
     <a class="avail-badge" href="#contacto">
       <div class="avail-dot"></div>
-      <span class="avail-text">DISPONIBLE PARA NUEVOS PROYECTOS</span>
+      <span class="avail-text" data-i="hero-avail">DISPONIBLE PARA NUEVOS PROYECTOS</span>
     </a>
   </div>
   <div class="hero-bot">
     <div class="hstats">
-      <div><div class="sn">8+</div><div class="sl">PROYECTOS</div></div>
-      <div><div class="sn">100%</div><div class="sl">CÓDIGO PROPIO</div></div>
+      <div><div class="sn">8+</div><div class="sl" data-i="stat-proj">PROYECTOS</div></div>
+      <div><div class="sn">100%</div><div class="sl" data-i="stat-code">CÓDIGO PROPIO</div></div>
       <div><div class="sn">MP</div><div class="sl">MERCADO PAGO</div></div>
     </div>
     <div class="hacts">
-      <a class="bp" href="#proyectos">VER PROYECTOS →</a>
-      <a class="bg" href="#contacto">HABLEMOS</a>
+      <a class="bp" href="#proyectos" data-i="cta-ver">VER PROYECTOS →</a>
+      <a class="bg" href="#contacto"  data-i="cta-talk">HABLEMOS</a>
     </div>
   </div>
-  <div class="shi"><span>SCROLL</span><div class="shline"></div></div>
+  <div class="shi"><span data-i="scroll-hint">SCROLL</span><div class="shline"></div></div>
 </section>
 
+<!-- MARQUEE -->
 <div class="mwrap">
   <div class="mtrack">
-    <span class="mitem">LANDING PAGES</span><span class="mitem hi">MERCADO PAGO</span>
-    <span class="mitem">REACT &amp; NEXT.JS</span><span class="mitem">E-COMMERCE</span>
-    <span class="mitem hi">APLICACIONES WEB</span><span class="mitem">DASHBOARDS</span>
-    <span class="mitem">UI · UX DESIGN</span><span class="mitem hi">GSAP ANIMATIONS</span>
+    <span class="mitem" data-i="mq-1">LANDING PAGES</span><span class="mitem hi">MERCADO PAGO</span>
+    <span class="mitem" data-i="mq-2">REACT &amp; NEXT.JS</span><span class="mitem" data-i="mq-3">E-COMMERCE</span>
+    <span class="mitem hi" data-i="mq-4">APLICACIONES WEB</span><span class="mitem" data-i="mq-5">DASHBOARDS</span>
+    <span class="mitem" data-i="mq-6">UI · UX DESIGN</span><span class="mitem hi">GSAP ANIMATIONS</span>
     <span class="mitem">TYPESCRIPT</span><span class="mitem hi">NODE.JS</span>
-    <span class="mitem">LANDING PAGES</span><span class="mitem hi">MERCADO PAGO</span>
-    <span class="mitem">REACT &amp; NEXT.JS</span><span class="mitem">E-COMMERCE</span>
-    <span class="mitem hi">APLICACIONES WEB</span><span class="mitem">DASHBOARDS</span>
-    <span class="mitem">UI · UX DESIGN</span><span class="mitem hi">GSAP ANIMATIONS</span>
+    <span class="mitem" data-i="mq-1b">LANDING PAGES</span><span class="mitem hi">MERCADO PAGO</span>
+    <span class="mitem" data-i="mq-2b">REACT &amp; NEXT.JS</span><span class="mitem" data-i="mq-3b">E-COMMERCE</span>
+    <span class="mitem hi" data-i="mq-4b">APLICACIONES WEB</span><span class="mitem" data-i="mq-5b">DASHBOARDS</span>
+    <span class="mitem" data-i="mq-6b">UI · UX DESIGN</span><span class="mitem hi">GSAP ANIMATIONS</span>
     <span class="mitem">TYPESCRIPT</span><span class="mitem hi">NODE.JS</span>
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     PROYECTOS
+═══════════════════════════════════════════ -->
 <section class="sec" id="proyectos">
   <div class="phead rv">
     <div>
-      <div class="ey">// TRABAJO SELECCIONADO</div>
-      <h2 class="stitle">PRO<span class="ac">YECTOS.</span></h2>
+      <div class="ey" data-i="sec-work-ey">// TRABAJO SELECCIONADO</div>
+      <h2 class="stitle">PRO<span class="ac" data-i="sec-work-h">YECTOS.</span></h2>
     </div>
   </div>
 
@@ -331,10 +364,10 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="pcard-body">
           <div class="pcard-num">01 — 08</div>
-          <span class="pcard-tag">SALUD &amp; BIENESTAR</span>
-          <div class="pcard-name">BIENESTAR INTERIOR</div>
-          <p class="pcard-desc">Landing de alta conversión con contador de urgencia, sticky CTA mobile e integración con Mercado Pago.</p>
-          <a class="pcard-link" href="https://bienestarinterior.netlify.app" target="_blank" rel="noopener">VER PROYECTO →</a>
+          <span class="pcard-tag" data-i="p1-tag">SALUD &amp; BIENESTAR</span>
+          <div class="pcard-name" data-i="p1-name">BIENESTAR INTERIOR</div>
+          <p class="pcard-desc" data-i="p1-desc">Landing de alta conversión con contador de urgencia, sticky CTA mobile e integración con Mercado Pago.</p>
+          <a class="pcard-link" href="https://bienestarinterior.netlify.app" target="_blank" rel="noopener" data-i="cta-proj">VER PROYECTO →</a>
         </div>
       </div>
 
@@ -346,10 +379,10 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="pcard-body">
           <div class="pcard-num">02 — 08</div>
-          <span class="pcard-tag">POST-VENTA</span>
-          <div class="pcard-name">CONFIRMACIÓN DE COMPRA</div>
-          <p class="pcard-desc">Entrega automática de activo digital integrada como URL de retorno en Mercado Pago. Sin intervención manual.</p>
-          <a class="pcard-link" href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" rel="noopener">VER PROYECTO →</a>
+          <span class="pcard-tag" data-i="p2-tag">POST-VENTA</span>
+          <div class="pcard-name" data-i="p2-name">CONFIRMACIÓN DE COMPRA</div>
+          <p class="pcard-desc" data-i="p2-desc">Entrega automática de activo digital integrada como URL de retorno en Mercado Pago. Sin intervención manual.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Intestino-Descarga/" target="_blank" rel="noopener" data-i="cta-proj">VER PROYECTO →</a>
         </div>
       </div>
 
@@ -361,10 +394,10 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="pcard-body">
           <div class="pcard-num">03 — 08</div>
-          <span class="pcard-tag">ADMIN PANEL</span>
-          <div class="pcard-name">SISTEMA DE GESTIÓN</div>
-          <p class="pcard-desc">Panel administrativo con métricas en tiempo real, gráficos dinámicos y dashboard completo de seguimiento.</p>
-          <a class="pcard-link" href="https://gastongarcia1295.github.io/Gestion-Ventas/" target="_blank" rel="noopener">VER PROYECTO →</a>
+          <span class="pcard-tag" data-i="p3-tag">ADMIN PANEL</span>
+          <div class="pcard-name" data-i="p3-name">SISTEMA DE GESTIÓN</div>
+          <p class="pcard-desc" data-i="p3-desc">Panel administrativo con métricas en tiempo real, gráficos dinámicos y dashboard completo de seguimiento.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Gestion-Ventas/" target="_blank" rel="noopener" data-i="cta-proj">VER PROYECTO →</a>
         </div>
       </div>
 
@@ -376,10 +409,10 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="pcard-body">
           <div class="pcard-num">04 — 08</div>
-          <span class="pcard-tag">HERRAMIENTA WEB</span>
-          <div class="pcard-name">CALCULADORA DE PRESUPUESTO</div>
-          <p class="pcard-desc">Cotizador interactivo con conversión ARS/USD en tiempo real y exportación a PDF con un clic.</p>
-          <a class="pcard-link" href="https://gastongarcia1295.github.io/Calculadora-Presupuesto/" target="_blank" rel="noopener">VER PROYECTO →</a>
+          <span class="pcard-tag" data-i="p4-tag">HERRAMIENTA WEB</span>
+          <div class="pcard-name" data-i="p4-name">CALCULADORA DE PRESUPUESTO</div>
+          <p class="pcard-desc" data-i="p4-desc">Cotizador interactivo con conversión ARS/USD en tiempo real y exportación a PDF con un clic.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Calculadora-Presupuesto/" target="_blank" rel="noopener" data-i="cta-proj">VER PROYECTO →</a>
         </div>
       </div>
 
@@ -391,10 +424,10 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="pcard-body">
           <div class="pcard-num">05 — 08</div>
-          <span class="pcard-tag">E-COMMERCE</span>
-          <div class="pcard-name">MAGNOLIA STORE</div>
-          <p class="pcard-desc">Tienda premium con carrito funcional, galería con zoom, filtros por categoría y cuotas con Mercado Pago.</p>
-          <a class="pcard-link" href="https://magnoliashop.netlify.app" target="_blank" rel="noopener">VER PROYECTO →</a>
+          <span class="pcard-tag" data-i="p5-tag">E-COMMERCE</span>
+          <div class="pcard-name" data-i="p5-name">MAGNOLIA STORE</div>
+          <p class="pcard-desc" data-i="p5-desc">Tienda premium con carrito funcional, galería con zoom, filtros por categoría y cuotas con Mercado Pago.</p>
+          <a class="pcard-link" href="https://magnoliashop.netlify.app" target="_blank" rel="noopener" data-i="cta-proj">VER PROYECTO →</a>
         </div>
       </div>
 
@@ -406,10 +439,10 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="pcard-body">
           <div class="pcard-num">06 — 08</div>
-          <span class="pcard-tag">ANALYTICS · SAAS</span>
-          <div class="pcard-name">PULSE ANALYTICS</div>
-          <p class="pcard-desc">Dashboard con 11 secciones, gráficos dinámicos, filtros por período y heatmap anual. Diseño SaaS profesional.</p>
-          <a class="pcard-link" href="https://gastongarcia1295.github.io/Dashboard-Analitico/" target="_blank" rel="noopener">VER PROYECTO →</a>
+          <span class="pcard-tag" data-i="p6-tag">ANALYTICS · SAAS</span>
+          <div class="pcard-name" data-i="p6-name">PULSE ANALYTICS</div>
+          <p class="pcard-desc" data-i="p6-desc">Dashboard con 11 secciones, gráficos dinámicos, filtros por período y heatmap anual. Diseño SaaS profesional.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Dashboard-Analitico/" target="_blank" rel="noopener" data-i="cta-proj">VER PROYECTO →</a>
         </div>
       </div>
 
@@ -421,10 +454,10 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
         </div>
         <div class="pcard-body">
           <div class="pcard-num">07 — 08</div>
-          <span class="pcard-tag">LANDING · APPLE</span>
-          <div class="pcard-name">TECH STORE SHOP</div>
-          <p class="pcard-desc">Landing premium para tienda de iPhones con partículas animadas, cursor personalizado y marquee infinito.</p>
-          <a class="pcard-link" href="https://gastongarcia1295.github.io/Landing-TechStore/" target="_blank" rel="noopener">VER PROYECTO →</a>
+          <span class="pcard-tag" data-i="p7-tag">LANDING · APPLE</span>
+          <div class="pcard-name" data-i="p7-name">TECH STORE SHOP</div>
+          <p class="pcard-desc" data-i="p7-desc">Landing premium para tienda de iPhones con partículas animadas, cursor personalizado y marquee infinito.</p>
+          <a class="pcard-link" href="https://gastongarcia1295.github.io/Landing-TechStore/" target="_blank" rel="noopener" data-i="cta-proj">VER PROYECTO →</a>
         </div>
       </div>
 
@@ -434,13 +467,13 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
           <img src="img/miturno.jpg" alt="MiTurno"/>
           <div class="ph"><div class="ph-ico">📅</div><div class="ph-lbl">miturno · sistema de turnos online</div></div>
         </div>
-        <span class="pcard-new">★ NUEVO</span>
+        <span class="pcard-new" data-i="badge-new">★ NUEVO</span>
         <div class="pcard-body">
           <div class="pcard-num" style="color:var(--gold);opacity:.7;">08 — 08</div>
-          <span class="pcard-tag gold">SAAS · FULL STACK</span>
-          <div class="pcard-name gold">MITURNO</div>
-          <p class="pcard-desc">Sistema de reserva de turnos online con backend real. Calendario interactivo, pago de seña con Mercado Pago, emails automáticos y panel de administración. Node.js + MongoDB + Express.</p>
-          <a class="pcard-link gold" href="https://gastongarcia1295.github.io/MiTurno-Frontend/" target="_blank" rel="noopener">VER DEMO →</a>
+          <span class="pcard-tag gold" data-i="p8-tag">SAAS · FULL STACK</span>
+          <div class="pcard-name gold" data-i="p8-name">MITURNO</div>
+          <p class="pcard-desc" data-i="p8-desc">Sistema de reserva de turnos online con backend real. Calendario interactivo, pago de seña con Mercado Pago, emails automáticos y panel de administración. Node.js + MongoDB + Express.</p>
+          <a class="pcard-link gold" href="https://gastongarcia1295.github.io/MiTurno-Frontend/" target="_blank" rel="noopener" data-i="cta-demo">VER DEMO →</a>
         </div>
       </div>
 
@@ -451,72 +484,78 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
       <button class="cbtn" id="next">→</button>
     </div>
   </div>
-  <div class="chint" style="text-align:center;margin-top:4.8rem;font-family:var(--fm);font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white3);opacity:.38">RUEDA DEL MOUSE · FLECHAS DEL TECLADO · SWIPE</div>
+  <div class="chint" style="text-align:center;margin-top:4.8rem;font-family:var(--fm);font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white3);opacity:.38" data-i="scroll-cards">RUEDA DEL MOUSE · FLECHAS DEL TECLADO · SWIPE</div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     SOBRE MÍ
+═══════════════════════════════════════════ -->
 <section class="sec" id="sobre-mi">
   <div class="agrid">
     <div class="rv">
       <div style="margin-bottom:2rem">
-        <div class="ey">// SOBRE MÍ</div>
-        <h2 class="stitle">CÓ<span class="ac">DIGO.</span></h2>
+        <div class="ey" data-i="sec-about-ey">// SOBRE MÍ</div>
+        <h2 class="stitle">CÓ<span class="ac" data-i="sec-about-h">DIGO.</span></h2>
       </div>
       <div class="acopy">
-        <p>Construyo productos web con precisión técnica y criterio de diseño. Cada línea de código tiene un propósito — <strong>ningún elemento es decorativo si no suma al resultado final</strong>.</p>
-        <p>Trabajo de manera <strong>independiente y transparente</strong>: sin intermediarios, sin sorpresas. El cliente ve el avance en tiempo real y participa del proceso desde el primer commit.</p>
-        <p>Cada proyecto es una oportunidad de construir algo que <strong>dure, escale y funcione</strong> en el mundo real.</p>
+        <p data-i="about-p1">Construyo productos web con precisión técnica y criterio de diseño. Cada línea de código tiene un propósito — <strong>ningún elemento es decorativo si no suma al resultado final</strong>.</p>
+        <p data-i="about-p2">Trabajo de manera <strong>independiente y transparente</strong>: sin intermediarios, sin sorpresas. El cliente ve el avance en tiempo real y participa del proceso desde el primer commit.</p>
+        <p data-i="about-p3">Cada proyecto es una oportunidad de construir algo que <strong>dure, escale y funcione</strong> en el mundo real.</p>
       </div>
     </div>
     <div class="avals rv d1">
-      <div class="aval"><div class="aval-ico">⚡</div><div><div class="avt">IMPACTO DESDE EL PRIMER SEGUNDO</div><p class="avx">Interfaces pensadas para capturar atención y sostenerla.</p></div></div>
-      <div class="aval"><div class="aval-ico">💳</div><div><div class="avt">PAGOS INTEGRADOS</div><p class="avx">Mercado Pago nativo para el mercado argentino. Sin rodeos.</p></div></div>
-      <div class="aval"><div class="aval-ico">🔬</div><div><div class="avt">DETALLE TÉCNICO</div><p class="avx">Código limpio, optimizado y mantenible. Nada a medias.</p></div></div>
-      <div class="aval"><div class="aval-ico">🚀</div><div><div class="avt">ENTREGA REAL</div><p class="avx">Proyectos en producción, funcionando, con usuarios reales.</p></div></div>
+      <div class="aval"><div class="aval-ico">⚡</div><div><div class="avt" data-i="val1-t">IMPACTO DESDE EL PRIMER SEGUNDO</div><p class="avx" data-i="val1-d">Interfaces pensadas para capturar atención y sostenerla.</p></div></div>
+      <div class="aval"><div class="aval-ico">💳</div><div><div class="avt" data-i="val2-t">PAGOS INTEGRADOS</div><p class="avx" data-i="val2-d">Mercado Pago nativo para el mercado argentino. Sin rodeos.</p></div></div>
+      <div class="aval"><div class="aval-ico">🔬</div><div><div class="avt" data-i="val3-t">DETALLE TÉCNICO</div><p class="avx" data-i="val3-d">Código limpio, optimizado y mantenible. Nada a medias.</p></div></div>
+      <div class="aval"><div class="aval-ico">🚀</div><div><div class="avt" data-i="val4-t">ENTREGA REAL</div><p class="avx" data-i="val4-d">Proyectos en producción, funcionando, con usuarios reales.</p></div></div>
     </div>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     TECNOLOGÍAS
+═══════════════════════════════════════════ -->
 <section class="sec" id="tecnologias">
   <div class="rv">
-    <div class="ey">// HERRAMIENTAS</div>
-    <h2 class="stitle">STACK <span class="ac">TÉCNICO</span></h2>
+    <div class="ey" data-i="sec-stack-ey">// HERRAMIENTAS</div>
+    <h2 class="stitle" data-i="sec-stack-h">STACK <span class="ac">TÉCNICO</span></h2>
   </div>
   <div class="stack-cols rv d1">
     <div class="scol">
-      <div class="scol-label">FUNDAMENTOS</div>
+      <div class="scol-label" data-i="st1">FUNDAMENTOS</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">HTML5</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">CSS3</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">JAVASCRIPT</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">TYPESCRIPT</div></div>
     </div>
     <div class="scol">
-      <div class="scol-label">FRAMEWORKS</div>
+      <div class="scol-label" data-i="st2">FRAMEWORKS</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">REACT.JS</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NEXT.JS</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NODE.JS</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">EXPRESS</div></div>
     </div>
     <div class="scol">
-      <div class="scol-label">ESTILOS</div>
+      <div class="scol-label" data-i="st3">ESTILOS</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">TAILWIND CSS</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">UI / UX DESIGN</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">CANVAS API</div></div>
     </div>
     <div class="scol">
-      <div class="scol-label">ANIMACIONES</div>
+      <div class="scol-label" data-i="st4">ANIMACIONES</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">GSAP</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">CSS ANIMATIONS</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">THREE.JS</div></div>
     </div>
     <div class="scol">
-      <div class="scol-label">PAGOS & APIs</div>
+      <div class="scol-label" data-i="st5">PAGOS &amp; APIs</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">MERCADO PAGO</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">APIs REST</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">MONGODB</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NODEMAILER</div></div>
     </div>
     <div class="scol">
-      <div class="scol-label">HERRAMIENTAS</div>
+      <div class="scol-label" data-i="st6">HERRAMIENTAS</div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">GIT / GITHUB</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">NETLIFY</div></div>
       <div class="sitem"><div class="sitem-dot"></div><div class="sitem-name">RENDER</div></div>
@@ -525,13 +564,16 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     CONTACTO
+═══════════════════════════════════════════ -->
 <section id="contacto" class="sec">
   <div class="cta-glow"></div>
   <div class="cta-grid rv">
     <div class="cta-left">
-      <div class="cta-eyebrow">// NUEVA OPORTUNIDAD</div>
-      <h2 class="cta-h">ESCRIBIME<br>PARA<br><span class="ac">COMENZAR.</span></h2>
-      <p class="cta-body">Si necesitás un <strong>Sitio Web</strong>, una <strong>Landing Page</strong>, una <strong>Aplicación Web</strong> o cualquier solución digital — escribime. <strong>Respondo en menos de 24hs.</strong></p>
+      <div class="cta-eyebrow" data-i="contact-ey">// NUEVA OPORTUNIDAD</div>
+      <h2 class="cta-h" data-i="contact-h">ESCRIBIME<br>PARA<br><span class="ac">COMENZAR.</span></h2>
+      <p class="cta-body" data-i="contact-body">Si necesitás un <strong>Sitio Web</strong>, una <strong>Landing Page</strong>, una <strong>Aplicación Web</strong> o cualquier solución digital — escribime. <strong>Respondo en menos de 24hs.</strong></p>
     </div>
     <div class="cta-right rv d1">
       <a class="cta-card" href="mailto:gastongarcia1295@gmail.com">
@@ -542,7 +584,7 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
           </svg>
         </div>
         <div class="cta-card-body">
-          <div class="cta-card-label">EMAIL</div>
+          <div class="cta-card-label" data-i="email-label">EMAIL</div>
           <div class="cta-card-title">GMAIL</div>
           <div class="cta-card-sub">gastongarcia1295@gmail.com</div>
         </div>
@@ -556,8 +598,8 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
           </svg>
         </div>
         <div class="cta-card-body">
-          <div class="cta-card-label">WHATSAPP</div>
-          <div class="cta-card-title">SI TENÉS ALGO EN MENTE, ESCRIBIME</div>
+          <div class="cta-card-label" data-i="wa-label">WHATSAPP</div>
+          <div class="cta-card-title" data-i="wa-cta">SI TENÉS ALGO EN MENTE, ESCRIBIME</div>
         </div>
         <div class="cta-card-arr">↗</div>
       </a>
@@ -565,12 +607,21 @@ footer{padding:1.1rem 3rem;border-top:1px solid var(--border);display:flex;justi
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
 <footer>
-  <span class="fc">GASTÓN GARCÍA — DESARROLLADOR WEB — CASTELAR, BUENOS AIRES © 2026</span>
-  <span class="fb"><span class="fbd"></span>DISPONIBLE PARA PROYECTOS</span>
+  <span class="fc" data-i="footer-txt">GASTÓN GARCÍA — DESARROLLADOR WEB — CASTELAR, BUENOS AIRES © 2026</span>
+  <span class="fb"><span class="fbd"></span><span data-i="footer-avail">DISPONIBLE PARA PROYECTOS</span></span>
 </footer>
 
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════ -->
 <script>
+/* ─────────────────────────────────────────────────
+   CURSOR
+───────────────────────────────────────────────── */
 const curEl=document.getElementById('cur'),ringEl=document.getElementById('cur-r');
 let rx=0,ry=0,cx=window.innerWidth/2,cy=window.innerHeight/2;
 document.addEventListener('mousemove',e=>{
@@ -580,9 +631,15 @@ document.addEventListener('mousemove',e=>{
 },{passive:true});
 (function loop(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;ringEl.style.left=rx+'px';ringEl.style.top=ry+'px';requestAnimationFrame(loop)})();
 
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>50),{passive:true});
+/* ─────────────────────────────────────────────────
+   NAV SOLID ON SCROLL
+───────────────────────────────────────────────── */
+const navEl=document.getElementById('nav');
+window.addEventListener('scroll',()=>navEl.classList.toggle('solid',scrollY>50),{passive:true});
 
+/* ─────────────────────────────────────────────────
+   CANVAS BG
+───────────────────────────────────────────────── */
 (function(){
   const c=document.getElementById('bgc'),ctx=c.getContext('2d');
   let W,H;
@@ -612,10 +669,16 @@ window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>50),{p
   draw();
 })();
 
+/* ─────────────────────────────────────────────────
+   REVEAL ON SCROLL
+───────────────────────────────────────────────── */
 const rvEls=document.querySelectorAll('.rv');
 const rvo=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvo.unobserve(e.target)}});},{threshold:0.06,rootMargin:'0px 0px -60px 0px'});
 rvEls.forEach(el=>rvo.observe(el));
 
+/* ─────────────────────────────────────────────────
+   CAROUSEL 3D
+───────────────────────────────────────────────── */
 (function(){
   const scene=document.getElementById('scene');
   const faces=[...scene.querySelectorAll('.pcard')];
@@ -626,7 +689,6 @@ rvEls.forEach(el=>rvo.observe(el));
   faces.forEach((_,i)=>{
     const d=document.createElement('button');
     d.className='cdot'+(i===0?' on':'');
-    if(i===N-1)d.classList.add('gold-dot-target');
     d.setAttribute('aria-label','Proyecto '+(i+1));
     d.addEventListener('click',()=>go(i));
     dotsEl.appendChild(d);
@@ -651,7 +713,7 @@ rvEls.forEach(el=>rvo.observe(el));
     });
     dots.forEach((d,i)=>{
       d.classList.toggle('on',i===cur);
-      if(i===N-1)d.classList.toggle('gold',i===cur);
+      d.classList.toggle('gold',i===cur&&i===N-1);
     });
   }
   go(0);
@@ -675,12 +737,16 @@ rvEls.forEach(el=>rvo.observe(el));
   cw.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>30)dx<0?go(cur+1):go(cur-1);},{passive:true});
 })();
 
+/* ─────────────────────────────────────────────────
+   TYPEWRITER
+───────────────────────────────────────────────── */
 (function(){
   const el=document.getElementById('typeword');
   const cur=document.getElementById('typecursor');
-  const word='DIGITALES';
+  const words={es:'DIGITALES',en:'DIGITAL'};
   function render(text){el.textContent=text;el.appendChild(cur);}
   function loop(){
+    const word=words[window.LANG||'es'];
     let i=0;
     (function type(){
       render(word.slice(0,i));
@@ -697,6 +763,298 @@ rvEls.forEach(el=>rvo.observe(el));
   }
   setTimeout(loop,950);
 })();
+
+/* ─────────────────────────────────────────────────
+   LANGUAGE SYSTEM
+───────────────────────────────────────────────── */
+window.LANG='es';
+
+const T={
+  es:{
+    'nav-proj':'PROYECTOS','nav-about':'SOBRE MÍ','nav-stack':'STACK','nav-contact':'CONTACTO','nav-cta':'CONTACTO →',
+    'hero-tag':'GASTÓN GARCÍA — BUENOS AIRES, ARGENTINA',
+    'hero-l1':'DESARROLLO','hero-l2':'EXPERIENCIAS',
+    'hero-p1':'Soy <strong>Gastón García, Desarrollador Web</strong>. Diseño y desarrollo experiencias de alto impacto, desde <strong>Landing Pages que convierten</strong> y <strong>Dashboards analíticos</strong> hasta <strong>Aplicaciones Web interactivas</strong> con integración de pagos real.',
+    'hero-p2':'Código 100% propio, sin templates ni soluciones a medias.',
+    'hero-avail':'DISPONIBLE PARA NUEVOS PROYECTOS',
+    'stat-proj':'PROYECTOS','stat-code':'CÓDIGO PROPIO',
+    'cta-ver':'VER PROYECTOS →','cta-talk':'HABLEMOS',
+    'scroll-hint':'SCROLL',
+    'sec-work-ey':'// TRABAJO SELECCIONADO','sec-work-h':'YECTOS.',
+    'scroll-cards':'RUEDA DEL MOUSE · FLECHAS DEL TECLADO · SWIPE',
+    'badge-new':'★ NUEVO',
+    'p1-tag':'SALUD & BIENESTAR','p1-name':'BIENESTAR INTERIOR','p1-desc':'Landing de alta conversión con contador de urgencia, sticky CTA mobile e integración con Mercado Pago.',
+    'p2-tag':'POST-VENTA','p2-name':'CONFIRMACIÓN DE COMPRA','p2-desc':'Entrega automática de activo digital integrada como URL de retorno en Mercado Pago. Sin intervención manual.',
+    'p3-tag':'ADMIN PANEL','p3-name':'SISTEMA DE GESTIÓN','p3-desc':'Panel administrativo con métricas en tiempo real, gráficos dinámicos y dashboard completo de seguimiento.',
+    'p4-tag':'HERRAMIENTA WEB','p4-name':'CALCULADORA DE PRESUPUESTO','p4-desc':'Cotizador interactivo con conversión ARS/USD en tiempo real y exportación a PDF con un clic.',
+    'p5-tag':'E-COMMERCE','p5-name':'MAGNOLIA STORE','p5-desc':'Tienda premium con carrito funcional, galería con zoom, filtros por categoría y cuotas con Mercado Pago.',
+    'p6-tag':'ANALYTICS · SAAS','p6-name':'PULSE ANALYTICS','p6-desc':'Dashboard con 11 secciones, gráficos dinámicos, filtros por período y heatmap anual. Diseño SaaS profesional.',
+    'p7-tag':'LANDING · APPLE','p7-name':'TECH STORE SHOP','p7-desc':'Landing premium para tienda de iPhones con partículas animadas, cursor personalizado y marquee infinito.',
+    'p8-tag':'SAAS · FULL STACK','p8-name':'MITURNO','p8-desc':'Sistema de reserva de turnos online con backend real. Calendario interactivo, pago de seña con Mercado Pago, emails automáticos y panel de administración. Node.js + MongoDB + Express.',
+    'cta-proj':'VER PROYECTO →','cta-demo':'VER DEMO →',
+    'sec-about-ey':'// SOBRE MÍ','sec-about-h':'DIGO.',
+    'about-p1':'Construyo productos web con precisión técnica y criterio de diseño. Cada línea de código tiene un propósito — <strong>ningún elemento es decorativo si no suma al resultado final</strong>.',
+    'about-p2':'Trabajo de manera <strong>independiente y transparente</strong>: sin intermediarios, sin sorpresas. El cliente ve el avance en tiempo real y participa del proceso desde el primer commit.',
+    'about-p3':'Cada proyecto es una oportunidad de construir algo que <strong>dure, escale y funcione</strong> en el mundo real.',
+    'val1-t':'IMPACTO DESDE EL PRIMER SEGUNDO','val1-d':'Interfaces pensadas para capturar atención y sostenerla.',
+    'val2-t':'PAGOS INTEGRADOS','val2-d':'Mercado Pago nativo para el mercado argentino. Sin rodeos.',
+    'val3-t':'DETALLE TÉCNICO','val3-d':'Código limpio, optimizado y mantenible. Nada a medias.',
+    'val4-t':'ENTREGA REAL','val4-d':'Proyectos en producción, funcionando, con usuarios reales.',
+    'sec-stack-ey':'// HERRAMIENTAS','sec-stack-h':'STACK <span class="ac">TÉCNICO</span>',
+    'st1':'FUNDAMENTOS','st2':'FRAMEWORKS','st3':'ESTILOS','st4':'ANIMACIONES','st5':'PAGOS & APIs','st6':'HERRAMIENTAS',
+    'contact-ey':'// NUEVA OPORTUNIDAD',
+    'contact-h':'ESCRIBIME<br>PARA<br><span class="ac">COMENZAR.</span>',
+    'contact-body':'Si necesitás un <strong>Sitio Web</strong>, una <strong>Landing Page</strong>, una <strong>Aplicación Web</strong> o cualquier solución digital — escribime. <strong>Respondo en menos de 24hs.</strong>',
+    'email-label':'EMAIL','wa-label':'WHATSAPP','wa-cta':'SI TENÉS ALGO EN MENTE, ESCRIBIME',
+    'footer-txt':'GASTÓN GARCÍA — DESARROLLADOR WEB — CASTELAR, BUENOS AIRES © 2026',
+    'footer-avail':'DISPONIBLE PARA PROYECTOS',
+    'pdf-btn':'DESCARGAR CV',
+    'mq-1':'LANDING PAGES','mq-2':'REACT & NEXT.JS','mq-3':'E-COMMERCE','mq-4':'APLICACIONES WEB','mq-5':'DASHBOARDS','mq-6':'UI · UX DESIGN',
+    'mq-1b':'LANDING PAGES','mq-2b':'REACT & NEXT.JS','mq-3b':'E-COMMERCE','mq-4b':'APLICACIONES WEB','mq-5b':'DASHBOARDS','mq-6b':'UI · UX DESIGN',
+  },
+  en:{
+    'nav-proj':'PROJECTS','nav-about':'ABOUT ME','nav-stack':'STACK','nav-contact':'CONTACT','nav-cta':'CONTACT →',
+    'hero-tag':'GASTÓN GARCÍA — BUENOS AIRES, ARGENTINA',
+    'hero-l1':'BUILDING','hero-l2':'EXPERIENCES',
+    'hero-p1':'I\'m <strong>Gastón García, Web Developer</strong>. I design and build high-impact digital experiences — from <strong>high-converting Landing Pages</strong> and <strong>Analytics Dashboards</strong> to <strong>interactive Web Apps</strong> with real payment integration.',
+    'hero-p2':'100% own code — no templates, no half-measures.',
+    'hero-avail':'AVAILABLE FOR NEW PROJECTS',
+    'stat-proj':'PROJECTS','stat-code':'OWN CODE',
+    'cta-ver':'SEE PROJECTS →','cta-talk':'LET\'S TALK',
+    'scroll-hint':'SCROLL',
+    'sec-work-ey':'// SELECTED WORK','sec-work-h':'JECTS.',
+    'scroll-cards':'MOUSE WHEEL · KEYBOARD ARROWS · SWIPE',
+    'badge-new':'★ NEW',
+    'p1-tag':'HEALTH & WELLNESS','p1-name':'BIENESTAR INTERIOR','p1-desc':'High-conversion landing with urgency countdown, sticky mobile CTA and Mercado Pago integration.',
+    'p2-tag':'POST-SALE','p2-name':'PURCHASE CONFIRMATION','p2-desc':'Automatic digital asset delivery as return URL in Mercado Pago. No manual intervention.',
+    'p3-tag':'ADMIN PANEL','p3-name':'MANAGEMENT SYSTEM','p3-desc':'Admin panel with real-time metrics, dynamic charts and full tracking dashboard.',
+    'p4-tag':'WEB TOOL','p4-name':'BUDGET CALCULATOR','p4-desc':'Interactive quoting tool with real-time ARS/USD conversion and one-click PDF export.',
+    'p5-tag':'E-COMMERCE','p5-name':'MAGNOLIA STORE','p5-desc':'Premium store with functional cart, zoom gallery, category filters and installments via Mercado Pago.',
+    'p6-tag':'ANALYTICS · SAAS','p6-name':'PULSE ANALYTICS','p6-desc':'Dashboard with 11 sections, dynamic charts, period filters and annual heatmap. Professional SaaS design.',
+    'p7-tag':'LANDING · APPLE','p7-name':'TECH STORE SHOP','p7-desc':'Premium landing for iPhone store with animated particles, custom cursor and infinite marquee.',
+    'p8-tag':'SAAS · FULL STACK','p8-name':'MITURNO','p8-desc':'Online appointment booking system with real backend. Interactive calendar, deposit payment with Mercado Pago, automatic emails and admin panel. Node.js + MongoDB + Express.',
+    'cta-proj':'VIEW PROJECT →','cta-demo':'VIEW DEMO →',
+    'sec-about-ey':'// ABOUT ME','sec-about-h':'DE.',
+    'about-p1':'I build web products with technical precision and design sensibility. Every line of code has a purpose — <strong>no element is decorative unless it adds to the final result</strong>.',
+    'about-p2':'I work <strong>independently and transparently</strong>: no intermediaries, no surprises. The client sees progress in real time and participates from the first commit.',
+    'about-p3':'Each project is an opportunity to build something that <strong>lasts, scales and works</strong> in the real world.',
+    'val1-t':'IMPACT FROM SECOND ONE','val1-d':'Interfaces designed to capture attention and hold it.',
+    'val2-t':'PAYMENTS INTEGRATED','val2-d':'Native Mercado Pago for the Argentine market.',
+    'val3-t':'TECHNICAL DETAIL','val3-d':'Clean, optimized and maintainable code. Nothing half-done.',
+    'val4-t':'REAL DELIVERY','val4-d':'Projects in production, running with real users.',
+    'sec-stack-ey':'// TOOLS','sec-stack-h':'TECH <span class="ac">STACK</span>',
+    'st1':'FOUNDATIONS','st2':'FRAMEWORKS','st3':'STYLES','st4':'ANIMATIONS','st5':'PAYMENTS & APIs','st6':'TOOLS',
+    'contact-ey':'// NEW OPPORTUNITY',
+    'contact-h':'WRITE ME<br>TO<br><span class="ac">START.</span>',
+    'contact-body':'If you need a <strong>Website</strong>, a <strong>Landing Page</strong>, a <strong>Web App</strong> or any digital solution — write me. <strong>I reply in less than 24h.</strong>',
+    'email-label':'EMAIL','wa-label':'WHATSAPP','wa-cta':'IF YOU HAVE SOMETHING IN MIND, WRITE ME',
+    'footer-txt':'GASTÓN GARCÍA — WEB DEVELOPER — CASTELAR, BUENOS AIRES © 2026',
+    'footer-avail':'AVAILABLE FOR PROJECTS',
+    'pdf-btn':'DOWNLOAD CV',
+    'mq-1':'LANDING PAGES','mq-2':'REACT & NEXT.JS','mq-3':'E-COMMERCE','mq-4':'WEB APPLICATIONS','mq-5':'DASHBOARDS','mq-6':'UI · UX DESIGN',
+    'mq-1b':'LANDING PAGES','mq-2b':'REACT & NEXT.JS','mq-3b':'E-COMMERCE','mq-4b':'WEB APPLICATIONS','mq-5b':'DASHBOARDS','mq-6b':'UI · UX DESIGN',
+  }
+};
+
+window.setLang=function(lang){
+  window.LANG=lang;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    const on=b.dataset.lang===lang;
+    b.classList.toggle('on',on);
+    b.setAttribute('aria-pressed',on);
+  });
+  const t=T[lang];
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    const key=el.dataset.i;
+    if(t[key]!==undefined) el.innerHTML=t[key];
+  });
+  try{localStorage.setItem('gg-lang',lang);}catch(e){}
+};
+
+// Init: recuperar preferencia o detectar browser
+(function(){
+  let saved='es';
+  try{saved=localStorage.getItem('gg-lang')||'es';}catch(e){}
+  window.setLang(saved);
+})();
+
+/* ─────────────────────────────────────────────────
+   PDF CV GENERATOR
+───────────────────────────────────────────────── */
+window.downloadPDF=async function(){
+  const btn=document.getElementById('btn-pdf');
+  btn.classList.add('loading');
+  await new Promise(r=>setTimeout(r,80));
+  try{
+    const{jsPDF}=window.jspdf;
+    const EN=window.LANG==='en';
+    const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    const W=210,M=18,COL=W-M*2;
+    let y=0;
+
+    const BK=[10,10,10],WH=[255,255,255],G1=[244,244,242],G2=[150,150,145],G3=[105,105,100],LG=[222,222,219];
+
+    function ln(yp,col){doc.setDrawColor(...(col||LG));doc.setLineWidth(.25);doc.line(M,yp,W-M,yp);}
+    function eye(txt,yp){
+      doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.setTextColor(...G2);
+      doc.setCharSpace(1.8);doc.text(txt.toUpperCase(),M,yp);doc.setCharSpace(0);
+    }
+    function pill(txt,px,py,sm){
+      doc.setFontSize(sm?6.5:7.5);doc.setFont('helvetica','normal');
+      const tw=doc.getTextWidth(txt),ph=sm?3.5:4.2,pw=tw+6;
+      doc.setFillColor(...G1);doc.setDrawColor(...LG);
+      doc.roundedRect(px,py-ph+.8,pw,ph+1,1.2,1.2,'FD');
+      doc.setTextColor(...G3);doc.text(txt,px+3,py+.7);
+      return pw+3;
+    }
+
+    /* ══════════════════════════════════════
+       HEADER — fondo negro, nombre grande
+    ══════════════════════════════════════ */
+    doc.setFillColor(10,10,10);
+    doc.rect(0,0,W,48,'F');
+
+    // Nombre
+    doc.setTextColor(240,238,234);
+    doc.setFontSize(30);doc.setFont('helvetica','bold');
+    doc.text('Gaston Garcia',M,20);
+
+    // Titulo
+    doc.setFontSize(11);doc.setFont('helvetica','normal');
+    doc.setTextColor(140,138,134);
+    doc.text(EN?'Web Developer  —  Full Stack':'Desarrollador Web  —  Full Stack',M,29);
+
+    // Disponibilidad — texto simple, sin badge
+    doc.setFontSize(8);doc.setFont('helvetica','bold');
+    doc.setTextColor(72,196,112);doc.setCharSpace(.6);
+    doc.text(EN?'AVAILABLE FOR NEW PROJECTS':'DISPONIBLE PARA NUEVOS PROYECTOS',M,38);
+    doc.setCharSpace(0);
+
+    // Contacto — columna derecha, alineado arriba, limpio
+    const contactLines=[
+      'gastongarcia1295@gmail.com',
+      'github.com/gastongarcia1295',
+      'wa.me/5491168087692',
+      'Buenos Aires, Argentina',
+    ];
+    doc.setFontSize(8.5);doc.setFont('helvetica','normal');
+    contactLines.forEach((line,i)=>{
+      doc.setTextColor(160,158,154);
+      doc.text(line,W-M,14+i*8,{align:'right'});
+    });
+
+    y=56;
+
+    /* ══════════════════════════════════════
+       SOBRE MI
+    ══════════════════════════════════════ */
+    ln(y,[220,218,214]);y+=6;
+    eye(EN?'ABOUT ME':'SOBRE MI',y);y+=5;
+
+    const at=EN
+      ?'I build web products with technical precision and design sensibility. Every line of code has a purpose — no element is decorative unless it adds to the final result. I work independently and transparently: no intermediaries, no surprises. The client sees real progress and participates from the first commit.'
+      :'Construyo productos web con precision tecnica y criterio de diseno. Cada linea de codigo tiene un proposito — ningun elemento es decorativo si no suma al resultado. Trabajo de manera independiente y transparente: sin intermediarios, sin sorpresas. El cliente ve el avance en tiempo real y participa desde el primer commit.';
+    doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(50,50,48);
+    const al=doc.splitTextToSize(at,COL);
+    doc.text(al,M,y);
+    y+=al.length*4.8+8;
+
+    /* ══════════════════════════════════════
+       STACK TECNICO — lista compacta en 3 cols
+    ══════════════════════════════════════ */
+    ln(y,[220,218,214]);y+=6;
+    eye(EN?'TECH STACK':'STACK TECNICO',y);y+=6;
+
+    const stackRows=[
+      [EN?'Foundations':'Fundamentos','HTML5 · CSS3 · JavaScript · TypeScript'],
+      [EN?'Frameworks':'Frameworks','React.js · Next.js · Node.js · Express'],
+      [EN?'Styles & Motion':'Estilos','Tailwind CSS · GSAP · CSS Animations · Three.js'],
+      [EN?'Payments & APIs':'Pagos & APIs','Mercado Pago · REST APIs · MongoDB · Nodemailer'],
+      [EN?'Tools':'Herramientas','Git · GitHub · Netlify · Render · VS Code'],
+    ];
+    const colA=M, colB=M+48;
+    stackRows.forEach(row=>{
+      doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.setTextColor(120,118,114);
+      doc.text(row[0],colA,y);
+      doc.setFont('helvetica','normal');doc.setTextColor(40,40,38);
+      doc.text(row[1],colB,y);
+      y+=6;
+    });
+    y+=4;
+
+    /* ══════════════════════════════════════
+       PROYECTOS — limpio, sin URL inline
+    ══════════════════════════════════════ */
+    ln(y,[220,218,214]);y+=6;
+    eye(EN?'SELECTED WORK':'PROYECTOS',y);y+=6;
+
+    const pj=[
+      {n:'01',nm:'MiTurno',tg:EN?'SaaS · Full Stack':'SaaS · Full Stack',
+       d:EN?'Appointment booking system with real backend. Interactive calendar, deposit payment via Mercado Pago, automatic confirmation emails and admin panel. Node.js + MongoDB + Express.':'Sistema de reserva de turnos con backend real. Calendario interactivo, pago de seña con Mercado Pago, emails automaticos y panel de administracion. Node.js + MongoDB + Express.'},
+      {n:'02',nm:'Pulse Analytics',tg:EN?'Analytics · SaaS':'Analytics · SaaS',
+       d:EN?'Dashboard with 11 sections, dynamic charts, period filters and annual activity heatmap. Professional SaaS design.':'Dashboard con 11 secciones, graficos dinamicos, filtros por periodo y heatmap anual. Diseno SaaS profesional.'},
+      {n:'03',nm:EN?'Management System':'Sistema de Gestion',tg:'Admin Panel',
+       d:EN?'Admin panel with real-time business metrics, dynamic charts and complete sales tracking dashboard.':'Panel administrativo con metricas en tiempo real, graficos dinamicos y dashboard completo de seguimiento.'},
+      {n:'04',nm:'Magnolia Store',tg:'E-Commerce',
+       d:EN?'Premium fashion store with functional cart, zoom gallery, category filters and installment payments via Mercado Pago.':'Tienda premium con carrito funcional, galeria con zoom, filtros por categoria y cuotas con Mercado Pago.'},
+      {n:'05',nm:'Bienestar Interior',tg:EN?'Health & Wellness':'Salud & Bienestar',
+       d:EN?'High-conversion landing page with urgency countdown, sticky mobile CTA and Mercado Pago integration.':'Landing de alta conversion con contador de urgencia, sticky CTA mobile e integracion Mercado Pago.'},
+      {n:'06',nm:EN?'Budget Calculator':'Calculadora de Presupuesto',tg:EN?'Web Tool':'Herramienta Web',
+       d:EN?'Interactive quoting tool with real-time ARS/USD conversion and one-click PDF export.':'Cotizador interactivo con conversion ARS/USD en tiempo real y exportacion a PDF con un clic.'},
+      {n:'07',nm:'Tech Store',tg:'Landing Page',
+       d:EN?'Premium landing for iPhone store with animated particles, custom cursor and infinite marquee.':'Landing premium para tienda de iPhones con particulas animadas, cursor personalizado y marquee infinito.'},
+      {n:'08',nm:EN?'Purchase Confirmation':'Confirmacion de Compra',tg:EN?'Post-sale Automation':'Automatizacion Post-venta',
+       d:EN?'Automatic digital product delivery integrated as return URL in Mercado Pago. Zero manual intervention.':'Entrega automatica de producto digital integrada como URL de retorno en Mercado Pago. Sin intervencion manual.'},
+    ];
+
+    pj.forEach(p=>{
+      if(y>262){doc.addPage();y=18;}
+
+      // Numero + nombre en la misma linea
+      doc.setFontSize(7);doc.setFont('helvetica','normal');doc.setTextColor(180,178,174);
+      doc.text(p.n,M,y+3.5);
+      doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(20,20,18);
+      doc.text(p.nm,M+10,y+3.5);
+      // Tag a la derecha
+      doc.setFontSize(7);doc.setFont('helvetica','normal');doc.setTextColor(120,118,114);
+      doc.text(p.tg,W-M,y+3.5,{align:'right'});
+      y+=6;
+
+      // Descripcion
+      doc.setFontSize(8.2);doc.setFont('helvetica','normal');doc.setTextColor(80,78,74);
+      const dl=doc.splitTextToSize(p.d,COL-10);
+      doc.text(dl,M+10,y);
+      y+=dl.length*4.2+5;
+
+      ln(y,[230,228,225]);
+    });
+    y+=6;
+
+    /* ══════════════════════════════════════
+       CONTACTO FINAL — simple y limpio
+    ══════════════════════════════════════ */
+    if(y>262){doc.addPage();y=18;}
+    doc.setFillColor(10,10,10);
+    doc.rect(0,y,W,32,'F');
+
+    doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(240,238,234);
+    doc.text(EN?"Let's build something together.":'Construyamos algo juntos.',M,y+10);
+
+    doc.setFontSize(8);doc.setFont('helvetica','normal');doc.setTextColor(110,108,104);
+    doc.text('gastongarcia1295@gmail.com',M,y+19);
+    doc.text('wa.me/5491168087692',M,y+26);
+    doc.text('gastongarcia1295.github.io/Portfolio',W-M,y+19,{align:'right'});
+    doc.text('github.com/gastongarcia1295',W-M,y+26,{align:'right'});
+
+    doc.save(EN?'GastonGarcia-WebDeveloper-CV.pdf':'GastonGarcia-Desarrollador-CV.pdf');
+  }catch(err){
+    console.error(err);
+    alert(window.LANG==='en'?'Error generating PDF. Please try again.':'Error al generar el PDF. Intentá de nuevo.');
+  }finally{
+    document.getElementById('btn-pdf').classList.remove('loading');
+  }
+};
 </script>
 </body>
 </html>
